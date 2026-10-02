@@ -5,38 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="styleDashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Dashboard</h1>
         <div class="KPIS">   
             <div class="card_comeias">
-                <h2>Total de Comeias</h2>
-                <p>Quantidade</p>
-                <p>Indicação</p>
+                <div class="superior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none">
+                       <polygon points="9,3.5 15,3.5 18,8.5 6,8.5" fill="#FFA500" stroke="#FF8C00" stroke-width="1.5" stroke-linejoin="round"/>
+                        <rect x="5" y="8" width="14" height="4" rx="1" fill="#FFA500" stroke="#FF8C00" stroke-width="1.5"/>
+                        <rect x="6" y="12" width="12" height="4" rx="1" fill="#FFA500" stroke="#FF8C00" stroke-width="1.5"/>
+                        <path d="M7 16H17V18C17 19.1 16.1 20 15 20H9C7.9 20 7 19.1 7 18V16Z" fill="#FFA500" stroke="#FF8C00" stroke-width="1.5"/>
+                        <path d="M10 20C10 18.9 10.9 18 12 18C13.1 18 14 18.9 14 20H10Z" fill="#CC6600"/>
+                    </svg>
+                    <h2 class="titulo">Total de Comeias</h2>
+                </div>
+                <span class="info">98</span>
+                <span id="spn_indicador">Indicação</span>
 
             </div>
             <div class="card_temperatura">
-                  <h2>Temperatura Média nas Comeias</h2>
-                <p>Temperatura</p>
-                <p>Indicação</p>
+                <div class="superior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                        <path d="M11.5 8v6" stroke="#F7A925" stroke-width="2" />
+                        <circle cx="11.5" cy="18.5" r="1.7" fill="#F7A925" />
+                    </svg>
+                    <h2 class="titulo">Temperatura Média</h2>
+                </div>
+                <span class="info">26°C</span>
+                <span id="spn_indicador">Indicação</span>
             </div>
             <div class="card_producao">
-                  <h2>Produção de Mel</h2>
-                <p>Temperatura</p>
-                <p>Indicação</p>
+                <div class="superior">
+                    <img src="" alt="">
+                    <h2 class="titulo">Produção de Mel</h2>
+                </div>
+                <span class="info">100.000,00</span>
+                <span id="spn_indicador">Indicação</span>
             </div>
             <div class="card_aviso">
-                  <h2>Alertas Ativos</h2>
-                <p>Quantidade</p>
-                <p>Indicação</p>
+                <div class="superior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#FF0000"/><path d="M12 9v4" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#FFFFFF"/></svg>
+                    <h2 class="titulo">Alertas Ativos</h2>
+                </div>
+                <span class="info">2</span>
+                <span id="spn_indicador">Indicação</span>
             </div>
         </div>
-        <div class="grafico_temp"></div>
-        <div class="grafico_2"></div>
 
-        <div class="mensagens">
+        <div class="grafico_temp">
+             <div style="display: flex;">
+                <div style="margin-left: 40px; width: 40%; background-color: #FFFDFD; padding: 30px; border: 2px solid #BFBFBF; border-radius: 20px;">
+                    <canvas id="sensorAnalogico"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="grafico_2">
+            <div style="display: flex;">
+                <div>
+                    <canvas id="sensorMel"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="mensagens_inferiores">
             <div class="leituras_temp">
+                <h2>Últimas leituras de temperatura</h2>
                 <div class="titulo">
                     <h2>Colmeia</h2>
                     <h2>Temperatura</h2>
@@ -45,16 +82,132 @@
             </div>
 
             <div class="card_alertas">
-                <img src="" alt="">
-                <h2>Alertas Recentes</h2>
+                <div class="superior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="65" height="65" fill="none">
+                        <path d="M10.29 3.86L1.82 18A2 2 0 0 0 3.53 21h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#F3A72E"/>
+                        <path d="M12 6.2L18.8 18H5.2L12 6.2z" fill="#1E382B"/>
+                        <path d="M12 9c-0.55 0-1 0.45-1 1v4c0 0.55 0.45 1 1 1s1-0.45 1-1v-4c0-0.55-0.45-1-1-1z" fill="#F8F3E6"/>
+                        <circle cx="12" cy="16.5" r="1" fill="#F8F3E6"/>
+                    </svg>
+                    <h2>Alertas Recentes</h2>
+                </div>
                 <div id="mensagem">
-                    <span id="situacao"></span>
-                    <div id="titulo"> a</div><!--Comeia que está acontecendo-->
-                    <div id="descricao"> a</div><!--descrição do que está acontecendo-->
-                    <div id="dataHorario"> a</div><!--Horário do alerta-->
+                    <span id="situacao">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="58" height="58" fill="none">
+                            <circle cx="12" cy="12" r="10" fill="#FF0000"/>
+                            <path d="M12 6.5C12.55 6.5 13 6.95 13 7.5V13C13 13.55 12.55 14 12 14C11.45 14 11 13.55 11 13V7.5C11 6.95 11.45 6.5 12 6.5Z" fill="#FFFFFF"/>
+                            <circle cx="12" cy="16.5" r="1.1" fill="#FFFFFF"/>
+                        </svg>
+                    </span>
+                    <div class="conteudo_texto">
+                        <div id="titulo"> Colmeia 03</div><!--Comeia que está acontecendo-->
+                        <div id="descricao"> Temperatura acima do ideal(38°C)</div><!--descrição do que está acontecendo-->
+                        <div id="dataHorario"> 02/09/2026  09:34</div><!--Horário do alerta-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+     var sensorAnalogico = new Chart(document.getElementById('sensorAnalogico').getContext('2d'), {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Temperatura das Comeias',
+                    borderColor: '#F7A925',
+                    backgroundColor: '#F7A925',
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                         title: {
+                            display: true,
+                            text: 'Comeias'
+                        },
+                        beginAtZero: true,
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '(°C)'
+                        },
+                        beginAtZero: true,
+                    },
+                },
+            }
+        });
+
+        const labels = Utils.months({count: 7});
+        const data = {
+        labels: labels,
+        datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+        };
+
+        var paginacao = {};
+        var tempo = {};
+
+        function obterDados(grafico, endpoint) {
+            fetch('http://localhost:3300/sensores/' + endpoint)
+                .then(response => response.json())
+                .then(valores => {
+                    if (paginacao[endpoint] == null) {
+                        paginacao[endpoint] = 0;
+                    }
+                    if (tempo[endpoint] == null) {
+                        tempo[endpoint] = 0;
+                    }
+
+                    var ultimaPaginacao = paginacao[endpoint];
+                    paginacao[endpoint] = valores.length;
+                    valores = valores.slice(ultimaPaginacao);
+
+                    valores.forEach((valor) => {
+                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                            grafico.data.labels.shift();
+                            grafico.data.datasets[0].data.shift();
+                        }
+
+                        grafico.data.labels.push(tempo[endpoint]++);
+                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        grafico.update();
+                    });
+                })
+                .catch(error => console.error('Erro ao obter dados:', error));
+        }
+
+        setInterval(() => {
+            obterDados(sensorAnalogico, 'analogico');
+        }, 1000);
+
+
+//---------------------------------------------------------------------------------------------------
+
+
+        //Gráfico de Produção do Mel
+        
+</script>

@@ -12,53 +12,140 @@ body {
 .KPIS{
     display: flex;
     align-content: space-between;
+    font-weight: 800;
 }
-
+.KPIS .superior{
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    gap: 10px;
+    width: 100%;
+}
+.KPIS .titulo{
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 18px;
+}
+.KPIS svg{
+    margin-top: 17px;
+    margin-left: 10px;
+}
+.KPIS .info{
+    display: flex;
+    font-size: 29px;
+    margin-top: 10px;
+    margin-left: 30%;
+    
+}
 .card_comeias,.card_producao,.card_temperatura,.card_aviso{
     background-color: white;
-    padding: 30px;
     margin-left: 50px;
-    height: 100px;
+    height: 160px;
+    width:300px ;
     margin-bottom: 20px;
     border-radius: 10px;
+}
+
+.card_aviso svg{
+    margin-left: 20px;
+}
+
+#spn_indicador{
+    font-size: 13px;
+    margin-left: 30%;
+    height: 20px;
 }
 
 /*GRAFICOS*/
 
 /*ALERTAS E HISTÓRICO*/
-.mensagens{
+.mensagens_inferiores{
     display: flex;
     align-content: space-between;
-    margin-top: 120px;
-}
-.card_alertas{
-    background-color: #F7E0B9;
-    height: 200px;
-    width: 600px;
-    padding: 10px;
-    border-radius: 20px;
-    margin-left: 80px;
-}
-.situacao{
-    background-color: red;
-    width: 50px;
-    height: 50px;
 }
 
+/*Aqui o CSS do Card das Colmeias que estão cadastradas no Sistema*/
 .leituras_temp{
     background-color: #FFFFFF;
     border: 2px solid #bfbfbf72;
-    height: 200px;
-    width: 700px;
-    border-radius: 20px;
-    padding: 10px;
+    min-height: 200px;
+    width: 650px;
+}
+.leituras_temp h2{
+    text-align: center;
 }
 
-#mensagem{
+.leituras_temp .titulo{
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    margin-left: 50px;
+    gap: 70px;
+    width: 100%;
+}
+/*Aqui começa o CSS do Card de alertas das colmeias*/
+.card_alertas {
+    background-color: #F7E0B9;
+    height: auto;               
+    min-height: 200px;
+    width: 650px;
+    padding: 15px;
+    border-radius: 20px;
+    margin-left: 80px;
+}
+.card_alertas .superior{
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    margin-left: 10px;
+    gap: 10px;
+    width: 100%;
+}
+
+#mensagem {
     background-color: #fff6e7a5;
     border: 2px solid #bfbfbf72;
-    border-radius: 10px;
-    width: 570px;
-    margin-left: 10px;
-    padding: 5px;
+    border-radius: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;        
+    gap: 15px;                  
+}
+
+
+#situacao {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;            
+}
+
+.conteudo_texto {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;                  
+}
+
+#titulo, #descricao, #dataHorario {
+    margin-left: 0;
+}
+
+#titulo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000;
+}
+
+#descricao {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+#dataHorario {
+    font-size: 14px;
+    font-weight: 800;
+    color: #000;
+    margin-top: 2px;
 }
