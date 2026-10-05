@@ -91,3 +91,47 @@ nav a{
     top: 80%;
     transform: translateY(-50%);
 }
+
+/* Seção dos benefícios */
+
+.secao-beneficios{
+    background-color: #f9f3e4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    min-height: 360px;
+    padding: 40px 60px;
+}
+
+
+/* Cada um dos três benefícios */
+
+.beneficio{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Títulos dos benefícios */
+
+.beneficio h2{
+    color: #283c27;
+    font-size: 24px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+
+/* Textos dos benefícios */
+
+.beneficio p{
+    color: #3f463e;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 300px;
+}
+
+
