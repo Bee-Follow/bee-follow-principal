@@ -1,34 +1,35 @@
-<img src="https://user-images.githubusercontent.com/46379117/189931169-9df7b283-bf43-4af4-8154-b1669862090e.png" width="1000px">
+# 🐝 Sistema de Monitoramento Térmico de Colmeias
 
-_Data Acquisition Arduino API = API Arduino para Aquisição de Dados_
+## 📖 Sobre o Projeto
+Este é um projeto de pesquisa e inovação desenvolvido no primeiro semestre do curso de Ciência da Computação. O objetivo é desenvolver um **sistema de monitoramento térmico contínuo** para colmeias do modelo *Langstroth* (o mais comum no Brasil). 
 
-<hr>
+Através do uso de um Arduino e sensores de temperatura LM35, o sistema coleta informações do ambiente interno das colmeias e as disponibiliza em um painel (dashboard) interativo. A solução atua como uma ferramenta de apoio à decisão, permitindo que os apicultores acompanhem o histórico de variações térmicas e recebam alertas sobre comportamentos fora do padrão, otimizando o manejo e reduzindo inspeções desnecessárias.
 
-# Como usar
+**Atenção:** A proposta *não* busca substituir o conhecimento ou a inspeção física do apicultor, mas sim fornecer uma camada extra de acompanhamento preventivo. Não há automação do processo de refrigeração/aquecimento das colmeias.
 
-1. Certifique-se de que o Arduino está em funcionamento e capturando dado do sensor, seja ele analógico ou digital.
+## ✨ Funcionalidades
+- **Monitoramento Contínuo:** Registro das temperaturas (interna e externa) ao longo do dia.
+- **Histórico de Dados:** Armazenamento seguro de todas as medições para análise de longo prazo.
+- **Alertas Inteligentes:** Emissão de alertas quando são identificadas alterações térmicas relevantes (considerando intensidade, duração e relação com o ambiente externo).
+- **Dashboard Analítica:** Painel com gráficos e métricas claras para acompanhamento simultâneo de várias colmeias.
+- **Apoio à Decisão:** Permite ao apicultor priorizar quais caixas necessitam de inspeção física baseando-se em dados reais.
 
-1. Clone este repositório em sua máquina.
+## 🛠️ Tecnologias e Arquitetura
 
-1. Acesse o arquivo **main.js** e parametrize:
+**Hardware:**
+- Microcontrolador: Arduino
+- Sensor: Sensor de Temperatura LM35
 
-- Gostaria de efetuar a inserção dos dados capturados no Banco de Dados? **Linha 11 - HABILITAR_OPERACAO_INSERIR;**
+**Software & Arquitetura:**
+- **Banco de Dados:** MySQL hospedado em um servidor de dados Linux (VMLinux).
+- **Integração:** API Local em conjunto com o Arduino para captura e inserção de dados diretamente no banco MySQL.
+- **Visualização:** Dashboard para transformação de dados brutos em gráficos e métricas de fácil leitura.
 
-- Para configurar as credenciais do banco de dados: adicione as credenciais para inserção no banco MySQL (**Linhas 22 - 26**) e ajuste seu INSERT para que esteja de acordo com a tabela que receberá as medidas (**Linhas 66 e 67**).
+## 🗄️ Estrutura do Banco de Dados
+A modelagem de dados foi desenhada para suportar o fluxo constante do sensor:
+1. Modelagem Lógica (v1)
+2. Script de criação do Banco de Dados
+3. Inserção automatizada de dados do Arduino para o MySQL via VMLinux.
 
-4. Acesse o local deste repositório no terminal (GitBash ou VSCode) e execute os comandos abaixo:
-
-```
-npm i
-``` 
-_O comando acima irá instalar as bibliotecas necessárias para o funcionamento da API. As bibliotecas a serem instaladas estão listadas no arquivo **package.json** então é muito importante que este não seja alterado. Será criada uma nova pasta/diretório chamado **node_modules** quando o comando for finalizado, que é onde as bibliotecas estão localizadas. Não altere a pasta/diretório._
-
-```
-npm start
-``` 
-
-_O comando acima irá iniciar sua API e efetuar os comandos de acordo com a sua parametrização feita nos passos anteriores._
-
-5. Para "ver" sua API funcionando você pode visualizar os gráficos das capturas sendo exibidos no seu navegador pelo caminho **http://localhost:3300** ou efetuando SELECT no seu Banco de Dados, caso tenha optado por inseri-los.
-
-6. Caso queira parar a API, tecle **CTRL+C** no terminal em que a API está rodando.
+---
+*Projeto desenvolvido como parte dos requisitos acadêmicos do curso de Ciência da Computação.*
