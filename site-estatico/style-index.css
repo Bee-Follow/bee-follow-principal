@@ -134,4 +134,37 @@ nav a{
     max-width: 300px;
 }
 
+/* Parte 3 - Sobre Nós */
 
+.secao-sobre{
+    background-color: #283c27;
+    padding: 80px 100px;
+}
+
+.sobre-conteudo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+}
+
+.sobre-titulo{
+    color: #f7a925;
+    font-size: 45px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.sobre-texto p{
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.sobre-img img{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+}
