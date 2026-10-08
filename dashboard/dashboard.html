@@ -21,52 +21,57 @@
                     </svg>
                     <h2 class="titulo">Total de Comeias</h2>
                 </div>
-                <span class="info">98</span>
-                <span id="spn_indicador">Indicação</span>
+                <span class="info" id="info" data-valor="98">98</span>
+                <p id="spn_indicador">s</p>
 
             </div>
             <div class="card_temperatura">
                 <div class="superior">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
-                        <path d="M11.5 8v6" stroke="#F7A925" stroke-width="2" />
-                        <circle cx="11.5" cy="18.5" r="1.7" fill="#F7A925" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none">
+                        <!-- Camada de trás: Borda externa (linha mais grossa em branco ou na cor desejada) -->
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Camada da frente: Linha principal do termômetro (preta) -->
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" stroke="#F7E0B9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Preenchimento e nível de temperatura interno -->
+                        <path d="M11.5 8v6" stroke="#F7A925" stroke-width="1.8" stroke-linecap="round"/>
+                        <circle cx="11.5" cy="18.5" r="1.7" fill="#F7A925"/>
                     </svg>
+
                     <h2 class="titulo">Temperatura Média</h2>
                 </div>
-                <span class="info">26°C</span>
-                <span id="spn_indicador">Indicação</span>
+                <span class="info"  id="info" data-valor="-5">-5°C</span>
+                <p id="spn_indicador"> </p>
+                
             </div>
             <div class="card_producao">
                 <div class="superior">
                     <img src="" alt="">
-                    <h2 class="titulo">Produção de Mel</h2>
+                    <h2 class="titulo">Definir o que vai ser</h2>
                 </div>
-                <span class="info">100.000,00</span>
-                <span id="spn_indicador">Indicação</span>
+                <span class="info"  id="info" data-valor="100.000">100.000,00</span>
+                <p id="spn_indicador"></p>
             </div>
             <div class="card_aviso">
                 <div class="superior">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#FF0000"/><path d="M12 9v4" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#FFFFFF"/></svg>
                     <h2 class="titulo">Alertas Ativos</h2>
                 </div>
-                <span class="info">2</span>
-                <span id="spn_indicador">Indicação</span>
+                <span class="info" id="info" data-valor="2">2</span>
+                <p id="spn_indicador"></p>
             </div>
         </div>
-
-        <div class="grafico_temp">
-             <div style="display: flex;">
-                <div style="margin-left: 40px; width: 40%; background-color: #FFFDFD; padding: 30px; border: 2px solid #BFBFBF; border-radius: 20px;">
-                    <canvas id="sensorAnalogico"></canvas>
-                </div>
+        <div class="graficos">
+            <div class="grafico_temp">              
+                    <div>
+                        <canvas id="sensorAnalogico"></canvas>
+                    </div>
             </div>
-        </div>
 
-        <div class="grafico_2">
-            <div style="display: flex;">
+            <div class="grafico_2">
                 <div>
-                    <canvas id="sensorMel"></canvas>
+                    
                 </div>
             </div>
         </div>
@@ -79,6 +84,7 @@
                     <h2>Temperatura</h2>
                     <h2>Horário</h2>
                 </div>
+                  FALTA COLOCAR O REGISTRO DAS COLMEIAS
             </div>
 
             <div class="card_alertas">
@@ -111,6 +117,37 @@
 </body>
 </html>
 <script>
+    
+     //Lógica dos indicadores
+    let UltimaSemana = 2; // Seleciona todos os cards contendo indicadores  
+    // Semana passada > ou < nessa semana. Caso o desempeho da semana for menor do que da semana passada 
+    let cards = document.querySelectorAll('.card_comeias, .card_temperatura, .card_producao, .card_aviso'); 
+    cards.forEach(card => { 
+        let spanInfo = card.querySelector('.info'); 
+        let pIndicador = card.querySelector('#spn_indicador'); 
+        
+            if (spanInfo && pIndicador) { // Obtém o valor numérico do atributo data-valor 
+                const valor = Number(spanInfo.dataset.valor); 
+                if (valor < 0) { // Condição para valor negativo (Queda) 
+                    pIndicador.textContent = `Queda de ${Math.abs(valor)}% em relação à semana passada`; 
+                    pIndicador.style.color = '#FF0000'; // Vermelho 
+                    pIndicador.style.fontWeight = 'bold'; 
+                } else if (valor > 0) { // Condição para valor positivo (Aumento)
+                    pIndicador.textContent = `Aumento de ${valor}% em relação à semana passada`;
+                    pIndicador.style.color = '#2E7D32'; // Verde 
+                    pIndicador.style.fontWeight = 'bold'; 
+                } else {  
+                    pIndicador.textContent = `Sem alterações em relação à semana passada`; 
+                    pIndicador.style.color = '#555555'; 
+                    pIndicador.style.fontWeight = 'bold'; 
+                } 
+            } 
+    });
+
+    //-----------------------------------------------------------------------------------------------------------
+    // Gráfico de Barra
+    
+    // Lógica do Gráfico de Temperatura
      var sensorAnalogico = new Chart(document.getElementById('sensorAnalogico').getContext('2d'), {
             type: 'line',
             data: {
@@ -206,8 +243,4 @@
 
 
 //---------------------------------------------------------------------------------------------------
-
-
-        //Gráfico de Produção do Mel
-        
 </script>
