@@ -2,17 +2,18 @@
 body {
     font-family: 'Inter' ;
     margin: 0;
-    min-height: 80vh;
+    width: 80%;
+    height: 80%;
     display: flex;
-    padding: 30px;
     background-color: #F9F3E4;
 }
-
 /*KPIS*/
 .KPIS{
     display: flex;
     align-content: space-between;
+    justify-content: center;
     font-weight: 800;
+    margin-top: 1%;
 }
 .KPIS .superior{
     display: flex;
@@ -21,67 +22,63 @@ body {
     gap: 10px;
     width: 100%;
 }
-.KPIS .titulo{
-    margin-top: 30px;
-    margin-left: 20px;
+.card-info, .card-titulo, .card-p{
+    text-align: center;
+}
+.card-p{
+    margin-left: 10px;
+}
+.titulo{
     font-size: 18px;
 }
 .KPIS svg{
-    margin-top: 17px;
+    margin-top: 10px;
     margin-left: 10px;
 }
-.KPIS .info{
-    display: flex;
+.info{
     font-size: 29px;
-    margin-top: 10px;
-    margin-left: 30%;
-    
-}
-.KPIS #spn_indicador{
-    width: 60% ;
 }
 .card_comeias,.card_producao,.card_temperatura,.card_aviso{
     background-color:#283C27;
     color: #F7E0B9;
     margin-left: 50px;
-    height: 170px;
-    width:280px ;
+    width: 280px;
     margin-bottom: 20px;
     border-radius: 10px;
 }
-
 .card_aviso svg{
     margin-left: 20px;
 }
 
 #spn_indicador{
     font-size: 13px;
-    margin-left: 30%;
     height: 20px;
 }
-
 /*GRAFICOS*/
 .graficos{
     display: flex;
-    align-items: space-between;
-    width: 100%;
-    margin-bottom: 10px;
-    margin-left: 30px;
 }
-.grafico_2, .grafico_temp{
-    margin-left: 40px; 
-    width: 40%; 
+.grafico_temp{
+    margin: auto;
+    width: 41%; 
     background-color: #FFFDFD; 
     padding: 30px; 
     border: 2px solid #BFBFBF; 
     border-radius: 20px;
 }
-
+.grafico_2{
+    margin: 0;
+    width: 41%; 
+    background-color: #FFFDFD; 
+    padding: 30px; 
+    border: 2px solid #BFBFBF; 
+    border-radius: 20px;
+}
 /*ALERTAS E HISTÓRICO*/
 .mensagens_inferiores{
     display: flex;
     align-content: space-between;
-    margin-top: 20px;
+    margin-top: 2%;
 }
 
 /*Aqui o CSS do Card das Colmeias que estão cadastradas no Sistema*/
@@ -90,14 +87,14 @@ body {
     background-color:#283C27;
     border: 2px solid #bfbfbf72;
     color: #F7E0B9;
-    min-height: 200px;
-    width: 600px;
-    margin-left: 40px;
+    height: max-content;
+    width: 47%;
+    margin-left: 4%;
+    border-radius: 5px;
 }
 .leituras_temp h2{
     text-align: center;
 }
-
 .leituras_temp .titulo{
     display: flex;
     align-items: center;
@@ -106,16 +103,14 @@ body {
     gap: 70px;
     width: 100%;
 }
-
 /*Aqui começa o CSS do Card de alertas das colmeias*/
 .card_alertas {
-    background-color: #F7E0B9;
-    height: auto;               
-    min-height: 200px;
-    width: 600px;
+    background-color: #F7E0B9;               
+    height: max-content;
+    width: 45%;
     padding: 15px;
     border-radius: 20px;
-    margin-left: 40px;
+    margin-left: 5%;
 }
 .card_alertas .superior{
     display: flex;
@@ -125,7 +120,6 @@ body {
     gap: 10px;
     width: 100%;
 }
-
 #mensagem {
     background-color: #fff6e7a5;
     border: 2px solid #bfbfbf72;
@@ -137,8 +131,6 @@ body {
     align-items: center;        
     gap: 15px;                  
 }
-
-
 #situacao {
     display: flex;
     align-items: center;
@@ -172,4 +164,53 @@ body {
     font-weight: 800;
     color: #000;
     margin-top: 2px;
+}
+.sidebar-menu{
+    margin: 0;
+    padding: 0;
+    width: 198px;
+    background-color: #283C27;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+.sidebar-menu a{
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+.content{
+    margin-left: 11.5%;
+    height: fit-content;
+    width: fit-content; 
+}
+.usuario-sidebar{
+    font-family: 'Inter';
+    color: white;
+    padding: 16px;
+}
+.img-sidebar{
+    margin: 10px;
+    width: 80%;    
+    height: auto;
+    padding: 1px 10px;
+}
+.sidebar-menu a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+.sidebar-menu a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+.table-leituras{
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Inter';
+}
+td, tr, th{
+    border: 1px solid white;
+    padding: 8px;
+    text-align: center
 }
