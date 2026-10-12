@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+        <h2 class="titulo">Quanto você está perdendo com a enxameação?</h2>
     <div class="container">
 
         <!-- Painel esquerdo: entrada de dados -->
@@ -40,10 +40,27 @@
                 <p class="placeholder">Preencha os campos ao lado e clique em "Calcular" para ver o resultado aqui.</p>
             </div>
             <div id="div_contato"></div>
-        </div>
+            </div>
 
+     </div>
     </div>
 
+         <div class="folder-faixa">
+ <div class="folder">
+     <div class="folder-textoh2">
+         <h2>Fale com a gente</h2>
+         <p class="folder-textop">
+             Tire suas dúvidas, conheça mais<br>
+             sobre a Bee Follow e descubra como<br>
+             podemos ajudar o seu apiário.
+         </p>
+     </div>
+     <div class="folder-redes">
+         <img class="folder-redesimg" src="Instagram.png" alt="Instagram">
+         <img class="folder-redesimg" src="facebook.png" alt="Facebook">
+         <img class="folder-redesimg" src="Linkedin.png" alt="Linkedin">
+     </div>
+ </div>
 <script>
 function calcular_valor(){
     let ax_erro = false;
@@ -97,6 +114,26 @@ function calcular_valor(){
         alert(ax_mensagem);
         div_msg.innerHTML = null;
     } else {
+
+    // Variável que armazena os resultados da projeção dos 6 meses
+    let resultado_meses = "";
+    let mes = 1
+
+    // Repete o cálculo enquanto o mês for menor ou igual a 6
+    while (mes <= 6) {
+    let mel_acumulado = Number(ax_mel_perdido_media) * mes;
+    let valor_acumulado = Number(ax_valor_perdido_media) * mes;
+         
+    resultado_meses +=`
+    <p>
+        <b>Mês ${mes}:</b>
+    ${mel_acumulado.toFixed(2)} kg de mel perdidos,
+     R$ ${valor_acumulado.toFixed(2)} de prejuízo acumulado.
+    </p>
+    `;
+ 
+    mes = mes + 1
+    }
         div_msg.innerHTML = `
         <div class="resposta">
             <p>
@@ -116,6 +153,7 @@ function calcular_valor(){
 <p style="color: red;">
   <b>Prejuízo médio estimado:</b> Perda de ${ax_mel_perdido_media} kg de mel, representando <b>R$ ${ax_valor_perdido_media} a menos no seu bolso por mês.</b>
 </p>
+    <h3>Projeção de prejuízo acumulado</h3> ${resultado_meses}
         </div>
         `;  div_contato.innerHTML= `<div class="contato">Entre em contato com a BEEFollow para evitar prejuízos! Fale conosco pelos 
             nossos canais de atendimento:<br>(11) 93021-9282 ou atendimento@beefollow.tech</div>`
