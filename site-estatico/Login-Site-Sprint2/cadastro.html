@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Follow - Criar Conta</title>
+    <link rel="stylesheet" href="cadastroElogin.css">
+</head>
+<body>
+
+    <div class="lado-esquerdo">
+        <div class="conteiner-logo">
+            <img class="imagem-logo" src="imagens/Logo.png" alt="Bee Follow Logo">
+        </div>
+    </div>
+
+    <div class="lado-direito">
+        <h1>Criar conta</h1>
+        <h2>preencha os dados para começar</h2>
+
+        <div class="grupo-formulario">
+            <label for="ipt_nome_empresa">Nome da empresa</label>
+            <input type="text" id="ipt_nome_empresa">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_email">Digite o seu e-mail</label>
+            <input type="email" id="ipt_email">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_cpf">Digite seu cpf</label>
+            <input type="text" id="ipt_cpf">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_telefone">telefone</label>
+            <input type="tel" id="ipt_telefone">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_senha">Digite a senha</label>
+            <input type="password" id="ipt_senha">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_conf_senha">Confirme a senha</label>
+            <input type="password" id="ipt_conf_senha">
+        </div>
+
+        <button onclick="cadastrar()">Cadastrar</button>
+    </div>
+
+   <script>
+        function cadastrar() {
+            let nome_empresa = ipt_nome_empresa.value
+            let email = ipt_email.value
+            let cpf = ipt_cpf.value
+            let telefone = ipt_telefone.value
+            let senha = ipt_senha.value
+            let conf_senha = ipt_conf_senha.value
+
+            let erro = false
+
+
+            if (nome_empresa == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "") {
+                alert('Por favor, preencha todos os campos!');
+                erro = true
+            } 
+            else if (senha != conf_senha) {
+                alert('As senhas não coincidem!');
+                erro = true
+            } 
+            else {
+                alert('Cadastro realizado com sucesso!');
+                erro = false
+            } 
+
+            if (erro == false) {
+                window.location.href = 'login.html';
+        }
+        }
+    </script>
+</body>
+</html>
