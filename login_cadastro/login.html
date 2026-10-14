@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Follow - Login</title>
+    <link rel="stylesheet" href="cadastroElogin.css">
+</head>
+<body>
+
+    <div class="lado-esquerdo">
+        <div class="conteiner-logo">
+            <img class="imagem-logo" src="../img/logo_login_cadastro.png" alt="Bee Follow Logo">
+        </div>
+    </div>
+
+    <div class="lado-direito">
+        <h1>Bem Vindo de volta</h1>
+        <h2>faça login para continuar</h2>
+
+        <div class="grupo-formulario">
+            <label for="ipt_email">Email</label>
+            <input type="email" id="ipt_email">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_senha">Senha</label>
+            <input type="password" id="ipt_senha">
+        </div>
+
+        <button onclick="entrar()">Entrar</button><br><br>
+
+        <div class="secao-cadastro">
+            <label>Caso não tenha Login</label>
+            <button onclick="irParaCadastro()">Fazer cadastro</button>
+        </div>
+    </div>
+
+   <script>
+        function entrar() {
+            let email = ipt_email.value;
+            let senha = ipt_senha.value;
+
+            if (email == "" || senha == "") {
+                alert('Por favor, preencha todos os campos!');
+            } else {
+                alert('Login efetuado com sucesso!');
+            }
+        }
+
+        function irParaCadastro() {
+            window.location.href = 'cadastro.html'; 
+        }
+    </script>
+</body>
+</html>
