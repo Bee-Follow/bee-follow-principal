@@ -37,14 +37,19 @@
     </div>
 
    <script>
+    let senha_estatica = 'abelhas@123'
+    let email_estatico = 'beefollow@gmail.com'
         function entrar() {
             let email = ipt_email.value;
             let senha = ipt_senha.value;
 
             if (email == "" || senha == "") {
                 alert('Por favor, preencha todos os campos!');
+            } else if (email != email_estatico || senha != senha_estatica) {
+                alert('Email ou senha incorretos, tente novamente')
             } else {
-                alert('Login efetuado com sucesso!');
+                alert ('Login efetuado com sucesso!')
+                window.location.href = '../dashboard/dashboard.html'
             }
         }
 

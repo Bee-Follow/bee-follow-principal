@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+html{
+    scroll-behavior: smooth;
+}
 header{
     background-color: #f9f3e4;
     display: flex;
@@ -12,6 +15,9 @@ header{
     height: 80px;
     padding: 15px 60px;
     width: 100%;
+    /* Qualquer erro de disposição retirar esses 2 aqui de baixo */
+    z-index: 999;
+    position: relative;
 }
 .text-titulo{
     color: #f7a925;
@@ -67,13 +73,11 @@ nav a{
     object-fit: cover;
     position: absolute;
 }
-
-
 .card-img::before{
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 1;                                 
+    z-index:1;                                 
     background: linear-gradient(to right, #283c27 0%, transparent 40%);
 }
 

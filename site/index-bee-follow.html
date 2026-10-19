@@ -24,8 +24,8 @@
             <a href="">Simulador Financeiro</a>
             <a href="">Contato</a>
             </nav>
-        <!-- tag <button> utilizada para o usuário ser redirecionado à pagina de login futuramente -->
-        <button onclick="" class="btn-entrar">Entrar</button>
+        <!-- tag <button> utilizada para o usuário ser redirecionado à pagina de login -->
+        <button onclick="carregamentoLogin()" class="btn-entrar">Entrar</button>
         </div>
     </header>
     <!-- <div> principal no primeiro banner do web site, contendo as demais divs-->
@@ -146,14 +146,37 @@
                     </div>
 
                     <button class="btn-enviar" onclick="enviar()">Enviar Solicitação</button>
+                    <!-- Precisa estilizar, não estilizei ainda -->
+                    <div id="div_aviso"></div>
                 </div>
+                
             </div>
 
             <div class="imagem">
-                <img src="" alt="Imagem do apicultor">
+                <img src="../img" alt="Imagem do apicultor">
             </div>
         </div>
     </section>
 </body>
+<script>
+    function carregamentoLogin() {
+        window.location.href = '../login_cadastro/login.html';
+    }
+    function enviar() {
+        let nome = ipt_nome_empresa.value;
+        let email = ipt_Email_empresa.value;
+        let assunto = ipt_assunto.value;
 
+        if (nome == '' || email == '' || assunto == '') {
+            div_aviso.innerHTML = 'Preencha todos os campos';
+        } else if (!email.includes('@') || !email.includes('.')) {
+            div_aviso.innerHTML = 'O email deve conter @ e .'
+        } else {
+            div_aviso.innerHTML = 'Solicitação enviada com sucesso!'
+            ipt_Email_empresa.value = ''
+            ipt_nome_empresa.value = ''
+            ipt_assunto.value = ''
+        }
+    }
+</script>
 </html>

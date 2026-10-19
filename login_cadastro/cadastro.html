@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Criar Conta</title>
     <link rel="stylesheet" href="cadastroElogin.css">
 </head>
+
 <body>
 
     <div class="lado-esquerdo">
@@ -19,8 +21,8 @@
         <h2>preencha os dados para começar</h2>
 
         <div class="grupo-formulario">
-            <label for="ipt_nome_empresa">Nome da empresa</label>
-            <input type="text" id="ipt_nome_empresa">
+            <label for="ipt_nome">Nome</label>
+            <input type="text" id="ipt_nome">
         </div>
 
         <div class="grupo-formulario">
@@ -29,13 +31,18 @@
         </div>
 
         <div class="grupo-formulario">
-            <label for="ipt_cpf">Digite seu cpf</label>
+            <label for="ipt_cpf">Digite seu CPF</label>
             <input type="text" id="ipt_cpf">
         </div>
 
         <div class="grupo-formulario">
-            <label for="ipt_telefone">telefone</label>
+            <label for="ipt_telefone">Telefone</label>
             <input type="tel" id="ipt_telefone">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_id_apiario">Informe o indicador do seu apiário</label>
+            <input type="text" id="ipt_id_apiario">
         </div>
 
         <div class="grupo-formulario">
@@ -51,35 +58,36 @@
         <button onclick="cadastrar()">Cadastrar</button>
     </div>
 
-   <script>
+    <script>
         function cadastrar() {
-            let nome_empresa = ipt_nome_empresa.value
+            let nome = ipt_nome.value
             let email = ipt_email.value
             let cpf = ipt_cpf.value
             let telefone = ipt_telefone.value
+            let id_apiario = ipt_id_apiario.value
             let senha = ipt_senha.value
             let conf_senha = ipt_conf_senha.value
 
-            let erro = false
 
 
-            if (nome_empresa == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "") {
+            if (nome == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "" || id_apiario == "") {
                 alert('Por favor, preencha todos os campos!');
-                erro = true
-            } 
+            } else if (!email.includes('@') && !email.includes('.')) {
+                alert('Os email precisa de @ e .')
+            }
+            else if (cpf.length != 11) {
+                alert('O CPF deve ter 11 caracteres');
+            }
             else if (senha != conf_senha) {
                 alert('As senhas não coincidem!');
-                erro = true
-            } 
-            else {
-                alert('Cadastro realizado com sucesso!');
-                erro = false
-            } 
-
-            if (erro == false) {
+            } else if (senha.length < 8) {
+                alert('A senha precisa ter 8 ou mais caracteres')
+            } else {
+                alert('Cadastro realizado com sucesso, redirecionando para a tela de login!')
                 window.location.href = 'login.html';
-        }
+            }
         }
     </script>
 </body>
+
 </html>
