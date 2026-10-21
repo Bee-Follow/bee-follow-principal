@@ -1,145 +1,77 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="styleDashboard.css">
+    <title>Bee Follow - Dashboard</title>
+    <link rel="stylesheet" href="styleDashboard_organizado.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="sidebar-menu">
-            <div id="div_card_img">
-                <div><img src="../img/logo.png" alt="Logomarca Bee Follow" class="img-sidebar"></div>
-                <h3 class="usuario-sidebar">Bem-vindo <span id=""></span>!</h3>
-            </div>
+    <div class="painel-dashboard">
+
+        <div class="menu-lateral">
+            <img src="../site-estatico/img/logo.png" alt="Logo Bee Follow" class="logo-menu">
+            <h3 class="boas-vindas">Bem-vindo!</h3>
             <a href="">Dashboard</a>
-            <a href="">Alertas</a>
+            <a href="">Sensores</a>
+            <a href="">Colmeias</a>
         </div>
-        <div class="content">
-            <div class="KPIS">
-                <div class="card_comeias">
-                    <div class="superior">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none">
-                            <polygon points="9,3.5 15,3.5 18,8.5 6,8.5" fill="#FFA500" stroke="#FF8C00"
-                                stroke-width="1.5" stroke-linejoin="round" />
-                            <rect x="5" y="8" width="14" height="4" rx="1" fill="#FFA500" stroke="#FF8C00"
-                                stroke-width="1.5" />
-                            <rect x="6" y="12" width="12" height="4" rx="1" fill="#FFA500" stroke="#FF8C00"
-                                stroke-width="1.5" />
-                            <path d="M7 16H17V18C17 19.1 16.1 20 15 20H9C7.9 20 7 19.1 7 18V16Z" fill="#FFA500"
-                                stroke="#FF8C00" stroke-width="1.5" />
-                            <path d="M10 20C10 18.9 10.9 18 12 18C13.1 18 14 18.9 14 20H10Z" fill="#CC6600" />
-                        </svg>
-                        <div class="card-titulo">
-                             <h2 class="titulo">Total de Comeias</h2>
-                        </div>
-                    </div>
-                     <div class="card-info">
-                        <span class="info" id="info" data-valor="10">10</span>
-                    </div>
-                    <div class="card-p">
-                        <p id="spn_indicador"> </p>
-                    </div>
-                </div>
-                <div class="card_temperatura">
-                    <div class="superior">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="55" height="55" fill="none">
-                            <!-- Camada de trás: Borda externa (linha mais grossa em branco ou na cor desejada) -->
-                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" stroke-width="4"
-                                stroke-linecap="round" stroke-linejoin="round" />
 
-                            <!-- Camada da frente: Linha principal do termômetro (preta) -->
-                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" stroke="#F7E0B9"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Área principal onde ficam os indicadores, gráficos e informações -->
+        <div class="conteudo-principal">
 
-                            <!-- Preenchimento e nível de temperatura interno -->
-                            <path d="M11.5 8v6" stroke="#F7A925" stroke-width="1.8" stroke-linecap="round" />
-                            <circle cx="11.5" cy="18.5" r="1.7" fill="#F7A925" />
-                        </svg>
-                        <div class="card-titulo">
-                             <h2 class="titulo">Temperatura Média</h2>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <span class="info" id="info" data-valor="10.7">36°C</span>
-                    </div>
-                    <div class="card-p">
-                        <p id="spn_indicador"> </p>
-                    </div>
+            <!-- Cards com os principais indicadores do apiário -->
+            <div class="secao-indicadores">
+                <div class="indicador">
+                    <h2>🐝 Total de colmeias</h2>
+                    <span class="valor-card" data-valor="10">10</span>
+                    <p class="texto-comparacao"></p>
                 </div>
-                <div class="card_producao">
-                    <div class="superior">
-                       <svg height="50" width="50" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                            <circle fill="#F9C900" cx="256.002" cy="129.793" r="68.049"/>
-                            <path fill="#F9AA0C" d="M281.518,180.83c-37.582,0-68.049-30.467-68.049-68.049c0-18.078,7.063-34.497,18.563-46.683c-25.753,9.696-44.081,34.551-44.081,63.695c0,37.582,30.467,68.049,68.049,68.049c19.505,0,37.079-8.218,49.487-21.366C298.03,179.283,289.955,180.83,281.518,180.83z"/>
-                            <path fill="#836134" d="M145.42,325.435c0-61.072,49.508-127.592,110.58-127.592s110.58,66.52,110.58,127.592S256,504.063,256,504.063S145.42,386.505,145.42,325.435z"/>
-                            <path fill="#754F1E" d="M187.951,342.447c0-61.072,49.508-127.592,110.58-127.592c3.634,0,7.226,0.242,10.77,0.699c-15.808-11.043-33.973-17.711-53.3-17.711c-61.072,0-110.58,66.521-110.58,127.592S256,504.063,256,504.063s5.485-5.833,14.002-15.561C237.237,449.167,187.951,383.221,187.951,342.447z"/>
-                            <path fill="#FAD433" d="M157.154,367.965c7.713,16.604,18.504,34.201,30.139,51.037h137.411c11.635-16.836,22.426-34.433,30.139-51.037H157.154z"/>
-                            <path fill="#FAD433" d="M351.822,265.892H160.177c-8.066,16.094-13.167,33.649-14.441,51.037h220.528C364.99,299.541,359.888,281.985,351.822,265.892z"/>
-                            <path fill="#FABB3D" d="M157.154,367.965c7.713,16.604,18.504,34.201,30.139,51.037h31.267c-11.013-17.447-20.38-35.075-25.752-51.037H157.154z"/>
-                            <path fill="#FABB3D" d="M160.177,265.892c-8.066,16.094-13.167,33.649-14.441,51.037h44.971c3.827-18.018,11.49-35.641,22.018-51.037H160.177z"/>
-                            <path fill="#F1EDE8" d="M256,197.843c0,0,132.54-68.049,170.123-68.049s68.049,30.467,68.049,68.049s-30.467,68.049-68.049,68.049S256,197.843,256,197.843z"/>
-                            <path fill="#E3DCD2" d="M434.628,240.373c-28.16,0-109.63-38.204-148.713-57.361c-17.86,8.641-29.916,14.83-29.916,14.83s132.54,68.049,170.123,68.049c34.755,0,63.405-26.062,67.522-59.705C481.899,226.61,459.878,240.373,434.628,240.373z"/>
-                            <path fill="#F1EDE8" d="M256,197.843c0,0-132.54-68.049-170.123-68.049s-68.049,30.467-68.049,68.049s30.467,68.049,68.049,68.049S256,197.843,256,197.843z"/>
-                            <path fill="#E3DCD2" d="M77.371,240.373c28.16,0,109.63-38.204,148.713-57.361c17.86,8.641,29.916,14.83,29.916,14.83s-132.54,68.049-170.123,68.049c-34.755,0-63.405-26.062-67.522-59.705C30.1,226.61,52.12,240.373,77.371,240.373z"/>
-                            <path d="M281.518,103.743h1.063c4.405,0,7.975-3.569,7.975-7.974s-3.569-7.974-7.975-7.974h-1.063c-4.405,0-7.974,3.569-7.974,7.974S277.113,103.743,281.518,103.743z"/>
-                            <path d="M231.545,87.794h-1.063c-4.404,0-7.975,3.569-7.975,7.974s3.57,7.974,7.975,7.974h1.063c4.404,0,7.975-3.569,7.975-7.974S235.949,87.794,231.545,87.794z"/>
-                            <path d="M426.122,121.819c-7.144,0-16.977,1.971-30.061,6.023c-4.206,1.304-6.56,5.77-5.257,9.978c1.304,4.205,5.766,6.56,9.978,5.257c14.164-4.388,21.598-5.309,25.341-5.309c33.125,0,60.075,26.95,60.075,60.075s-26.95,60.075-60.075,60.075c-26.038,0-108.854-38.445-152.38-60.059c19.031-9.43,54.338-26.493,87.129-40.011c4.071-1.678,6.012-6.339,4.333-10.412c-1.677-4.072-6.336-6.013-10.411-4.333c-8.925,3.679-18.03,7.615-26.947,11.59c2.75-7.936,4.178-16.322,4.178-24.9c0-24.448-11.613-46.222-29.598-60.139l17.752-42.857c3.655-8.826,14.076-13.158,22.923-9.495c8.937,3.702,13.196,13.985,9.495,22.923c-1.686,4.069,0.246,8.734,4.316,10.419c4.067,1.69,8.734-0.246,10.419-4.316c7.066-17.062-1.063-36.693-18.125-43.76c-8.263-3.424-17.367-3.425-25.634-0.001c-8.265,3.424-14.702,9.861-18.125,18.127l-16.765,40.471c-9.906-4.737-20.988-7.395-32.68-7.395c-11.693,0-22.774,2.658-32.679,7.395l-16.763-40.47c-3.424-8.265-9.861-14.703-18.127-18.127c-8.266-3.424-17.368-3.423-25.634,0.001c-8.266,3.424-14.703,9.86-18.127,18.126c-3.424,8.265-3.424,17.37,0,25.634c1.685,4.069,6.351,6,10.419,4.316c4.069-1.685,6.001-6.35,4.316-10.419c-3.665-8.847,0.67-19.267,9.495-22.923c8.846-3.666,19.267,0.671,22.922,9.495l17.751,42.857c-17.985,13.916-29.597,35.691-29.597,60.138c0,8.528,1.412,16.876,4.136,24.78c-37.498-16.691-78.668-32.755-98.235-32.755c-41.919,0-76.024,34.104-76.024,76.024s34.104,76.024,76.024,76.024c15.2,0,43.442-9.698,72.87-21.85c-13.556,22.66-21.301,48.812-21.301,73.419c0,15.409,6.258,34.975,18.602,58.154c2.204,4.138,7.675,5.479,11.548,2.829c3.417-2.337,4.358-6.88,2.45-10.48h171.926c-5.724,10.759-12.889,22.484-21.46,35.088H191.496c-1.002-1.474-1.999-2.951-2.982-4.432c-2.437-3.669-7.385-4.668-11.055-2.231c-3.668,2.437-4.667,7.385-2.23,11.054c32.217,48.501,74.538,93.657,74.961,94.108c3.103,3.298,8.515,3.299,11.617,0c4.604-4.894,112.746-120.59,112.746-184.093c0-24.62-7.742-50.759-21.298-73.416c29.426,12.151,57.666,21.848,72.867,21.848c41.919,0,76.024-34.104,76.024-76.024S468.04,121.819,426.122,121.819z M206.511,163.862c-6.926-10.038-10.587-21.819-10.587-34.068c0-33.125,26.95-60.075,60.075-60.075s60.075,26.95,60.075,60.075c0,12.441-3.768,24.375-10.895,34.511c-0.23,0.326-0.421,0.666-0.594,1.011c-22.391,10.453-40.998,19.75-48.574,23.577c-8.397-4.267-26.789-13.49-48.793-23.771C207.02,164.689,206.791,164.266,206.511,163.862z M25.802,197.843c0-33.125,26.95-60.075,60.075-60.075c26.046,0,108.895,38.465,152.412,60.075c-43.514,21.611-126.36,60.075-152.412,60.075C52.751,257.917,25.802,230.968,25.802,197.843z M357.346,308.954H154.654c1.774-11.83,5.381-23.75,10.565-35.088h181.564C351.968,285.201,355.574,297.121,357.346,308.954z M256,492.25c-10.195-11.309-32.223-36.471-53.255-65.275h106.507c-1.397,1.914-2.811,3.837-4.265,5.785C285.361,459.057,265.523,481.69,256,492.25z M349.705,359.997c-0.047,0-0.091-0.006-0.138-0.006H162.432c-0.038,0-0.074,0.005-0.112,0.005c-5.92-13.667-8.926-25.256-8.926-34.561c0-0.176,0.006-0.354,0.006-0.532h205.197c0.001,0.178,0.006,0.355,0.006,0.532C358.605,334.786,355.591,346.397,349.705,359.997z M326.68,242.191c4.205,4.933,8.049,10.208,11.506,15.726h-164.37c3.398-5.427,7.17-10.619,11.293-15.479c0.62-0.73,1.076-1.543,1.39-2.392c30.71-13.747,58.565-27.692,69.501-33.249c10.919,5.549,38.7,19.458,69.35,33.182C325.664,240.762,326.102,241.512,326.68,242.191z"/>
-                        </svg>
-                        <div class="card-titulo">
-                            <h2 class="titulo">Enxameações no mês</h2>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <span class="info" id="info" data-valor="100">1</span>
-                    </div>
-                    <div class="card-p">
-                        <p id="spn_indicador"></p>
-                    </div>
+
+                <div class="indicador">
+                    <h2>🌡️ Temperatura média</h2>
+                    <span class="valor-card" data-valor="0">36°C</span>
+                    <p class="texto-comparacao"></p>
                 </div>
-                <div class="card_aviso">
-                    <div class="superior">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50">
-                            <path
-                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                                fill="#FF0000" />
-                            <path d="M12 9v4" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-                            <circle cx="12" cy="16" r="1" fill="#FFFFFF" />
-                        </svg>
-                        <div>
-                            <div class="card-titulo">
-                                <h2 class="titulo">Alertas na semana</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <span class="info" id="info" data-valor="50">2</span>
-                    </div>
-                    <div class="card-p">
-                        <p id="spn_indicador"> </p>
-                    </div>
-                    
+
+                <div class="indicador">
+                    <h2>🍯 Enxameações no mês</h2>
+                    <span class="valor-card" data-valor="-5">1</span>
+                    <p class="texto-comparacao"></p>
+                </div>
+
+                <div class="indicador">
+                    <h2>⚠️ Alertas na semana</h2>
+                    <span class="valor-card" data-valor="20">2</span>
+                    <p class="texto-comparacao"></p>
                 </div>
             </div>
-            <div class="graficos">
-                <div class="grafico_temp">
-                    <div>
-                        <canvas id="sensorAnalogico"></canvas>
-                    </div>
+
+            <!--  gráficos do dashboard -->
+            <div class="secao-graficos">
+                <div class="grafico">
+                    <h2>Temperaturas das colmeias</h2>
+                    <canvas id="sensorAnalogico"></canvas>
                 </div>
-                <div class="grafico_2">
-                    <div>
-                        <canvas id="alertaSemana"></canvas>
-                    </div>
+
+                <div class="grafico">
+                    <h2>Alertas da semana</h2>
+                    <canvas id="alertaSemana"></canvas>
                 </div>
             </div>
-            <div class="mensagens_inferiores">
-                <div class="leituras_temp">
-                    <table class="table-leituras">
+
+            <!-- Área inferior com a tabela de leituras e os alertas recentes -->
+                 <div class="secao-inferior">
+
+                <!--  últimas temperaturas registradas -->
+                <div class="card-ultimas-leituras">
+                    <h2>Últimas leituras</h2>
+
+                    <table class="tabela-leituras">
                         <tr>
                             <th>Colmeia</th>
                             <th>Temperatura</th>
@@ -147,63 +79,49 @@
                         </tr>
                         <tr>
                             <td>Colmeia 1</td>
-                            <td>34 ºC</td>
-                            <td>10-10-2026 12:30</td>
+                            <td>34°C</td>
+                            <td>10/10/2026 12:30</td>
                         </tr>
                         <tr>
                             <td>Colmeia 2</td>
-                            <td>36 ºC</td>
-                            <td>10-10-2026 13:30</td>
+                            <td>36°C</td>
+                            <td>10/10/2026 13:30</td>
                         </tr>
                         <tr>
                             <td>Colmeia 3</td>
-                            <td>38 ºC</td>
-                            <td>10-10-2026 14:30</td>
+                            <td>38°C</td>
+                            <td>10/10/2026 14:30</td>
                         </tr>
                         <tr>
                             <td>Colmeia 4</td>
-                            <td>36 ºC</td>
-                            <td>10-10-2026 12:30</td>
+                            <td>36°C</td>
+                            <td>10/10/2026 12:30</td>
                         </tr>
                     </table>
                 </div>
 
-                <div class="card_alertas">
-                    <div class="superior">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="65" height="65" fill="none">
-                            <path
-                                d="M10.29 3.86L1.82 18A2 2 0 0 0 3.53 21h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                                fill="#F3A72E" />
-                            <path d="M12 6.2L18.8 18H5.2L12 6.2z" fill="#1E382B" />
-                            <path d="M12 9c-0.55 0-1 0.45-1 1v4c0 0.55 0.45 1 1 1s1-0.45 1-1v-4c0-0.55-0.45-1-1-1z"
-                                fill="#F8F3E6" />
-                            <circle cx="12" cy="16.5" r="1" fill="#F8F3E6" />
-                        </svg>
-                        <h2>Alertas Recentes</h2>
+                <!--  alertas mais recentes  -->
+                <div class="card-alertas-recentes">
+                    <h2>⚠️ Alertas recentes</h2>
+
+                    <div class="item-alerta">
+                        <strong>Colmeia 03</strong>
+                        <p>Temperatura acima do ideal (38°C)</p>
+                        <small>10/10/2026 14:30</small>
                     </div>
-                    <div id="mensagem">
-                        <span id="situacao">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="58" height="58"
-                                fill="none">
-                                <circle cx="12" cy="12" r="10" fill="#FF0000" />
-                                <path
-                                    d="M12 6.5C12.55 6.5 13 6.95 13 7.5V13C13 13.55 12.55 14 12 14C11.45 14 11 13.55 11 13V7.5C11 6.95 11.45 6.5 12 6.5Z"
-                                    fill="#FFFFFF" />
-                                <circle cx="12" cy="16.5" r="1.1" fill="#FFFFFF" />
-                            </svg>
-                        </span>
-                        <div class="conteudo_texto">
-                            <div id="titulo"> Colmeia 03</div><!--Comeia que está acontecendo-->
-                            <div id="descricao"> Temperatura acima do ideal(38°C)</div>
-                            <!--descrição do que está acontecendo-->
-                            <div id="dataHorario"> 10-10-2026 14:30</div><!--Horário do alerta-->
-                        </div>
+
+                    <div class="item-alerta">
+                        <strong>Colmeia 02</strong>
+                        <p>Temperatura próxima do limite (36°C)</p>
+                        <small>10/10/2026 13:30</small>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
+
+    <script src="dashboard.js"></script>
 </body>
 
 </html>

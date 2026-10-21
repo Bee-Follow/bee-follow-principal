@@ -1,216 +1,180 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
-body {
-    font-family: 'Inter' ;
-    margin: 0;
-    width: 80%;
-    height: 80%;
-    display: flex;
-    background-color: #F9F3E4;
-}
-/*KPIS*/
-.KPIS{
-    display: flex;
-    align-content: space-between;
-    justify-content: center;
-    font-weight: 800;
-    margin-top: 1%;
-}
-.KPIS .superior{
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    gap: 10px;
-    width: 100%;
-}
-.card-info, .card-titulo, .card-p{
-    text-align: center;
-}
-.card-p{
-    margin-left: 10px;
-}
-.titulo{
-    font-size: 18px;
-}
-.KPIS svg{
-    margin-top: 10px;
-    margin-left: 10px;
-}
-.info{
-    font-size: 29px;
-}
-.card_comeias,.card_producao,.card_temperatura,.card_aviso{
-    background-color:#283C27;
-    color: #F7E0B9;
-    margin-left: 50px;
-    width: 280px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-.card_aviso svg{
-    margin-left: 20px;
-}
 
-#spn_indicador{
-    font-size: 13px;
-    height: 20px;
-}
-/*GRAFICOS*/
-.graficos{
-    display: flex;
-}
-.grafico_temp{
-    margin: auto;
-    width: 41%; 
-    background-color: #FFFDFD; 
-    padding: 30px; 
-    border: 2px solid #BFBFBF; 
-    border-radius: 20px;
-}
-.grafico_2{
-    margin: 0;
-    width: 41%; 
-    background-color: #FFFDFD; 
-    padding: 30px; 
-    border: 2px solid #BFBFBF; 
-    border-radius: 20px;
-}
-/*ALERTAS E HISTÓRICO*/
-.mensagens_inferiores{
-    display: flex;
-    align-content: space-between;
-    margin-top: 2%;
-}
-
-/*Aqui o CSS do Card das Colmeias que estão cadastradas no Sistema*/
-
-.leituras_temp{
-    background-color:#283C27;
-    border: 2px solid #bfbfbf72;
-    color: #F7E0B9;
-    height: max-content;
-    width: 47%;
-    margin-left: 4%;
-    border-radius: 5px;
-}
-.leituras_temp h2{
-    text-align: center;
-}
-.leituras_temp .titulo{
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    margin-left: 50px;
-    gap: 70px;
-    width: 100%;
-}
-/*Aqui começa o CSS do Card de alertas das colmeias*/
-.card_alertas {
-    background-color: #F7E0B9;               
-    height: max-content;
-    width: 45%;
-    padding: 15px;
-    border-radius: 20px;
-    margin-left: 5%;
-}
-.card_alertas .superior{
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    margin-left: 10px;
-    gap: 10px;
-    width: 100%;
-}
-#mensagem {
-    background-color: #fff6e7a5;
-    border: 2px solid #bfbfbf72;
-    border-radius: 15px;
-    width: 100%;
+* {
     box-sizing: border-box;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;        
-    gap: 15px;                  
-}
-#situacao {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;            
 }
 
-.conteudo_texto {
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #F9F3E4;
+    color: #1E382B;
+}
+
+
+/* PAINEL E MENU LATERAL */
+
+.painel-dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Menu lateral com logo e links */
+.menu-lateral {
+    width: 180px;
+    padding: 20px 15px;
+    background: #1E382B;
     display: flex;
     flex-direction: column;
-    gap: 4px;                  
+    gap: 15px;
 }
 
-#titulo, #descricao, #dataHorario {
-    margin-left: 0;
+.logo-menu {
+    width: 100px;
+    margin: 0 auto;
 }
 
-#titulo {
-    font-size: 18px;
-    font-weight: 800;
-    color: #000;
+/* Texto de boas-vindas */
+.boas-vindas {
+    color: #F9F3E4;
+    text-align: center;
 }
 
-#descricao {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-}
-
-#dataHorario {
-    font-size: 14px;
-    font-weight: 800;
-    color: #000;
-    margin-top: 2px;
-}
-.sidebar-menu{
-    margin: 0;
-    padding: 0;
-    width: 198px;
-    background-color: #283C27;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-}
-.sidebar-menu a{
-    display: block;
-    color: white;
-    padding: 16px;
+/* Links do menu */
+.menu-lateral a {
+    padding: 12px 10px;
+    color: #F9F3E4;
     text-decoration: none;
+    border-radius: 8px;
 }
-.content{
-    margin-left: 11.5%;
-    height: fit-content;
-    width: fit-content; 
+
+
+/* CONTEÚDO PRINCIPAL*/
+
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
+    padding: 25px;
 }
-.usuario-sidebar{
-    font-family: 'Inter';
-    color: white;
-    padding: 16px;
+
+
+/* SEÇÕES DO DASHBOARD */
+
+.secao-indicadores,
+.secao-graficos,
+.secao-inferior {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
 }
-.img-sidebar{
-    margin: 10px;
-    width: 80%;    
-    height: auto;
-    padding: 1px 10px;
+
+
+/* CARTÕES DE INDICADORES */
+
+.secao-indicadores {
+    flex-wrap: wrap;
 }
-.sidebar-menu a.active {
-  background-color: #04AA6D;
-  color: white;
+
+.indicador {
+    flex: 1;
+    min-width: 180px;
+    padding: 18px;
+    background: #F7A925;
+    border-radius: 12px;
 }
-.sidebar-menu a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+
+.indicador h2 {
+    font-size: 19px;
 }
-.table-leituras{
-    border-collapse: collapse;
+
+/* Valores dos indicadores */
+.valor-card {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Comparação dos indicadores */
+.texto-comparacao {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* CARTÕES DOS GRÁFICOS */
+
+.grafico {
+    width: 50%;
+    min-width: 0;
+    padding: 18px;
+    background: white;
+    border: 1px solid #E6DCC7;
+    border-radius: 12px;
+}
+
+.grafico canvas {
+    max-width: 100%;
+}
+
+
+/* TABELA E ALERTAS RECENTES */
+
+/* Estilo compartilhado pelos dois cartões */
+.card-ultimas-leituras,
+.card-alertas-recentes {
+    padding: 20px;
+    background: #F7E0B9;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+/* Cartão da tabela de leituras */
+.card-ultimas-leituras {
+    width: 60%;
+}
+
+/* Cartão dos alertas recentes */
+.card-alertas-recentes {
+    width: 40%;
+}
+
+
+/* TABELA DE LEITURAS */
+
+.tabela-leituras {
     width: 100%;
-    font-family: 'Inter';
+    border-collapse: collapse;
+    background: white;
+    font-size: 13px;
 }
-td, tr, th{
-    border: 1px solid white;
-    padding: 8px;
-    text-align: center
+
+/* Células e cabeçalhos da tabela */
+.tabela-leituras th,
+.tabela-leituras td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #E6DCC7;
 }
+
+/* Cabeçalho da tabela */
+.tabela-leituras th {
+    background: #F7A925;
+}
+
+
+/* ALERTAS RECENTES */
+
+/* Cada item de alerta */
+.item-alerta {
+    padding: 12px 0;
+    border-bottom: 1px solid #D9C49F;
+}
+
+/* Mensagem do alerta */
+.item-alerta p {
+    font-size: 14px;
+}
+
+/* Data e horário do alerta */
+.item-alerta small {
+    color: #555;
+}
+
