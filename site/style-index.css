@@ -1,13 +1,15 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
-html{
+
+html {
     scroll-behavior: smooth;
 }
-header{
+
+header {
     background-color: #f9f3e4;
     display: flex;
     justify-content: space-between;
@@ -19,28 +21,34 @@ header{
     z-index: 999;
     position: relative;
 }
-.text-titulo{
+
+.text-titulo {
     color: #f7a925;
 }
-.text-info{
+
+.text-info {
     color: white;
     line-height: 1.6;
 }
-nav{
+
+nav {
     display: flex;
     gap: 30px;
 }
-.logo img{
+
+.logo img {
     height: 60px;
     width: auto;
 }
-nav a{
-   text-decoration: none;
-   color: #1d4339;
-   font-size: 16px;
-   font-weight: 500;
+
+nav a {
+    text-decoration: none;
+    color: #1d4339;
+    font-size: 16px;
+    font-weight: 500;
 }
-.btn-entrar{
+
+.btn-entrar {
     background-color: #283c27;
     color: white;
     padding: 10px 30px;
@@ -49,39 +57,46 @@ nav a{
     font-weight: 600;
     border: none;
 }
-.menu-direito{
+
+.menu-direito {
     display: flex;
     align-items: center;
     gap: 40px;
 }
-.card-inicio{
-    min-height: calc(100vh - 80px); /*Cálculo para a div ocupar a tela toda - o header de 80px*/
+
+.card-inicio {
+    min-height: calc(100vh - 80px);
+    /*Cálculo para a div ocupar a tela toda - o header de 80px*/
     background-color: #283c27;
     display: grid;
     grid-template-columns: 60% 40%;
     position: relative;
 }
+
 .card-img {
     grid-column: 2;
     grid-row: 1;
     position: relative;
 }
+
 .card-img img {
     width: 100%;
     height: 100%;
-    inset: 0; /* top, right, bottom, left = 0 */
+    inset: 0;
+    /* top, right, bottom, left = 0 */
     object-fit: cover;
     position: absolute;
 }
-.card-img::before{
+
+.card-img::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index:1;                                 
+    z-index: 1;
     background: linear-gradient(to right, #283c27 0%, transparent 40%);
 }
 
-.card-texto{
+.card-texto {
     grid-column: 1;
     grid-row: 1;
     display: flex;
@@ -90,16 +105,19 @@ nav a{
     font-size: larger;
     padding: 60px 40px 60px 100px;
 }
-.card-img-colmeias{
+
+.card-img-colmeias {
     position: absolute;
     left: -25px;
     top: 80%;
     transform: translateY(-50%);
 }
-.card-img-colmeias{
+
+.card-img-colmeias {
     width: 100%;
     height: 100%;
-    inset: 0; /* top, right, bottom, left = 0 */
+    inset: 0;
+    /* top, right, bottom, left = 0 */
     object-fit: cover;
     position: absolute;
 }
@@ -107,7 +125,7 @@ nav a{
 
 /* Seção dos benefícios */
 
-.secao-beneficios{
+.secao-beneficios {
     background-color: #f9f3e4;
     display: flex;
     justify-content: space-around;
@@ -120,7 +138,7 @@ nav a{
 
 /* Cada um dos três benefícios */
 
-.beneficio{
+.beneficio {
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -130,7 +148,7 @@ nav a{
 
 /* Títulos dos benefícios */
 
-.beneficio h2{
+.beneficio h2 {
     color: #283c27;
     font-size: 24px;
     margin-bottom: 20px;
@@ -140,7 +158,7 @@ nav a{
 
 /* Textos dos benefícios */
 
-.beneficio p{
+.beneficio p {
     color: #3f463e;
     font-size: 16px;
     line-height: 1.5;
@@ -149,12 +167,12 @@ nav a{
 
 /* Parte 3 - Sobre Nós */
 
-.secao-sobre{
+.secao-sobre {
     background-color: #283c27;
-   height: 650px;
+    height: 650px;
 }
 
-.sobre-conteudo{
+.sobre-conteudo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -162,7 +180,7 @@ nav a{
     width: 100%;
 }
 
-.sobre-titulo{
+.sobre-titulo {
     color: #f7a925;
     font-size: 45px;
     line-height: 1.2;
@@ -171,7 +189,7 @@ nav a{
     width: 300px;
 }
 
-.sobre-texto p{
+.sobre-texto p {
     color: white;
     font-size: 18px;
     line-height: 1.6;
@@ -179,12 +197,13 @@ nav a{
     margin-left: 40px;
 }
 
-.sobre-img img{
+.sobre-img img {
     width: 100%;
     height: 650px;
     inset: 0;
     object-fit: cover;
 }
+
 /* BAIXAR A IMAGEM PARA FUNCIONAR!!!!!
 .sobre-img ::before{
     content: "";
@@ -197,13 +216,13 @@ nav a{
 
 /*Secao de contato*/
 
-.secao-contato{
+.secao-contato {
     height: 730px;
     background-color: #283c27;
     color: #f9f3e4;
 }
 
-.contato_conteudo{
+.contato_conteudo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -211,7 +230,7 @@ nav a{
     width: 100%;
 }
 
-.formulario h1{
+.formulario h1 {
     color: #f7a925;
     margin-left: 40px;
     margin-top: 40px;
@@ -297,4 +316,175 @@ nav a{
 
 .btn-enviar:hover {
     background-color: #e99612;
+}
+
+
+/* SEÇÃO 4 - CALCULADORA FINANCEIRA */
+
+.secao-calculadora {
+    background-color: #f9f3e4;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.secao-calculadora .titulo {
+    color: #283c27;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.secao-calculadora .container {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(40, 60, 39, 0.2);
+}
+
+.secao-calculadora .painel {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background-color: #283c27;
+    color: white;
+    padding: 35px 30px;
+    text-align: center;
+}
+
+.secao-calculadora .painel h1 {
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.secao-calculadora .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.secao-calculadora .row {
+    display: flex;
+    gap: 15px;
+}
+
+.secao-calculadora .row .campo {
+    flex: 1;
+    min-width: 0;
+}
+
+.secao-calculadora input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    text-align: left;
+}
+
+.secao-calculadora button {
+    align-self: center;
+    width: 70%;
+    padding: 12px;
+    background-color: #f7a925;
+    color: #283c27;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.secao-calculadora .painel-resultado {
+    width: 50%;
+    padding: 35px 30px;
+    background-color: #f7a925;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.secao-calculadora .placeholder {
+    color: #283c27;
+    font-style: italic;
+}
+
+.secao-calculadora .resposta {
+    background-color: white;
+    color: #283c27;
+    border-radius: 10px;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.secao-calculadora .contato {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #283c27;
+}
+
+
+/* FAIXA FALE COM A GENTE */
+
+.secao-calculadora .folder-faixa {
+    width: calc(100% + 80px);
+    margin-top: 40px;
+    margin-bottom: 0px;
+    background-color: #283c27;
+    padding: 15px 40px;
+}
+
+.secao-calculadora .folder {
+    width: 100%;
+    min-height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    color: white;
+}
+
+.secao-calculadora .folder-textoh2 {
+    text-align: left;
+    flex: 1;
+}
+
+.secao-calculadora .folder-textoh2 h2 {
+    color: #f7a925;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.secao-calculadora .folder-textop {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.secao-calculadora .folder-redes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    flex: 0 0 auto;
+    margin-right: 5px;
+}
+
+.secao-calculadora .folder-redesimg {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+}
+
+.secao-calculadora .folder-redes img:first-child {
+    width: 90px;
+    height: 90px;
 }

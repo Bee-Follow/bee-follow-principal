@@ -21,8 +21,8 @@
             <a href="#secao1">Inicio</a>
             <a href="#secao2">Soluções</a>
             <a href="#secao3">Sobre Nós</a>
-            <a href="">Simulador Financeiro</a>
-            <a href="">Contato</a>
+            <a href="#secao4">Simulador Financeiro</a>
+            <a href="#secao5">Contato</a>
             </nav>
         <!-- tag <button> utilizada para o usuário ser redirecionado à pagina de login -->
         <button onclick="carregamentoLogin()" class="btn-entrar">Entrar</button>
@@ -123,8 +123,154 @@
     </div>
 </section>
     <!-- COLOCAR AQUI A CALCULADORA FINACEIRA-->
+    <section class="secao-calculadora" id="secao4">
+ <h2 class="titulo">Quanto você está perdendo com a enxameação?</h2>
+ <div class="container">
+     <!-- Painel esquerdo: entrada de dados -->
+     <div class="painel text">
+         <h1>Calculadora de produção apícola e Enxameação</h1>
+         <div class="campo">
+             <label>Média de produção mensal (em quilos) de mel por colmeia:</label>
+             <input type="number" id="ipt_quilo" min="0">
+         </div>
+         <div class="row">
+             <div class="campo">
+                 <label>Número de Colmeias:</label>
+                 <input type="number" id="ipt_colmeia" min="0">
+             </div>
+             <div class="campo">
+                 <label>Valor do Mel por quilo:</label>
+                 <input type="number" id="ipt_valor" min="0">
+             </div>
+         </div>
+         <button onclick="calcular_valor()">Calcular</button>
+     </div>
+     <!-- Painel direito: resultado -->
+     <div class="painel-resultado text">
+         <div class=msg id="div_msg">
+             <p class="placeholder">Preencha os campos ao lado e clique em "Calcular" para ver o resultado aqui.
+            </p>
+         </div>
+         <div id="div_contato"></div>
+     </div>
+ </div>
+ <div class="folder-faixa">
+     <div class="folder">
+         <div class="folder-textoh2">
+             <h2>Fale com a gente</h2>
+             <p class="folder-textop">
+                 Tire suas dúvidas, conheça mais<br>
+                 sobre a Bee Follow e descubra como<br>
+                 podemos ajudar o seu apiário.
+             </p>
+         </div>
+         <div class="folder-redes">
+             <img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram">
+             <img class="folder-redesimg" src="../img/facebook.png" alt="Facebook">
+             <img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin">
+         </div>
+    </div>
+ </section>
+        <script>
+            function calcular_valor() {
+                let ax_erro = false;
+                let ax_mensagem = 'Os seguintes valores não podem ser vazios: ';
 
+                let ax_colmeia = Number(ipt_colmeia.value);
+                let ax_valor = Number(ipt_valor.value);
+                let ax_quilo = Number(ipt_quilo.value);
 
+                let ax_mel_total = Number(ax_colmeia * ax_quilo);
+                let ax_valor_total = ((ax_mel_total) * ax_valor).toFixed(2);
+
+                // Valores no total após enxameação
+                let ax_mel_reduzido_min = Number(ax_mel_total * 0.3).toFixed(2);
+                let ax_mel_reduzido_max = Number(ax_mel_total * 0.5).toFixed(2);
+
+                let ax_valor_aumentado_min = Number(ax_mel_reduzido_min * ax_valor).toFixed(2);
+                let ax_valor_aumentado_max = Number(ax_mel_reduzido_max * ax_valor).toFixed(2);
+
+                // Valores perdidos no total
+                let ax_mel_perdido_min = (ax_mel_total - ax_mel_reduzido_max).toFixed(2);
+                let ax_mel_perdido_max = (ax_mel_total - ax_mel_reduzido_min).toFixed(2);
+                let ax_valor_perdido_min = (Number(ax_mel_perdido_min) * ax_valor).toFixed(2);
+                let ax_valor_perdido_max = (Number(ax_mel_perdido_max) * ax_valor).toFixed(2);
+
+                // Média das perdas totais
+                let ax_mel_perdido_media = ((Number(ax_mel_perdido_min) + Number(ax_mel_perdido_max)) / 2).toFixed(2);
+                let ax_valor_perdido_media = ((Number(ax_valor_perdido_min) + Number(ax_valor_perdido_max)) / 2).toFixed(2);
+
+                // Valores perdidos, por colmeia
+                let ax_mel_perdido_colmeia_min = (ax_mel_perdido_min / ax_colmeia).toFixed(2);
+                let ax_mel_perdido_colmeia_max = (ax_mel_perdido_max / ax_colmeia).toFixed(2);
+                let ax_valor_perdido_colmeia_min = (ax_valor_perdido_min / ax_colmeia).toFixed(2);
+                let ax_valor_perdido_colmeia_max = (ax_valor_perdido_max / ax_colmeia).toFixed(2);
+
+                // Checagem de Valores dos Inputs.
+                if (ipt_quilo.value.length == 0) {
+                    ax_erro = true;
+                    ax_mensagem += 'Produção Mensal, ';
+                }
+                if (ipt_colmeia.value.length == 0) {
+                    ax_erro = true;
+                    ax_mensagem += 'Número de Colmeias, ';
+                }
+                if (ipt_valor.value.length == 0) {
+                    ax_erro = true;
+                    ax_mensagem += 'Valor do Mel; ';
+                }
+
+                if (ax_erro) {
+                    alert(ax_mensagem);
+                    div_msg.innerHTML = null;
+                } else {
+
+                    // Variável que armazena os resultados da projeção dos 6 meses
+                    let resultado_meses = "";
+                    let mes = 1
+
+                    // Repete o cálculo enquanto o mês for menor ou igual a 6
+                    while (mes <= 6) {
+                        let mel_acumulado = Number(ax_mel_perdido_media) * mes;
+                        let valor_acumulado = Number(ax_valor_perdido_media) * mes;
+
+                        resultado_meses += `
+    <p>
+        <b>Mês ${mes}:</b>
+    ${mel_acumulado.toFixed(2)} kg de mel perdidos,
+     R$ ${valor_acumulado.toFixed(2)} de prejuízo acumulado.
+    </p>
+    `;
+
+                        mes = mes + 1
+                    }
+                    div_msg.innerHTML = `
+        <div class="resposta">
+            <p>
+  <b>Sua produção atual:</b> ${ax_mel_total} kg por mês, rendendo <span style="color: green;"><b>R$ ${ax_valor_total}/mês</b></span>.
+</p>
+
+<p>
+  ⚠️ <b>Atenção ao risco de enxameação:</b> A sua produção pode cair de <b>50% a 70%</b>!
+</p>
+
+<p>
+  <b>O que isso significa na prática?</b><br>
+  • <b>Por colmeia:</b> Perda de ${ax_mel_perdido_colmeia_min} a ${ax_mel_perdido_colmeia_max} kg (menos R$ ${ax_valor_perdido_colmeia_min} a R$ ${ax_valor_perdido_colmeia_max} todo mês).<br>
+  • <b>No total do apiário:</b> Perda de ${ax_mel_perdido_min} a ${ax_mel_perdido_max} kg (prejuízo de R$ ${ax_valor_perdido_min} a R$ ${ax_valor_perdido_max}).
+</p>
+
+<p style="color: red;">
+  <b>Prejuízo médio estimado:</b> Perda de ${ax_mel_perdido_media} kg de mel, representando <b>R$ ${ax_valor_perdido_media} a menos no seu bolso por mês.</b>
+</p>
+    <h3>Projeção de prejuízo acumulado</h3> ${resultado_meses}
+        </div>
+        `; div_contato.innerHTML = `<div class="contato">Entre em contato com a BEEFollow para evitar prejuízos! Fale conosco pelos 
+            nossos canais de atendimento:<br>(11) 93021-9282 ou atendimento@beefollow.tech</div>`
+                }
+            }
+        </script>
+        
     <section class="secao-contato" id="secao5">
         <div class="contato_conteudo">
             <div class="formulario">
