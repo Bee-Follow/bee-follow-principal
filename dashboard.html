@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Follow - Dashboard</title>
+    <link rel="stylesheet" href="styleDashboard_organizado.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="painel-dashboard">
+
+        <div class="menu-lateral">
+            <img src="../site-estatico/img/logo.png" alt="Logo Bee Follow" class="logo-menu">
+            <h3 class="boas-vindas">Bem-vindo!</h3>
+            <a href="">Dashboard</a>
+            <a href="">Sensores</a>
+            <a href="">Colmeias</a>
+        </div>
+
+        <!-- Área principal onde ficam os indicadores, gráficos e informações -->
+        <div class="conteudo-principal">
+
+            <!-- Cards com os principais indicadores do apiário -->
+            <div class="secao-indicadores">
+                <div class="indicador">
+                    <h2>🐝 Total de colmeias</h2>
+                    <span class="valor-card" data-valor="10">10</span>
+                    <p class="texto-comparacao"></p>
+                </div>
+
+                <div class="indicador">
+                    <h2>🌡️ Temperatura média</h2>
+                    <span class="valor-card" data-valor="0">36°C</span>
+                    <p class="texto-comparacao"></p>
+                </div>
+
+                <div class="indicador">
+                    <h2>🍯 Enxameações no mês</h2>
+                    <span class="valor-card" data-valor="-5">1</span>
+                    <p class="texto-comparacao"></p>
+                </div>
+
+                <div class="indicador">
+                    <h2>⚠️ Alertas na semana</h2>
+                    <span class="valor-card" data-valor="20">2</span>
+                    <p class="texto-comparacao"></p>
+                </div>
+            </div>
+
+            <!--  gráficos do dashboard -->
+            <div class="secao-graficos">
+                <div class="grafico">
+                    <h2>Temperaturas das colmeias</h2>
+                    <canvas id="sensorAnalogico"></canvas>
+                </div>
+
+                <div class="grafico">
+                    <h2>Alertas da semana</h2>
+                    <canvas id="alertaSemana"></canvas>
+                </div>
+            </div>
+
+            <!-- Área inferior com a tabela de leituras e os alertas recentes -->
+                 <div class="secao-inferior">
+
+                <!--  últimas temperaturas registradas -->
+                <div class="card-ultimas-leituras">
+                    <h2>Últimas leituras</h2>
+
+                    <table class="tabela-leituras">
+                        <tr>
+                            <th>Colmeia</th>
+                            <th>Temperatura</th>
+                            <th>Última atualização</th>
+                        </tr>
+                        <tr>
+                            <td>Colmeia 1</td>
+                            <td>34°C</td>
+                            <td>10/10/2026 12:30</td>
+                        </tr>
+                        <tr>
+                            <td>Colmeia 2</td>
+                            <td>36°C</td>
+                            <td>10/10/2026 13:30</td>
+                        </tr>
+                        <tr>
+                            <td>Colmeia 3</td>
+                            <td>38°C</td>
+                            <td>10/10/2026 14:30</td>
+                        </tr>
+                        <tr>
+                            <td>Colmeia 4</td>
+                            <td>36°C</td>
+                            <td>10/10/2026 12:30</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!--  alertas mais recentes  -->
+                <div class="card-alertas-recentes">
+                    <h2>⚠️ Alertas recentes</h2>
+
+                    <div class="item-alerta">
+                        <strong>Colmeia 03</strong>
+                        <p>Temperatura acima do ideal (38°C)</p>
+                        <small>10/10/2026 14:30</small>
+                    </div>
+
+                    <div class="item-alerta">
+                        <strong>Colmeia 02</strong>
+                        <p>Temperatura próxima do limite (36°C)</p>
+                        <small>10/10/2026 13:30</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
+<script>
+
+    //Lógica dos indicadores
+    let UltimaSemana = 2; // Seleciona todos os cards contendo indicadores  
+    // Semana passada > ou < nessa semana. Caso o desempeho da semana for menor do que da semana passada 
+    let cards = document.querySelectorAll('.card_comeias, .card_temperatura, .card_producao, .card_aviso');
+    cards.forEach(card => {
+        let spanInfo = card.querySelector('.info');
+        let pIndicador = card.querySelector('#spn_indicador');
+
+        if (spanInfo && pIndicador) { // Obtém o valor numérico do atributo data-valor 
+            const valor = Number(spanInfo.dataset.valor);
+            if (valor < 0) { // Condição para valor negativo (Queda) 
+                pIndicador.textContent = `Queda de ${Math.abs(valor)}% em relação à semana passada`;
+                pIndicador.style.color = '#FF0000'; // Vermelho 
+                pIndicador.style.fontWeight = 'bold';
+            } else if (valor > 0) { // Condição para valor positivo (Aumento)
+                pIndicador.textContent = `Aumento de ${valor}% em relação à semana passada`;
+                pIndicador.style.color = '#2E7D32'; // Verde 
+                pIndicador.style.fontWeight = 'bold';
+            } else {
+                pIndicador.textContent = `Sem alterações em relação à semana passada`;
+                pIndicador.style.color = '#555555';
+                pIndicador.style.fontWeight = 'bold';
+            }
+        }
+    });
+
+    //-----------------------------------------------------------------------------------------------------------
+    // Gráfico de Barra
+    const sensor = document.getElementById('sensorAnalogico');
+    new Chart(sensor, {
+        type: 'bar',
+        data: {
+            labels: ['Colmeia 1', 'Colmeia 2', 'Colmeia 3', 'Colmeia 4', 'Colmeia 5', 'Colmeia 6'],
+            datasets: [{
+                label: 'Temperatura das Colmeias',
+                data: [34, 36, 38, 36, 34, 35],
+                borderWidth: 1,
+                backgroundColor: '#f7a925',
+                borderColor: 'white',
+                borderWidth: 1
+            },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Colmeias'
+                    },
+                    beginAtZero: true,
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: '(°C)'
+                    },
+                    beginAtZero: true,
+                },
+            },
+        }
+    });
+    // Gráfico de Alertas Semanais
+    const alerta = document.getElementById('alertaSemana');
+    new Chart(alerta, {
+        type: 'line',
+        data: {
+            labels: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'],
+            datasets: [{
+                label: 'Alertas da Semana',
+                data: [0, 1, 3, 2, 1, 0, 1],
+                borderWidth: 1,
+                borderColor: '#f7a925',
+                backgroundColor: '#f9f3e4'
+            },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Dias da semana'
+                    },
+                    beginAtZero: true,
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Alertas'
+                    },
+                    beginAtZero: true,
+                },
+            },
+        }
+    });
+
+    // Terceira Sprint
+
+    // var paginacao = {};
+    // var tempo = {};
+
+    // function obterDados(grafico, endpoint) {
+    //     fetch('http://localhost:3300/sensores/' + endpoint)
+    //         .then(response => response.json())
+    //         .then(valores => {
+    //             if (paginacao[endpoint] == null) {
+    //                 paginacao[endpoint] = 0;
+    //             }
+    //             if (tempo[endpoint] == null) {
+    //                 tempo[endpoint] = 0;
+    //             }
+
+    //             var ultimaPaginacao = paginacao[endpoint];
+    //             paginacao[endpoint] = valores.length;
+    //             valores = valores.slice(ultimaPaginacao);
+
+    //             valores.forEach((valor) => {
+    //                 if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+    //                     grafico.data.labels.shift();
+    //                     grafico.data.datasets[0].data.shift();
+    //                 }
+
+    //                 grafico.data.labels.push(tempo[endpoint]++);
+    //                 grafico.data.datasets[0].data.push(parseFloat(valor));
+    //                 grafico.update();
+    //             });
+    //         })
+    //         .catch(error => console.error('Erro ao obter dados:', error));
+    // }
+
+    // setInterval(() => {
+    //     obterDados(sensorAnalogico, 'analogico');
+    // }, 1000);
+    //---------------------------------------------------------------------------------------------------
+</script>
