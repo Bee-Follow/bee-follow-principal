@@ -11,21 +11,21 @@
 
 <body>
     <!-- tag <header> criada para ser o topo da página, contendo as tags <nav> utilizada para navegação dentro do web site-->
-    <header>
+    <header id="header">
         <!-- <div> dentro do header para colocar a imagem dentro da navbar -->
         <div class="logo img"><img src="../img/logo.png" alt="Logo da Bee Follow"></div>
         <!-- <div> criada dentro do header contendo os links de navegação e o botão -->
         <div class="menu-direito">
             <nav>
-            <!-- tag <a> utilizada para criar os links de navegação dentro do header-->
-            <a href="#secao1">Inicio</a>
-            <a href="#secao2">Soluções</a>
-            <a href="#secao3">Sobre Nós</a>
-            <a href="#secao4">Simulador Financeiro</a>
-            <a href="#secao5">Contato</a>
+                <!-- tag <a> utilizada para criar os links de navegação dentro do header-->
+                <a href="#header">Inicio</a>
+                <a href="#secao2">Soluções</a>
+                <a href="#secao3">Sobre Nós</a>
+                <a href="#secao4">Simulador Financeiro</a>
+                <a href="#secao5">Contato</a>
             </nav>
-        <!-- tag <button> utilizada para o usuário ser redirecionado à pagina de login -->
-        <button onclick="carregamentoLogin()" class="btn-entrar">Entrar</button>
+            <!-- tag <button> utilizada para o usuário ser redirecionado à pagina de login -->
+            <button onclick="carregamentoLogin()" class="btn-entrar">Entrar</button>
         </div>
     </header>
     <!-- <div> principal no primeiro banner do web site, contendo as demais divs-->
@@ -38,239 +38,111 @@
         <div class="card-texto">
             <!-- tags <h1> para destacar o título do banner e <p> para colocar o texto complementar-->
             <h1 class="text-titulo">Antecipe os sinais da enxameação<br>
-                Monitore suas colmeias e 
-                <br>aja com informação</h1>
-            <p class="text-info">A Bee Follow utiliza tecnologia e monitoramento de dados para auxiliar o apicultor na identificação de condições relacionadas à enxameação, permitindo uma tomada de decisão mais rápida e preventiva.</p>
+                Monitore suas colmeias e
+                <br>aja com informação
+            </h1>
+            <br>
+            <p class="text-info">A Bee Follow utiliza tecnologia e monitoramento de dados para auxiliar o apicultor na
+                identificação de condições relacionadas à enxameação, permitindo uma tomada de decisão mais rápida e
+                preventiva.</p>
         </div>
         <!-- <div> da imagem da abelhla no banner inicial do web site, criada para separa-lá das demais -->
-        <div class="card-img"><img src="../img/abelha-1.png" alt="Fotografia aproximada de uma abelha pousada no centro amarelo de uma flor com pétalas brancas"></div>
-    </div>
-
-<!-- Seção criada para apresentar os principais benefícios da Bee Follow -->
-<section class="secao-beneficios" id="secao2">
-
-    <!-- Primeiro benefício -->
-    <div class="beneficio">
-
-        <!-- Espaço reservado para a imagem -->
-        <div>
-            <img src="../img/solucao_1.png" height="70%" width="70%">
+        <div class="card-img"><img src="../img/abelha-1.png"
+                alt="Fotografia aproximada de uma abelha pousada no centro amarelo de uma flor com pétalas brancas">
         </div>
-
-        <h2  class="text-titulo">Monitoramento em<br>tempo real</h2>
-
-        <p>
-            Sensores coletam dados importantes para acompanhar
-            alterações no ambiente da colmeia.
-        </p>
-
     </div>
-
-    <!-- Segundo benefício -->
-    <div class="beneficio">
-
-        <!-- Espaço reservado para a imagem -->
-        <div>
-            <img src="../img/solucao_2.png" alt="Imagem de alerta" height="70%" width="70%">
+    <!-- Seção criada para apresentar os principais benefícios da Bee Follow -->
+    <section class="secao-beneficios" id="secao2">
+        <!-- Primeiro benefício -->
+        <div class="beneficio">
+            <!-- Espaço reservado para a imagem -->
+            <div>
+                <img src="../img/solucao_1.png" height="80%" width="80%">
+            </div>
+            <br>
+            <h2 class="text-titulo">Monitoramento em<br>tempo real</h2>
+            <p>
+                Sensores coletam dados importantes para acompanhar
+                alterações no ambiente da colmeia.
+            </p>
         </div>
-
-        <h2  class="text-titulo">Alertas inteligentes</h2>
-
-        <p>
-            O sistema apresenta alertas quando os dados
-            monitorados atingem condições previamente definidas.
-        </p>
-
-    </div>
-
-    <!-- Terceiro benefício -->
-    <div class="beneficio">
-
-        <!-- Espaço reservado para a imagem -->
-        <div>
-             <img src="../img/solucao_3.png" alt="Imagem do icone do bando de dados" height="70%" width="70%">
+        <!-- Segundo benefício -->
+        <div class="beneficio">
+            <!-- Espaço reservado para a imagem -->
+            <div>
+                <img src="../img/solucao_2.png" alt="Imagem de alerta" height="80%" width="80%">
+            </div>
+            <br>
+            <h2 class="text-titulo">Alertas inteligentes</h2>
+            <p>
+                O sistema apresenta alertas quando os dados
+                monitorados atingem condições previamente definidas.
+            </p>
         </div>
-
-        <h2>Dados</h2>
-
-        <p>
-            Visualize informações e históricos para auxiliar
-            o apicultor na tomada de decisões.
-        </p>
-
-    </div>
-     
-
-</section>
-
+        <!-- Terceiro benefício -->
+        <div class="beneficio">
+            <!-- Espaço reservado para a imagem -->
+            <div>
+                <img src="../img/solucao_3.png" alt="Imagem do icone do bando de dados" height="80%" width="80%">
+            </div>
+            <br>
+            <h2>Dados</h2>
+            <p>
+                Visualize informações e históricos para auxiliar
+                o apicultor na tomada de decisões.
+            </p>
+        </div>
+    </section>
     <!-- Parte 3: Sobre Nós -->
     <section class="secao-sobre" id="secao3">
-    <div class="sobre-conteudo">
-        <div class="sobre-texto">
-            <h1 class="sobre-titulo">Sobre Nós Bee Follow</h1>
-            <p>
-                A Bee Follow é uma solução desenvolvida para auxiliar apicultores no monitoramento das colmeias
-                por meio da tecnologia e da coleta de dados. Nosso sistema acompanha informações como temperatura
-                da colmeia, ajudando na identificação de condições relacionadas à enxameação e permitindo que o
-                apicultor tenha informações para tomar decisões de forma mais rápida e preventiva. Tecnologia,
-                monitoramento e informação para um manejo mais eficiente das colmeias.
-            </p>
+        <div class="sobre-conteudo">
+            <div class="sobre-texto">
+                <h1 class="sobre-titulo">Sobre Nós Bee Follow</h1>
+                <p>
+                    A Bee Follow é uma solução desenvolvida para auxiliar apicultores no monitoramento das colmeias
+                    por meio da tecnologia e da coleta de dados. Nosso sistema acompanha informações como temperatura
+                    da colmeia, ajudando na identificação de condições relacionadas à enxameação e permitindo que o
+                    apicultor tenha informações para tomar decisões de forma mais rápida e preventiva. Tecnologia,
+                    monitoramento e informação para um manejo mais eficiente das colmeias.
+                </p>
+            </div>
+            <div class="sobre-img">
+                <img src="https://thumbs.dreamstime.com/b/n%C3%A9ctar-de-p%C3%B3len-flores-e-mel-em-favos-harmonia-cores-as-abelhas-trazem-para-colmeia-enchem-o-pente-com-ele-267779988.jpg" alt="Abelhas em um favo de mel">
+            </div>
         </div>
-
-        <div class="sobre-img">
-            <img src="https://thumbs.dreamstime.com/b/n%C3%A9ctar-de-p%C3%B3len-flores-e-mel-em-favos-harmonia-cores-as-abelhas-trazem-para-colmeia-enchem-o-pente-com-ele-267779988.jpg" alt="Abelhas em um favo de mel">
-        </div>
-    </div>
-</section>
-    <!-- COLOCAR AQUI A CALCULADORA FINACEIRA-->
+    </section>
     <section class="secao-calculadora" id="secao4">
- <h2 class="titulo">Quanto você está perdendo com a enxameação?</h2>
- <div class="container">
-     <!-- Painel esquerdo: entrada de dados -->
-     <div class="painel text">
-         <h1>Calculadora de produção apícola e Enxameação</h1>
-         <div class="campo">
-             <label>Média de produção mensal (em quilos) de mel por colmeia:</label>
-             <input type="number" id="ipt_quilo" min="0">
-         </div>
-         <div class="row">
-             <div class="campo">
-                 <label>Número de Colmeias:</label>
-                 <input type="number" id="ipt_colmeia" min="0">
-             </div>
-             <div class="campo">
-                 <label>Valor do Mel por quilo:</label>
-                 <input type="number" id="ipt_valor" min="0">
-             </div>
-         </div>
-         <button onclick="calcular_valor()">Calcular</button>
-     </div>
-     <!-- Painel direito: resultado -->
-     <div class="painel-resultado text">
-         <div class=msg id="div_msg">
-             <p class="placeholder">Preencha os campos ao lado e clique em "Calcular" para ver o resultado aqui.
-            </p>
-         </div>
-         <div id="div_contato"></div>
-     </div>
- </div>
- <div class="folder-faixa">
-     <div class="folder">
-         <div class="folder-textoh2">
-             <h2>Fale com a gente</h2>
-             <p class="folder-textop">
-                 Tire suas dúvidas, conheça mais<br>
-                 sobre a Bee Follow e descubra como<br>
-                 podemos ajudar o seu apiário.
-             </p>
-         </div>
-         <div class="folder-redes">
-             <img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram">
-             <img class="folder-redesimg" src="../img/facebook.png" alt="Facebook">
-             <img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin">
-         </div>
-    </div>
- </section>
-        <script>
-            function calcular_valor() {
-                let ax_erro = false;
-                let ax_mensagem = 'Os seguintes valores não podem ser vazios: ';
-
-                let ax_colmeia = Number(ipt_colmeia.value);
-                let ax_valor = Number(ipt_valor.value);
-                let ax_quilo = Number(ipt_quilo.value);
-
-                let ax_mel_total = Number(ax_colmeia * ax_quilo);
-                let ax_valor_total = ((ax_mel_total) * ax_valor).toFixed(2);
-
-                // Valores no total após enxameação
-                let ax_mel_reduzido_min = Number(ax_mel_total * 0.3).toFixed(2);
-                let ax_mel_reduzido_max = Number(ax_mel_total * 0.5).toFixed(2);
-
-                let ax_valor_aumentado_min = Number(ax_mel_reduzido_min * ax_valor).toFixed(2);
-                let ax_valor_aumentado_max = Number(ax_mel_reduzido_max * ax_valor).toFixed(2);
-
-                // Valores perdidos no total
-                let ax_mel_perdido_min = (ax_mel_total - ax_mel_reduzido_max).toFixed(2);
-                let ax_mel_perdido_max = (ax_mel_total - ax_mel_reduzido_min).toFixed(2);
-                let ax_valor_perdido_min = (Number(ax_mel_perdido_min) * ax_valor).toFixed(2);
-                let ax_valor_perdido_max = (Number(ax_mel_perdido_max) * ax_valor).toFixed(2);
-
-                // Média das perdas totais
-                let ax_mel_perdido_media = ((Number(ax_mel_perdido_min) + Number(ax_mel_perdido_max)) / 2).toFixed(2);
-                let ax_valor_perdido_media = ((Number(ax_valor_perdido_min) + Number(ax_valor_perdido_max)) / 2).toFixed(2);
-
-                // Valores perdidos, por colmeia
-                let ax_mel_perdido_colmeia_min = (ax_mel_perdido_min / ax_colmeia).toFixed(2);
-                let ax_mel_perdido_colmeia_max = (ax_mel_perdido_max / ax_colmeia).toFixed(2);
-                let ax_valor_perdido_colmeia_min = (ax_valor_perdido_min / ax_colmeia).toFixed(2);
-                let ax_valor_perdido_colmeia_max = (ax_valor_perdido_max / ax_colmeia).toFixed(2);
-
-                // Checagem de Valores dos Inputs.
-                if (ipt_quilo.value.length == 0) {
-                    ax_erro = true;
-                    ax_mensagem += 'Produção Mensal, ';
-                }
-                if (ipt_colmeia.value.length == 0) {
-                    ax_erro = true;
-                    ax_mensagem += 'Número de Colmeias, ';
-                }
-                if (ipt_valor.value.length == 0) {
-                    ax_erro = true;
-                    ax_mensagem += 'Valor do Mel; ';
-                }
-
-                if (ax_erro) {
-                    alert(ax_mensagem);
-                    div_msg.innerHTML = null;
-                } else {
-
-                    // Variável que armazena os resultados da projeção dos 6 meses
-                    let resultado_meses = "";
-                    let mes = 1
-
-                    // Repete o cálculo enquanto o mês for menor ou igual a 6
-                    while (mes <= 6) {
-                        let mel_acumulado = Number(ax_mel_perdido_media) * mes;
-                        let valor_acumulado = Number(ax_valor_perdido_media) * mes;
-
-                        resultado_meses += `
-    <p>
-        <b>Mês ${mes}:</b>
-    ${mel_acumulado.toFixed(2)} kg de mel perdidos,
-     R$ ${valor_acumulado.toFixed(2)} de prejuízo acumulado.
-    </p>
-    `;
-
-                        mes = mes + 1
-                    }
-                    div_msg.innerHTML = `
-        <div class="resposta">
-            <p>
-  <b>Sua produção atual:</b> ${ax_mel_total} kg por mês, rendendo <span style="color: green;"><b>R$ ${ax_valor_total}/mês</b></span>.
-</p>
-
-<p>
-  ⚠️ <b>Atenção ao risco de enxameação:</b> A sua produção pode cair de <b>50% a 70%</b>!
-</p>
-
-<p>
-  <b>O que isso significa na prática?</b><br>
-  • <b>Por colmeia:</b> Perda de ${ax_mel_perdido_colmeia_min} a ${ax_mel_perdido_colmeia_max} kg (menos R$ ${ax_valor_perdido_colmeia_min} a R$ ${ax_valor_perdido_colmeia_max} todo mês).<br>
-  • <b>No total do apiário:</b> Perda de ${ax_mel_perdido_min} a ${ax_mel_perdido_max} kg (prejuízo de R$ ${ax_valor_perdido_min} a R$ ${ax_valor_perdido_max}).
-</p>
-
-<p style="color: red;">
-  <b>Prejuízo médio estimado:</b> Perda de ${ax_mel_perdido_media} kg de mel, representando <b>R$ ${ax_valor_perdido_media} a menos no seu bolso por mês.</b>
-</p>
-    <h3>Projeção de prejuízo acumulado</h3> ${resultado_meses}
+        <h2 class="titulo">Quanto você está perdendo com a enxameação?</h2>
+        <div class="container">
+            <!-- Painel esquerdo: entrada de dados -->
+            <div class="painel text">
+                <h1>Calculadora de produção apícola e Enxameação</h1>
+                <div class="campo">
+                    <label>Média de produção mensal (em quilos) de mel por colmeia:</label>
+                    <input type="number" id="ipt_quilo" min="0">
+                </div>
+                <div class="row">
+                    <div class="campo">
+                        <label>Número de Colmeias:</label>
+                        <input type="number" id="ipt_colmeia" min="0">
+                    </div>
+                    <div class="campo">
+                        <label>Valor do Mel por quilo:</label>
+                        <input type="number" id="ipt_valor" min="0">
+                    </div>
+                </div>
+                <button onclick="calcular_valor()">Calcular</button>
+            </div>
+            <!-- Painel direito: resultado -->
+            <div class="painel-resultado text">
+                <div class=msg id="div_msg">
+                    <p class="placeholder">Preencha os campos ao lado e clique em "Calcular" para ver o resultado aqui.
+                    </p>
+                </div>
+                <div id="div_contato"></div>
+            </div>
         </div>
-        `; div_contato.innerHTML = `<div class="contato">Entre em contato com a BEEFollow para evitar prejuízos! Fale conosco pelos 
-            nossos canais de atendimento:<br>(11) 93021-9282 ou atendimento@beefollow.tech</div>`
-                }
-            }
-        </script>
-        
+    </section>
     <section class="secao-contato" id="secao5">
         <div class="contato_conteudo">
             <div class="formulario">
@@ -278,30 +150,57 @@
                 <div class="campos">
                     <div class="empresa">
                         <label for="nome_empresa">Nome da empresa:</label>
-                        <input type="text" id="ipt_nome_empresa">
+                        <input type="text" id="ipt_nome_empresa" placeholder="Ex: Nome da sua empresa">
                     </div>
-
                     <div class="e-mail">
                         <label for="Email_empresa">E-mail:</label>
-                        <input type="text" id="ipt_Email_empresa">
+                        <input type="text" id="ipt_Email_empresa" placeholder="Ex: seu.nome@empresa.com.br">
                     </div>
-                
                     <div class="assunto">
                         <label for="assunto">Assunto:</label>
-                        <textarea type="text" id="ipt_assunto"></textarea>
+                        <textarea type="text" id="ipt_assunto" placeholder="Ex: Orçamento, Suporte, Parceria..."></textarea>
                     </div>
-
                     <button class="btn-enviar" onclick="enviar()">Enviar Solicitação</button>
-                    <!-- Precisa estilizar, não estilizei ainda -->
-                    <div id="div_aviso"></div>
+                    <br>
+                    <div id="div_aviso" class="card-aviso-contato"></div>
                 </div>
-                
             </div>
-
-            <div class="imagem">
-                <img src="../img" alt="Imagem do apicultor">
+            <div class="card-img-contato">
+                <img src="../img/apicultor.jpg" alt="Imagem do apicultor" style="height: 100%; width: 100%;">
             </div>
         </div>
+    </section>
+    <section class="secao-folder">
+        <div class="folder-faixa">
+            <div class="folder">
+                <div class="folder-textoh2">
+                    <h2>Fale conosco</h2>
+                    <p class="folder-textop">
+                        Tire suas dúvidas, conheça mais<br>
+                        sobre a Bee Follow e descubra como<br>
+                        podemos ajudar o seu apiário.
+                    </p>
+                <div class="links-secoes-folder">
+                    <ul>
+                        <a href="#header">Inicio</a>
+                        <a href="#secao2">Soluções</a>
+                        <a href="#secao3">Sobre nós</a>
+                        <a href="#secao4">Simulador Financeiro</a>
+                        <a href="#secao5">Contato</a>
+                    </ul>
+                </div>
+                <div class="endereco-folder">
+                    <h2>Endereço</h2>
+                    <p>Rua da Abelha, 123, Cidade Jardim, São Paulo-SP</p>
+                </div>
+                <div class="folder-redes">
+                    <h2>Nossas redes</h2>
+                    <img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram">
+                    <img class="folder-redesimg" src="../img/facebook.png" alt="Facebook">
+                    <img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin">
+                </div>
+                </div>
+            </div>
     </section>
 </body>
 <script>
@@ -312,16 +211,99 @@
         let nome = ipt_nome_empresa.value;
         let email = ipt_Email_empresa.value;
         let assunto = ipt_assunto.value;
+        let com = email.indexOf('.com');
+        let arroba = email.indexOf('@');
+        let arroba_antes_com = arroba < com;
 
         if (nome == '' || email == '' || assunto == '') {
-            div_aviso.innerHTML = 'Preencha todos os campos';
-        } else if (!email.includes('@') || !email.includes('.')) {
-            div_aviso.innerHTML = 'O email deve conter @ e .'
+            div_aviso.innerHTML = '<span style="color:#e99612">Por favor, preencha todos os campos para enviar sua solicitação.<span>';
+        } else if (com < 0 || arroba < 0) {
+            div_aviso.innerHTML = '<span style="color:#e99612">O e-mail informado está incompleto. Verifique se possui "@" e ".com"</b><span>'
+        } else if (arroba_antes_com == false){
+            div_aviso.innerHTML = '<span style="color:#e99612">Formato de e-mail inválido. O "@" deve vir antes do ".com"<span>'
         } else {
-            div_aviso.innerHTML = 'Solicitação enviada com sucesso!'
+            div_aviso.innerHTML = 'Solicitação enviada com sucesso! Retornaremos em breve.'
             ipt_Email_empresa.value = ''
             ipt_nome_empresa.value = ''
             ipt_assunto.value = ''
+        }
+    }
+    function calcular_valor() {
+        let ax_erro = false;
+        let ax_mensagem = 'Os seguintes valores não podem ser vazios: ';
+
+        let ax_colmeia = Number(ipt_colmeia.value);
+        let ax_valor = Number(ipt_valor.value);
+        let ax_quilo = Number(ipt_quilo.value);
+
+        let ax_mel_total = Number(ax_colmeia * ax_quilo);
+        let ax_valor_total = ((ax_mel_total) * ax_valor).toFixed(2);
+
+        // Valores no total após enxameação
+        let ax_mel_reduzido_min = Number(ax_mel_total * 0.3).toFixed(2);
+        let ax_mel_reduzido_max = Number(ax_mel_total * 0.5).toFixed(2);
+
+        let ax_valor_aumentado_min = Number(ax_mel_reduzido_min * ax_valor).toFixed(2);
+        let ax_valor_aumentado_max = Number(ax_mel_reduzido_max * ax_valor).toFixed(2);
+
+        // Valores perdidos no total
+        let ax_mel_perdido_min = (ax_mel_total - ax_mel_reduzido_max).toFixed(2);
+        let ax_mel_perdido_max = (ax_mel_total - ax_mel_reduzido_min).toFixed(2);
+        let ax_valor_perdido_min = (Number(ax_mel_perdido_min) * ax_valor).toFixed(2);
+        let ax_valor_perdido_max = (Number(ax_mel_perdido_max) * ax_valor).toFixed(2);
+
+        // Média das perdas totais
+        let ax_mel_perdido_media = ((Number(ax_mel_perdido_min) + Number(ax_mel_perdido_max)) / 2).toFixed(2);
+        let ax_valor_perdido_media = ((Number(ax_valor_perdido_min) + Number(ax_valor_perdido_max)) / 2).toFixed(2);
+
+        // Valores perdidos, por colmeia
+        let ax_mel_perdido_colmeia_min = (ax_mel_perdido_min / ax_colmeia).toFixed(2);
+        let ax_mel_perdido_colmeia_max = (ax_mel_perdido_max / ax_colmeia).toFixed(2);
+        let ax_valor_perdido_colmeia_min = (ax_valor_perdido_min / ax_colmeia).toFixed(2);
+        let ax_valor_perdido_colmeia_max = (ax_valor_perdido_max / ax_colmeia).toFixed(2);
+
+        // Checagem de Valores dos Inputs.
+        if (ipt_quilo.value.length == 0) {
+            ax_erro = true;
+            ax_mensagem += 'Produção Mensal, ';
+        }
+        if (ipt_colmeia.value.length == 0) {
+            ax_erro = true;
+            ax_mensagem += 'Número de Colmeias, ';
+        }
+        if (ipt_valor.value.length == 0) {
+            ax_erro = true;
+            ax_mensagem += 'Valor do Mel; ';
+        }
+
+        if (ax_erro) {
+            alert(ax_mensagem);
+            div_msg.innerHTML = null;
+        } else {
+            // Variável que armazena os resultados da projeção dos 6 meses
+            let resultado_meses = "";
+            let mes = 1
+            // Repete o cálculo enquanto o mês for menor ou igual a 6
+            while (mes <= 6) {
+                let mel_acumulado = Number(ax_mel_perdido_media) * mes;
+                let valor_acumulado = Number(ax_valor_perdido_media) * mes;
+                resultado_meses += `<p><b>Mês ${mes}:</b>${mel_acumulado.toFixed(2)} kg de mel perdidos, R$ ${valor_acumulado.toFixed(2)} de prejuízo acumulado. </p>`;
+                mes = mes + 1
+            }
+            div_msg.innerHTML = `<div class="resposta">
+            <p>
+            <b>Sua produção atual:</b> ${ax_mel_total} kg por mês, rendendo <span style="color: green;"><b>R$ ${ax_valor_total}/mês</b></span>.</p>
+            <p>⚠️ <b>Atenção ao risco de enxameação:</b> A sua produção pode cair de <b>50% a 70%</b></p>
+            <p><b>O que isso significa na prática?</b><br>
+            • <b>Por colmeia:</b> Perda de ${ax_mel_perdido_colmeia_min} a ${ax_mel_perdido_colmeia_max} kg (menos R$ ${ax_valor_perdido_colmeia_min} a R$ ${ax_valor_perdido_colmeia_max} todo mês).<br>
+            • <b>No total do apiário:</b> Perda de ${ax_mel_perdido_min} a ${ax_mel_perdido_max} kg (prejuízo de R$ ${ax_valor_perdido_min} a R$ ${ax_valor_perdido_max}).
+            </p>
+            <p style="color: red;">
+            <b>Prejuízo médio estimado:</b> Perda de ${ax_mel_perdido_media} kg de mel, representando <b>R$ ${ax_valor_perdido_media} a menos no seu bolso por mês.</b>
+            </p>
+            <h3>Projeção de prejuízo acumulado</h3> ${resultado_meses}
+            </div>`; 
+            div_contato.innerHTML = `<div class="contato">Entre em contato com a Bee Follow para evitar prejuízos! Fale conosco através do formulário abaixo!</div>`
         }
     }
 </script>
