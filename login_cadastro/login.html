@@ -15,21 +15,21 @@
     </div>
 
     <div class="lado-direito">
-        <h1>Bem Vindo de volta</h1>
-        <h2>faça login para continuar</h2>
+        <h1>Bem-Vindo novamente!</h1>
+        <h2>Faça login para continuar</h2>
 
         <div class="grupo-formulario">
             <label for="ipt_email">Email</label>
-            <input type="email" id="ipt_email">
+            <input type="email" id="ipt_email" placeholder="seuemail@exemplo.com">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_senha">Senha</label>
-            <input type="password" id="ipt_senha">
+            <input type="password" id="ipt_senha" placeholder="********">
         </div>
 
         <button onclick="entrar()">Entrar</button><br><br>
-
+        <div id="div_aviso"></div>
         <div class="secao-cadastro">
             <label>Caso não tenha Login</label>
             <button onclick="irParaCadastro()">Fazer cadastro</button>
@@ -42,14 +42,16 @@
         function entrar() {
             let email = ipt_email.value;
             let senha = ipt_senha.value;
-
-            if (email == "" || senha == "") {
-                alert('Por favor, preencha todos os campos!');
-            } else if (email != email_estatico || senha != senha_estatica) {
-                alert('Email ou senha incorretos, tente novamente')
-            } else {
+            let JsonEmail = window.localStorage.getItem('email');
+            let JsonSenha = window.localStorage.getItem('senha');
+            let verifca_email = JSON.parse(JsonEmail)
+            let verifca_senha = JSON.parse(JsonSenha)
+            
+            if (email == verifca_email && senha == verifca_senha) {
                 alert ('Login efetuado com sucesso!')
                 window.location.href = '../dashboard/dashboard.html'
+            } else {
+                div_aviso.innerHTML='Por favor, preencha todos os campos!';
             }
         }
 

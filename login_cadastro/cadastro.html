@@ -18,41 +18,41 @@
 
     <div class="lado-direito">
         <h1>Criar conta</h1>
-        <h2>preencha os dados para começar</h2>
+        <h2>Preencha os dados para começar</h2>
 
         <div class="grupo-formulario">
             <label for="ipt_nome">Nome</label>
-            <input type="text" id="ipt_nome">
+            <input type="text" id="ipt_nome" placeholder="Ex: João da Silva">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_email">Digite o seu e-mail</label>
-            <input type="email" id="ipt_email">
+            <input type="email" id="ipt_email" placeholder="Ex: seuemail@exemplo.com">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_cpf">Digite seu CPF</label>
-            <input type="text" id="ipt_cpf">
+            <input type="text" id="ipt_cpf" placeholder="000.000.000-00">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_telefone">Telefone</label>
-            <input type="tel" id="ipt_telefone">
+            <input type="tel" id="ipt_telefone" placeholder="(00) 00000-0000">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_id_apiario">Informe o indicador do seu apiário</label>
-            <input type="text" id="ipt_id_apiario">
+            <input type="text" id="ipt_id_apiario" placeholder="Insira o código fornecido a sua empresa">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_senha">Digite a senha</label>
-            <input type="password" id="ipt_senha">
+            <input type="password" id="ipt_senha" placeholder="********">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_conf_senha">Confirme a senha</label>
-            <input type="password" id="ipt_conf_senha">
+            <input type="password" id="ipt_conf_senha" placeholder="********">
         </div>
 
         <button onclick="cadastrar()">Cadastrar</button>
@@ -67,8 +67,12 @@
             let id_apiario = ipt_id_apiario.value
             let senha = ipt_senha.value
             let conf_senha = ipt_conf_senha.value
-
-
+            let lista_pessoas = JSON.parse(localStorage.getItem('lista-pessoas') || '[]');
+            lista_pessoas.push({
+                email: email,
+                senha: senha
+            });
+            window.localStorage.setItem("lista-pessoas", JSON.stringify(lista_pessoas));
 
             if (nome == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "" || id_apiario == "") {
                 alert('Por favor, preencha todos os campos!');
@@ -85,6 +89,7 @@
             } else {
                 alert('Cadastro realizado com sucesso, redirecionando para a tela de login!')
                 window.location.href = 'login.html';
+                console.log(cadastro_Json)
             }
         }
     </script>
