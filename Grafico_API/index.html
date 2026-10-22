@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - Case três salas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; background: #f4f6f8; color: #1f2a44; }
+        h1 { font-size: 22px; }
+        .grafico { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 20px; max-width: 800px; }
+        .status { font-size: 14px; margin: 4px 0 0 0; }
+        .ok { color: #1a7f37; }
+        .erro { color: #c62828; }
+    </style>
+</head>
+<body>
+    <h1>Painel dos sensores</h1>
+
+    <div class="grafico">
+        <canvas id="graficoLm35"></canvas>
+        <p class="status" id="statusLm35">aguardando...</p>
+    </div>
+
+    <div class="grafico">
+        <canvas id="graficoTcrt5000"></canvas>
+        <p class="status" id="statusTcrt5000">aguardando...</p>
+    </div>
+
+    <script>
+        // este painel já está pronto: NÃO altere este arquivo
+        const API = 'http://localhost:3300';
+        const MAX_PONTOS = 10;
+
+        const criarGrafico = (idCanvas, titulo, cor, passo) => new Chart(document.getElementById(idCanvas), {
+            type: 'line',
+            data: { labels: [], datasets: [{ label: titulo, data: [], borderColor: cor, borderWidth: 2, stepped: passo }] },
+            options: { animation: false }
+        });
+
+        const graficoLm35 = criarGrafico('graficoLm35', 'LM35 - temperatura (°C)', '#ed145b', false);
+        //const graficoTcrt5000 = criarGrafico('graficoTcrt5000', 'TCRT5000 - porta (1 = fechada, 0 = aberta)', '#0762c8', true);
+
+        const atualizar = async (caminho, grafico, idStatus) => {
+            const status = document.getElementById(idStatus);
+            try {
+                const resposta = await fetch(API + caminho);
+                const valores = await resposta.json();
+                const ultimos = valores.slice(-MAX_PONTOS);
+                grafico.data.labels = ultimos.map((_, i) => i + 1);
+                grafico.data.datasets[0].data = ultimos;
+                grafico.update();
+                status.className = 'status ok';
+                status.textContent = `${caminho}: ${valores.length} leituras recebidas`;
+            } catch (erro) {
+                status.className = 'status erro';
+                status.textContent = `${caminho}: a API não respondeu (${erro.message})`;
+            }
+        };
+
+        setInterval(() => {
+            atualizar('/sensores/lm35', graficoLm35, 'statusLm35');
+        }, 1000);
+    </script>
+</body>
+</html>
