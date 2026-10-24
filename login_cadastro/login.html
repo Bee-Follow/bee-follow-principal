@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Login</title>
     <link rel="stylesheet" href="cadastroElogin.css">
+    <script src="../cadastro.js"></script>
 </head>
 <body>
 
@@ -15,6 +16,8 @@
     </div>
 
     <div class="lado-direito">
+        <div id="toast" class="hidden show"></div>
+        <br>
         <h1>Bem-Vindo novamente!</h1>
         <h2>Faça login para continuar</h2>
 
@@ -28,7 +31,7 @@
             <input type="password" id="ipt_senha" placeholder="********">
         </div>
 
-        <button onclick="entrar()">Entrar</button><br><br>
+        <button onclick="entrar()" id="btnEntrar">Entrar</button><br><br>
         <div id="div_aviso"></div>
         <div class="secao-cadastro">
             <label>Caso não tenha Login</label>
@@ -37,24 +40,30 @@
     </div>
 
    <script>
-    let senha_estatica = 'abelhas@123'
-    let email_estatico = 'beefollow@gmail.com'
+    const showToastBtn = document.getElementById('btnEntrar');
+            const toast = document.getElementById('toast');
+            showToastBtn.addEventListener('click', function() {
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            setTimeout(function() {
+                    toast.classList.add('hidden');
+                }, 5000);
+            });
         function entrar() {
+            const cadastro = JSON.parse(localStorage.getItem("dadosCadastro"))
             let email = ipt_email.value;
             let senha = ipt_senha.value;
-            let JsonEmail = window.localStorage.getItem('email');
-            let JsonSenha = window.localStorage.getItem('senha');
-            let verifca_email = JSON.parse(JsonEmail)
-            let verifca_senha = JSON.parse(JsonSenha)
-            
-            if (email == verifca_email && senha == verifca_senha) {
-                alert ('Login efetuado com sucesso!')
-                window.location.href = '../dashboard/dashboard.html'
-            } else {
-                div_aviso.innerHTML='Por favor, preencha todos os campos!';
+                if (email == '' || senha == '') {
+                 toast.innerHTML='Por favor, preencha todos os campos!';
+                } else if (email == cadastro.email && senha == cadastro.senha ) {
+                    toast.innerHTML = "Bem-vindo! Aguarde o redirecionamento para a próxima tela."
+                    setTimeout(() => {
+                        window.location = "../dashboard/dashboard.html";
+                    }, "3000");
+                } else {
+                    toast.innerHTML = "E-mail ou senha incorreta."
+                }
             }
-        }
-
         function irParaCadastro() {
             window.location.href = 'cadastro.html'; 
         }

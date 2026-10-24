@@ -113,7 +113,7 @@ button:hover {
 }
 
 .secao-cadastro label {
-    color: #FFFFFF;
+    color: white;
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 1px;
@@ -121,4 +121,40 @@ button:hover {
 
 .secao-cadastro button {
     width: 42%;
+}
+#toast {
+    display: fixed;
+    width: 40%;
+    margin-left: 70%;
+    background-color: #f7a925;
+    border-radius: 4px;
+    color: black;
+    padding: 10px 20px;
+}
+.show {
+    opacity: 0;
+    transform: translateX(20px); 
+    animation: surgirEsumir 5s ease-in-out forwards;
+}
+@keyframes surgirEsumir {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(0); 
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px); 
+  }
+}
+
+.hidden {
+    display: none;
 }

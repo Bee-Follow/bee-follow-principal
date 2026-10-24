@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Criar Conta</title>
     <link rel="stylesheet" href="cadastroElogin.css">
+    <script src="../cadastro.js"></script>
 </head>
 
 <body>
@@ -17,6 +18,7 @@
     </div>
 
     <div class="lado-direito">
+        <div id="toast" class="hidden show"></div>
         <h1>Criar conta</h1>
         <h2>Preencha os dados para começar</h2>
 
@@ -54,12 +56,20 @@
             <label for="ipt_conf_senha">Confirme a senha</label>
             <input type="password" id="ipt_conf_senha" placeholder="********">
         </div>
-
-        <button onclick="cadastrar()">Cadastrar</button>
+            <button onclick="cadastrar()" id="cadastro">Cadastrar</button>  
     </div>
 
     <script>
-        function cadastrar() {
+            const showToastBtn = document.getElementById('cadastro');
+            const toast = document.getElementById('toast');
+            showToastBtn.addEventListener('click', function() {
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            setTimeout(function() {
+                    toast.classList.add('hidden');
+                }, 5000);
+            });
+            function cadastrar() {
             let nome = ipt_nome.value
             let email = ipt_email.value
             let cpf = ipt_cpf.value
@@ -67,30 +77,32 @@
             let id_apiario = ipt_id_apiario.value
             let senha = ipt_senha.value
             let conf_senha = ipt_conf_senha.value
-            let lista_pessoas = JSON.parse(localStorage.getItem('lista-pessoas') || '[]');
-            lista_pessoas.push({
-                email: email,
-                senha: senha
-            });
-            window.localStorage.setItem("lista-pessoas", JSON.stringify(lista_pessoas));
-
+            let com = email.indexOf('.com');
+            let arroba = email.indexOf('@');
+            let arroba_antes_com = arroba < com;
+            var cadastro = {email: email, senha: senha}
             if (nome == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "" || id_apiario == "") {
-                alert('Por favor, preencha todos os campos!');
-            } else if (!email.includes('@') && !email.includes('.')) {
-                alert('Os email precisa de @ e .')
+                toast.innerHTML = 'Preencha os dados corretamente'
+            } else if (com < 0 || arroba < 0) {
+                toast.innerHTML = 'Os email precisa de @ e .com'
+            } else if (arroba_antes_com == false) {
+                toast.innerHTML = 'Formato de e-mail inválido. O "@" deve vir antes do ".com"'
             }
             else if (cpf.length != 11) {
-                alert('O CPF deve ter 11 caracteres');
+                toast.innerHTML = 'O CPF deve ter 11 caracteres'
             }
             else if (senha != conf_senha) {
-                alert('As senhas não coincidem!');
+                toast.innerHTML = 'As senhas não coincidem!';
             } else if (senha.length < 8) {
-                alert('A senha precisa ter 8 ou mais caracteres')
+                toast.innerHTML = 'A senha precisa ter 8 ou mais caracteres'
             } else {
-                alert('Cadastro realizado com sucesso, redirecionando para a tela de login!')
-                window.location.href = 'login.html';
-                console.log(cadastro_Json)
+                localStorage.setItem("dadosCadastro", JSON.stringify(cadastro));
+                toast.innerHTML = "Cadastro concluído! Você será redirecionado, aguarde."
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "3000");
             }
+               
         }
     </script>
 </body>
