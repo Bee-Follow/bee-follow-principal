@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,36 +18,78 @@
             <a href="">Dashboard</a>
             <a href="">Sensores</a>
             <a href="">Colmeias</a>
+
+            <div class="menu-rodape">
+                <div class="perfil-usuario">
+                    <div class="icone-usuario">👤</div>
+                    <span>Administrador</span>
+                </div>
+
+                <a href="" class="link-saida">↪ Sair</a>
+            </div>
+
         </div>
 
         <!-- Área principal onde ficam os indicadores, gráficos e informações -->
         <div class="conteudo-principal">
 
+            <!-- Cabeçalho principal da Dashboard-->
+            <div class="cabecalho-dashboard">
+
+                <h1>DASHBOARD GLOBAL: SISTEMA BEE FOLOW</h1>
+
+                <div class="informacoes-sistema">
+
+                    <div class="status-geral">
+                        <span class="indicador-status"></span>
+                        <span id="status_geral">STATUS GERAL: SAUDÁVEL</span>
+                        <small id="ultima_verificacao">(Verificado às --:--)</small>
+                    </div>
+
+                    <select id="select_apiario" name="apiario">
+                        <option value="apiario_sul">São Paulo - Apiário Sul (2026)</option>
+                        <option value="apiario_norte">Apiário Norte (2026)</option>
+                    </select>
+
+                </div>
+
+            </div>
+
             <!-- Cards com os principais indicadores do apiário -->
             <div class="secao-indicadores">
+
                 <div class="indicador">
                     <h2>🐝 Total de colmeias</h2>
-                    <span class="valor-card" data-valor="10">10</span>
-                    <p class="texto-comparacao"></p>
+                    <span class="valor-card" id="total_colmeias" data-valor="10">10</span>
+                    <p class="texto-comparacao" id="comparacao_colmeias">
+                        Colmeias cadastradas
+                    </p>
                 </div>
 
                 <div class="indicador">
                     <h2>🌡️ Temperatura média</h2>
-                    <span class="valor-card" data-valor="0">36°C</span>
-                    <p class="texto-comparacao"></p>
+                    <span class="valor-card" id="temperatura_media" data-valor="36">36°C</span>
+                    <p class="texto-comparacao" id="comparacao_temperatura">
+                        Média atual dos sensores
+                    </p>
                 </div>
 
                 <div class="indicador">
                     <h2>🍯 Enxameações no mês</h2>
-                    <span class="valor-card" data-valor="-5">1</span>
-                    <p class="texto-comparacao"></p>
+                    <span class="valor-card" id="total_enxameacoes" data-valor="1">1</span>
+                    <p class="texto-comparacao" id="comparacao_enxameacoes">
+                        Ocorrências neste mês
+                    </p>
                 </div>
 
                 <div class="indicador">
                     <h2>⚠️ Alertas na semana</h2>
-                    <span class="valor-card" data-valor="20">2</span>
-                    <p class="texto-comparacao"></p>
+                    <span class="valor-card" id="total_alertas" data-valor="2">2</span>
+                    <p class="texto-comparacao" id="comparacao_alertas">
+                        Alertas registrados
+                    </p>
                 </div>
+
             </div>
 
             <!--  gráficos do dashboard -->
@@ -65,7 +106,7 @@
             </div>
 
             <!-- Área inferior com a tabela de leituras e os alertas recentes -->
-                 <div class="secao-inferior">
+            <div class="secao-inferior">
 
                 <!--  últimas temperaturas registradas -->
                 <div class="card-ultimas-leituras">
