@@ -107,7 +107,7 @@
                 </p>
             </div>
             <div class="sobre-img">
-                <img src="https://thumbs.dreamstime.com/b/n%C3%A9ctar-de-p%C3%B3len-flores-e-mel-em-favos-harmonia-cores-as-abelhas-trazem-para-colmeia-enchem-o-pente-com-ele-267779988.jpg" alt="Abelhas em um favo de mel">
+                <img src="../img/sobre_nos.png" alt="Abelhas em um favo de mel">
             </div>
         </div>
     </section>
@@ -158,7 +158,8 @@
                     </div>
                     <div class="assunto">
                         <label for="assunto">Assunto:</label>
-                        <textarea type="text" id="ipt_assunto" placeholder="Ex: Orçamento, Suporte, Parceria..."></textarea>
+                        <textarea type="text" id="ipt_assunto"
+                            placeholder="Ex: Orçamento, Suporte, Parceria..."></textarea>
                     </div>
                     <button class="btn-enviar" onclick="enviar()">Enviar Solicitação</button>
                     <br>
@@ -166,47 +167,64 @@
                 </div>
             </div>
             <div class="card-img-contato">
-                <img src="../img/apicultor.jpg" alt="Imagem do apicultor" style="height: 100%; width: 100%;">
+                <img src="../img/fale_conosco.png" alt="Imagem do apicultor" style="height: 100%; width: 100%;">
             </div>
         </div>
     </section>
     <section class="secao-folder">
         <div class="folder-faixa">
             <div class="folder">
-                <div class="folder-textoh2">
+
+                <div class="folder-coluna folder-contato">
                     <h2>Fale conosco</h2>
                     <p class="folder-textop">
-                        Tire suas dúvidas, conheça mais<br>
-                        sobre a Bee Follow e descubra como<br>
-                        podemos ajudar o seu apiário.
+                        Tire suas dúvidas, conheça mais sobre a Bee Follow e descubra como podemos ajudar o seu apiário.
                     </p>
-                <div class="links-secoes-folder">
+                </div>
+
+                <div class="folder-coluna links-secoes-folder">
                     <ul>
-                        <a href="#header">Inicio</a>
-                        <a href="#secao2">Soluções</a>
-                        <a href="#secao3">Sobre nós</a>
-                        <a href="#secao4">Simulador Financeiro</a>
-                        <a href="#secao5">Contato</a>
+                        <li><a href="#header">Início</a></li>
+                        <li><a href="#secao2">Soluções</a></li>
+                        <li><a href="#secao3">Sobre nós</a></li>
+                        <li><a href="#secao4">Simulador Financeiro</a></li>
+                        <li><a href="#secao5">Contato</a></li>
                     </ul>
                 </div>
-                <div class="endereco-folder">
+
+                <div class="folder-coluna endereco-folder">
                     <h2>Endereço</h2>
                     <p>Rua da Abelha, 123, Cidade Jardim, São Paulo-SP</p>
                 </div>
-                <div class="folder-redes">
+
+                <div class="folder-coluna folder-redes">
                     <h2>Nossas redes</h2>
-                    <img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram">
-                    <img class="folder-redesimg" src="../img/facebook.png" alt="Facebook">
-                    <img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin">
+                    <div class="folder-redes-icones">
+                        <a href="#"><img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram"></a>
+                        <a href="#"><img class="folder-redesimg" src="../img/facebook.png" alt="Facebook"></a>
+                        <a href="#"><img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin"></a>
+                    </div>
                 </div>
-                </div>
+
             </div>
+        </div>
     </section>
 </body>
 <script>
     function carregamentoLogin() {
         window.location.href = '../login_cadastro/login.html';
     }
+
+    function aviso(tipo, titulo, mensagem) {
+        div_aviso.innerHTML = `
+                            <div class="aviso aviso-${tipo}">
+                                <div class="aviso-texto">
+                                    <strong>${titulo}</strong>
+                                    <p>${mensagem}</p>
+                                </div>
+                            </div>`
+    }
+
     function enviar() {
         let nome = ipt_nome_empresa.value;
         let email = ipt_Email_empresa.value;
@@ -216,21 +234,34 @@
         let arroba_antes_com = arroba < com;
 
         if (nome == '' || email == '' || assunto == '') {
-            div_aviso.innerHTML = '<span style="color:#e99612">Por favor, preencha todos os campos para enviar sua solicitação.<span>';
+            aviso('erro', '<b>Campos Obrigatórios<b>', 'Por favor, preencher todos os campos!')
         } else if (com < 0 || arroba < 0) {
-            div_aviso.innerHTML = '<span style="color:#e99612">O e-mail informado está incompleto. Verifique se possui "@" e ".com"</b><span>'
-        } else if (arroba_antes_com == false){
-            div_aviso.innerHTML = '<span style="color:#e99612">Formato de e-mail inválido. O "@" deve vir antes do ".com"<span>'
+            aviso('erro', 'O seu e-mail está incompleto', 'Verificar se o e-mail tem "@"" e ".com " ')
+        } else if (arroba_antes_com == false) {
+            aviso('erro', 'Formato de e-mail inválido', 'O "@" deve vir antes do ".com".')
         } else {
-            div_aviso.innerHTML = 'Solicitação enviada com sucesso! Retornaremos em breve.'
+            aviso('certo', '<b>Formulário Enviado!<b>', '<b>Solicitação enviada com sucesso! Retornaremos em breve.<b>')
             ipt_Email_empresa.value = ''
             ipt_nome_empresa.value = ''
             ipt_assunto.value = ''
         }
+
     }
+
+
     function calcular_valor() {
         let ax_erro = false;
-        let ax_mensagem = 'Os seguintes valores não podem ser vazios: ';
+        let kg_erro = false
+        let valor_erro = false;
+        let colmeia_erro = false;
+
+        let ax_mensagem = `  
+                            <div class="valores-invalido">
+                                <div class="aviso-invalido">
+                                    <strong>Informe Todos Valores</strong>
+                                    <p>A média de produção <br> Número de comeias e <br> Valor do mel por Kg  <br>devem ser preenchidos <b>CORRETAMENTE</b></p>
+                                </div>
+                            </div>`
 
         let ax_colmeia = Number(ipt_colmeia.value);
         let ax_valor = Number(ipt_valor.value);
@@ -265,17 +296,17 @@
         // Checagem de Valores dos Inputs.
         if (ipt_quilo.value.length == 0) {
             ax_erro = true;
-            ax_mensagem += '<br><br>Produção Mensal.';
+            kg_erro = true;
         }
         if (ipt_colmeia.value.length == 0) {
             ax_erro = true;
-            ax_mensagem += '<br><br>Número de Colmeias.';
+            colmeia_erro = true;
         }
         if (ipt_valor.value.length == 0) {
             ax_erro = true;
-            ax_mensagem += '<br><br>Valor do Mel.';
+            valor_erro = true 
         }
-        
+
         if (ax_erro) {
             div_msg.innerHTML = `<span><b>${ax_mensagem}</b></span>`;
         } else {
@@ -301,9 +332,10 @@
             <b>Prejuízo médio estimado:</b> Perda de ${ax_mel_perdido_media} kg de mel, representando <b>R$ ${ax_valor_perdido_media} a menos no seu bolso por mês.</b>
             </p>
             <h3>Projeção de prejuízo acumulado</h3> ${resultado_meses}
-            </div>`; 
+            </div>`;
             div_contato.innerHTML = `<div class="contato">Entre em contato com a Bee Follow para evitar prejuízos! Fale conosco através do formulário abaixo!</div>`
         }
     }
 </script>
+
 </html>

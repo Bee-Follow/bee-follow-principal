@@ -65,6 +65,10 @@ nav a {
     gap: 40px;
 }
 
+#secao1, #secao2, #secao3, #secao4, #secao5 {
+  position: relative;
+}
+
 .card-inicio {
     min-height: calc(100vh - 80px);
     /*Cálculo para a div ocupar a tela toda - o header de 80px*/
@@ -314,6 +318,63 @@ nav a {
     cursor: pointer;
 }
 
+.card-aviso-contato {
+    width: 100%;
+    margin-top: 16px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.aviso {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-left: 6px solid;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.aviso-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.aviso-texto strong {
+    display: block;
+    font-size: 25px;
+    margin: 0 0 2px;
+}
+
+.aviso-texto p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+/* Se der erro */
+.aviso-erro { 
+    border-color: #e5484d; 
+}
+.aviso-erro { 
+    background: #e5484d65; 
+}
+.aviso-erro strong {
+    color:white; 
+
+}
+
+/* Se dar certo*/
+.aviso-certo { 
+    border-color: #2fb36d; 
+}
+.aviso-certo {
+    background: #2fb36db2; 
+}
+.aviso-certo strong { 
+    color: white;
+}
+
 .btn-enviar:hover {
     background-color: #e99612;
 }
@@ -325,10 +386,34 @@ nav a {
     font-size: 20px;
 }
 
-.card-img-contato{
+.card-img-contato, .sobre-img{
+    position: relative ;
     width: 100%;
-    height: 100%;
+    height: 98%;
+    margin-bottom: 10px;
 }
+
+
+.card-img-contato, .sobre-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img-contato img, .sobre-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-img-contato::after , .sobre-img::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #283c27 2%, transparent 40%);
+  pointer-events: none;
+}
+
 /* SEÇÃO 4 - CALCULADORA FINANCEIRA */
 
 .secao-calculadora {
@@ -440,66 +525,133 @@ nav a {
     color: #283c27;
 }
 
-
-/* FAIXA FALE COM A GENTE */
-
-.secao-folder .folder-faixa {
-    width: 100%;
-    margin-top: 5px;
-    background-color: #283c27;
-    padding: 30px 40px;
-    box-sizing: border-box;
+.secao-calculadora .valores-invalido {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-left: 6px solid;
+    background: #e5484d65; 
+    backdrop-filter: blur(6px);
+    border-color: #f30b13; 
+    color: black;
+}
+.secao-calculadora .aviso-invalido strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 2px;
+    margin-left: 20px;
 }
 
+.secao-calculadora .aviso-invalido p {
+    margin-left: 20px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* FAIXA FALE COM A GENTE */
+.secao-folder {
+  width: 100%;
+  color: white;
+}
+
+.secao-folder .folder-faixa {
+  width: 100%;
+  background-color: #283c27;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* 4 colunas alinhadas pelo topo */
+.secao-folder .folder-conteudo {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.3fr 1fr;
+  gap: 40px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* títulos iguais em todas as colunas */
+.secao-folder .folder-coluna h2 {
+  color: #f7a925;
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+
+.secao-folder .folder-textop,
+.endereco-folder p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* links */
 .secao-folder {
     width: 100%;
     color: white;
 }
-.secao-folder .folder-textoh2 {
-    display: flex;
-    justify-content: space-between; 
-    align-items: flex-start; 
-    gap: 30px;
-    flex-wrap: wrap; 
-}
-.secao-folder .folder-textoh2 h2 {
-    color: #f7a925;
-    font-size: 22px;
-    margin-top: 0;
-    margin-bottom: 12px;
+
+.secao-folder .folder-faixa {
+    width: 100%;
+    background-color: #283c27;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
-.secao-folder .folder-textop {
+/* 4 colunas alinhadas pelo topo */
+.secao-folder .folder {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.3fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* títulos */
+.secao-folder h2 {
+    color: #f7a925;
+    font-size: 22px;
+    margin: 0 0 16px;
+}
+
+.secao-folder .folder-textop,
+.endereco-folder p {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
 }
+
+/* links (sem título: espaço no topo para alinhar com os h2) */
 .links-secoes-folder ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .links-secoes-folder a {
     color: white;
     text-decoration: none;
+    transition: color 0.2s;
 }
 
 .links-secoes-folder a:hover {
     color: #f7a925;
 }
 
-.endereco-folder p {
-    margin: 0;
-    line-height: 1.5;
-}
-.secao-folder .folder-redes {
+/* redes sociais */
+.folder-redes-icones {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .secao-folder .folder-redesimg {
     width: 35px;
     height: 35px;
