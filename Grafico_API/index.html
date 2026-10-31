@@ -7,20 +7,20 @@
     <link rel="icon" type="image/png" href="../img/logo.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 24px; background: #f4f6f8; color: #1f2a44; }
-        h1 { font-size: 22px; }
-        .grafico { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 20px; max-width: 800px; }
-        .status { font-size: 14px; margin: 4px 0 0 0; }
+        body { font-family: Arial, sans-serif; margin: 24px; background: #293c27; color: #fff; }
+        h1 { font-size: 22px; text-align: center;}
+        .grafico { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 20px; max-width: 800px; margin-left: 22%;}
+        .status { font-size: 14px; margin: 4px 0 0 0; color: #293c27;}
         .ok { color: #1a7f37; }
         .erro { color: #c62828; }
     </style>
 </head>
 <body>
-    <h1>Painel dos sensores</h1>
+    <h1>Teste de Temperatura - Bee Follow</h1>
 
     <div class="grafico">
         <canvas id="graficoLm35"></canvas>
-        <p class="status" id="statusLm35">aguardando...</p>
+        <p class="status" id="statusLm35">Aguardando...</p>
     </div>
 
     <!-- <div class="grafico">
@@ -36,10 +36,10 @@
         const criarGrafico = (idCanvas, titulo, cor, passo) => new Chart(document.getElementById(idCanvas), {
             type: 'line',
             data: { labels: [], datasets: [{ label: titulo, data: [], borderColor: cor, borderWidth: 2, stepped: passo }] },
-            options: { animation: false }
+            options: { animation: true }
         });
 
-        const graficoLm35 = criarGrafico('graficoLm35', 'LM35 - temperatura (°C)', '#ed145b', false);
+        const graficoLm35 = criarGrafico('graficoLm35', 'Temperatura (Cº)', '#293c27', true);
         //const graficoTcrt5000 = criarGrafico('graficoTcrt5000', 'TCRT5000 - porta (1 = fechada, 0 = aberta)', '#0762c8', true);
 
         const atualizar = async (caminho, grafico, idStatus) => {
