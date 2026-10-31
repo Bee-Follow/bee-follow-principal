@@ -8,7 +8,7 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = false    ;
+const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
@@ -20,12 +20,12 @@ const serial = async (
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost', // Colocar as informações do nosso Banco de Dados
-            user: 'user_insert',
-            password: '12345678',
-            database: 'teste_colmeia',
-            port: 3306
+            user: 'aluno',
+            password: 'Sptech#2024',
+            database: 'colmeias',
+            port: 3307
         }
-    ).promise();
+    ).promise();    
 
     // lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
@@ -34,7 +34,7 @@ const serial = async (
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }
 
-    // configura a porta serial com o baud rate especificado
+    // configura a porta serial com o baud rate 12345678especificado
     const arduino = new serialport.SerialPort(
         {
             path: portaArduino.path,
@@ -65,7 +65,7 @@ const serial = async (
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO leitura_temperatura ( temperatura, fk_sensor) VALUES (?,1)',
+                'INSERT INTO leitura_temperatura (temperatura, fk_sensor) VALUES (?,1)',
                 [sensorTemperatura]
             );
             console.log("valores inseridos no banco: ", sensorTemperatura);
@@ -100,7 +100,7 @@ const servidor = (
     });
 
     // define os endpoints da API para cada tipo de sensor
-    app.get('/sensores/analogico', (_, response) => {
+    app.get('/sensores/lm35', (_, response) => {
         return response.json(valoresSensorTemperatura);
     });
     //app.get('/sensores/digital', (_, response) => {
