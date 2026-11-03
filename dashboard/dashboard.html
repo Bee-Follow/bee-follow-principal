@@ -12,200 +12,199 @@
 <body>
     <div class="painel-dashboard">
 
+        <!-- MENU LATERAL -->
         <div class="menu-lateral">
-            <img src="../site-estatico/img/logo.png" alt="Logo Bee Follow" class="logo-menu">
+            <img src="../img/logo_login_cadastro.png" alt="Logo Bee Follow" class="logo-menu">
             <h3 class="boas-vindas">Bem-vindo!</h3>
-            <a href="">Dashboard</a>
-            <a href="">Sensores</a>
-            <a href="">Colmeias</a>
-
-            <div class="menu-rodape">
-                <div class="perfil-usuario">
+             <div class="perfil-usuario">
                     <div class="icone-usuario">👤</div>
                     <span>Administrador</span>
-                </div>
+                </div><br>
+            <a href="" class="ativo"> Dashboard</a>
+            <a href=""> Colmeias</a>
+            <a href=""> Alertas</a>
+            <a href=""> Relatórios</a>
+            <a href=""> Sensores</a>
 
-                <a href="" class="link-saida">↪ Sair</a>
+            <div class="menu-rodape">
+                <button class="link-saida" onclick="sair()">↪ Sair</button>
             </div>
-
         </div>
 
-        <!-- Área principal onde ficam os indicadores, gráficos e informações -->
+        <!-- CONTEÚDO PRINCIPAL -->
         <div class="conteudo-principal">
 
-            <!-- Cabeçalho principal da Dashboard-->
+            <!-- Cabeçalho principal da Dashboard -->
             <div class="cabecalho-dashboard">
+                <h1>GESTÃO DA TEMPERATURA DE COLMEIAS - BEE FOLLOW</h1>
 
-                <h1>DASHBOARD GLOBAL: SISTEMA BEE FOLOW</h1>
-
-                <div class="informacoes-sistema">
-
-                    <div class="status-geral">
-                        <span class="indicador-status"></span>
-                        <span id="status_geral">STATUS GERAL: SAUDÁVEL</span>
-                        <small id="ultima_verificacao">(Verificado às --:--)</small>
-                    </div>
-
-                    <select id="select_apiario" name="apiario">
-                        <option value="apiario_sul">São Paulo - Apiário Sul (2026)</option>
-                        <option value="apiario_norte">Apiário Norte (2026)</option>
-                    </select>
-
-                </div>
-
+  
             </div>
 
-            <!-- Cards com os principais indicadores do apiário -->
+            <!-- CARDS DE INDICADORES (4 Cards como na referência) -->
             <div class="secao-indicadores">
-
                 <div class="indicador">
-                    <h2>🐝 Total de colmeias</h2>
-                    <span class="valor-card" id="total_colmeias" data-valor="10">10</span>
-                    <p class="texto-comparacao" id="comparacao_colmeias">
-                        Colmeias cadastradas
-                    </p>
+                    <h2>Colmeias em atenção</h2>
+                    <span class="valor-card">4 / 12</span>
+                    <p class="texto-comparacao">(Representa 33,3% do apiário afetado)</p>
                 </div>
 
                 <div class="indicador">
-                    <h2>🌡️ Temperatura média</h2>
-                    <span class="valor-card" id="temperatura_media" data-valor="36">36°C</span>
-                    <p class="texto-comparacao" id="comparacao_temperatura">
-                        Média atual dos sensores
-                    </p>
+                    <h2>Possíveis enxameações</h2>
+                    <span class="valor-card">1</span>
+                    <p class="texto-comparacao">Colmeia 3 - (Necessita inspeção física nas próximos 20 minutos)</p>
+                </div>
+
+                <div class="indicador indicador">
+                    <h2>Colmeia mais sinalizada da semana</h2>
+                    <span class="valor-card">Colmeia 3</span>
+                    <p class="texto-comparacao">(Responsável por 75% dos alertas gerados)</p>
                 </div>
 
                 <div class="indicador">
-                    <h2>🍯 Enxameações no mês</h2>
-                    <span class="valor-card" id="total_enxameacoes" data-valor="1">1</span>
-                    <p class="texto-comparacao" id="comparacao_enxameacoes">
-                        Ocorrências neste mês
-                    </p>
+                    <h2></span>Status do sensor</h2>
+                    <span class="valor-card valor-hardware">
+                        <span class="cor-ok">Ativo: 11</span> | <span class="cor-critica">Inativo: 1</span>
+                    </span>
+                    <p class="texto-comparacao">(1 sensor desconectou há 4 horas)</p>
                 </div>
-
-                <div class="indicador">
-                    <h2>⚠️ Alertas na semana</h2>
-                    <span class="valor-card" id="total_alertas" data-valor="2">2</span>
-                    <p class="texto-comparacao" id="comparacao_alertas">
-                        Alertas registrados
-                    </p>
-                </div>
-
             </div>
 
-            <!--  gráficos do dashboard -->
+            <!-- SEÇÃO SUPERIOR: Gráfico de Barras e Alertas Recentes -->
             <div class="secao-graficos">
                 <div class="grafico">
-                    <h2>Temperaturas das colmeias</h2>
+                    <h2>Média Térmica por Colmeia (°C)</h2>
                     <canvas id="sensorAnalogico"></canvas>
                 </div>
 
-                <div class="grafico">
-                    <h2>Alertas da semana</h2>
-                    <canvas id="alertaSemana"></canvas>
+                <div class="card-alertas-recentes">
+                    <h2>Alertas Recentes</h2>
+                    <div class="bloco-alerta-item">
+                        <strong>Colmeia 03</strong>
+                        <p class="cor-critica">Temperatura acima do ideal (38°C)</p>
+                        <small>30-10-2026 14:20</small>
+                    </div>
+                    <div class="bloco-alerta-item">
+                        <strong>Colmeia 02</strong>
+                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
+                        <small>29-10-2026 17:05</small>
+                    </div>
+                    <div class="bloco-alerta-item">
+                        <strong>Colmeia 04</strong>
+                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
+                        <small>28-10-2026 08:40</small>
+                    </div>
+                    <div class="bloco-alerta-item">
+                        <strong>Colmeia 10</strong>
+                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
+                        <small>26-10-2026 12:15</small>
+                    </div>
                 </div>
             </div>
 
-            <!-- Área inferior com a tabela de leituras e os alertas recentes -->
+            <!-- SEÇÃO INFERIOR: Status dos Sensores e Guia de Monitoramento -->
             <div class="secao-inferior">
-
-                <!--  últimas temperaturas registradas -->
                 <div class="card-ultimas-leituras">
-                    <h2>Últimas leituras</h2>
-
+                    <h2>Status sensores</h2>
                     <table class="tabela-leituras">
                         <tr>
                             <th>Colmeia</th>
-                            <th>Temperatura</th>
-                            <th>Última atualização</th>
+                            <th>Status</th>
+                            <th>Última manutenção</th>
                         </tr>
                         <tr>
-                            <td>Colmeia 1</td>
-                            <td>34°C</td>
-                            <td>10/10/2026 12:30</td>
+                            <td>1</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>23-10-2026</td>
                         </tr>
                         <tr>
-                            <td>Colmeia 2</td>
-                            <td>36°C</td>
-                            <td>10/10/2026 13:30</td>
+                            <td>2</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>16-10-2026</td>
                         </tr>
                         <tr>
-                            <td>Colmeia 3</td>
-                            <td>38°C</td>
-                            <td>10/10/2026 14:30</td>
+                            <td>3</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>28-10-2026</td>
                         </tr>
                         <tr>
-                            <td>Colmeia 4</td>
-                            <td>36°C</td>
-                            <td>10/10/2026 12:30</td>
+                            <td>4</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>09-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>21-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>02-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>14-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>26-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>07-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>19-10-2026</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td class="cor-critica">Sensor com Problema</td>
+                            <td>15-09-2026</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td class="cor-ok">Ativo</td>
+                            <td>12-10-2026</td>
                         </tr>
                     </table>
                 </div>
 
-                <!--  alertas mais recentes  -->
-                <div class="card-alertas-recentes">
-                    <h2>⚠️ Alertas recentes</h2>
-
-                    <div class="item-alerta">
-                        <strong>Colmeia 03</strong>
-                        <p>Temperatura acima do ideal (38°C)</p>
-                        <small>10/10/2026 14:30</small>
-                    </div>
-
-                    <div class="item-alerta">
-                        <strong>Colmeia 02</strong>
-                        <p>Temperatura próxima do limite (36°C)</p>
-                        <small>10/10/2026 13:30</small>
+                <!-- GUIA DE MONITORAMENTO -->
+                <div class="card-guia">
+                    <h2>Guia de monitoramento</h2>
+                    <div class="texto-guia">
+                        <p><strong class="cor-critica">Vermelho (Crítico):</strong> Alteração intensa na colmeia, exigindo intervenção presencial imediata do apicultor para evitar danos ao enxame.</p>
+                        <p><strong class="cor-atencao">Amarelo (Atenção):</strong> Variação térmica que indica comportamento fora do padrão, exigindo acompanhamento prioritário no sistema.</p>
+                        <p><strong class="cor-ok">Verde (Normal):</strong> Temperatura dentro da faixa ideal de 34°C a 35°C, dispensando inspeções presenciais não programadas.</p>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 
-    <script src="dashboard.js"></script>
-</body>
+    <!-- SCRIPT DO GRÁFICO DE BARRAS -->
+    <script>
+        
+        Chart.defaults.color = '#ffffff';
+   
 
-</html>
-<script>
-
-    //Lógica dos indicadores
-    let UltimaSemana = 2; // Seleciona todos os cards contendo indicadores  
-    // Semana passada > ou < nessa semana. Caso o desempeho da semana for menor do que da semana passada 
-    let cards = document.querySelectorAll('.card_comeias, .card_temperatura, .card_producao, .card_aviso');
-    cards.forEach(card => {
-        let spanInfo = card.querySelector('.info');
-        let pIndicador = card.querySelector('#spn_indicador');
-
-        if (spanInfo && pIndicador) { // Obtém o valor numérico do atributo data-valor 
-            const valor = Number(spanInfo.dataset.valor);
-            if (valor < 0) { // Condição para valor negativo (Queda) 
-                pIndicador.textContent = `Queda de ${Math.abs(valor)}% em relação à semana passada`;
-                pIndicador.style.color = '#FF0000'; // Vermelho 
-                pIndicador.style.fontWeight = 'bold';
-            } else if (valor > 0) { // Condição para valor positivo (Aumento)
-                pIndicador.textContent = `Aumento de ${valor}% em relação à semana passada`;
-                pIndicador.style.color = '#2E7D32'; // Verde 
-                pIndicador.style.fontWeight = 'bold';
-            } else {
-                pIndicador.textContent = `Sem alterações em relação à semana passada`;
-                pIndicador.style.color = '#555555';
-                pIndicador.style.fontWeight = 'bold';
-            }
-        }
-    });
-
-    //-----------------------------------------------------------------------------------------------------------
-    // Gráfico de Barra
     const sensor = document.getElementById('sensorAnalogico');
     new Chart(sensor, {
         type: 'bar',
         data: {
-            labels: ['Colmeia 1', 'Colmeia 2', 'Colmeia 3', 'Colmeia 4', 'Colmeia 5', 'Colmeia 6'],
+            labels: ['Colmeia 1', 'Colmeia 2', 'Colmeia 3', 'Colmeia 4', 'Colmeia 5', 'Colmeia 6', 'Colmeia 7', 'Colmeia 8', 'Colmeia 9', 'Colmeia 10', 'Colmeia 11', 'Colmeia 12'],
             datasets: [{
                 label: 'Temperatura das Colmeias',
-                data: [34, 36, 38, 36, 34, 35],
+                data: [34, 36, 38, 36, 34, 35, 35, 34, 35, 36, null, 35,],
                 borderWidth: 1,
-                backgroundColor: '#f7a925',
+                backgroundColor: ['#65b96e', '#f7a925', '#D9534F', '#f7a925', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#f7a925', '#65b96e', '#65b96e' ],
                 borderColor: 'white',
                 borderWidth: 1
             },
@@ -225,46 +224,21 @@
                         display: true,
                         text: '(°C)'
                     },
-                    beginAtZero: true,
-                },
-            },
-        }
-    });
-    // Gráfico de Alertas Semanais
-    const alerta = document.getElementById('alertaSemana');
-    new Chart(alerta, {
-        type: 'line',
-        data: {
-            labels: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'],
-            datasets: [{
-                label: 'Alertas da Semana',
-                data: [0, 1, 3, 2, 1, 0, 1],
-                borderWidth: 1,
-                borderColor: '#f7a925',
-                backgroundColor: '#f9f3e4'
-            },
-            ],
-        },
-        options: {
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Dias da semana'
+                    min: 30,
+                    max: 40,
+                    ticks: {
+                        stepSize: 1,
                     },
-                    beginAtZero: true,
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Alertas'
-                    },
-                    beginAtZero: true,
                 },
             },
         }
     });
 
+    function sair() {
+        window.location.href = "../login_cadastro/login.html";
+    }
+
+    
     // Terceira Sprint
 
     // var paginacao = {};
@@ -303,4 +277,7 @@
     //     obterDados(sensorAnalogico, 'analogico');
     // }, 1000);
     //---------------------------------------------------------------------------------------------------
-</script>
+    </script>
+</body>
+
+</html>
