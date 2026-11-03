@@ -22,7 +22,7 @@ const serial = async (
             host: 'localhost', // Colocar as informações do nosso Banco de Dados
             user: 'aluno',
             password: 'Sptech#2024',
-            database: 'colmeias',
+            database: 'beefollow',
             port: 3307
         }
     ).promise();    
