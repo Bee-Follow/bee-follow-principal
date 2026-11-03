@@ -14,7 +14,7 @@
 
         <!-- MENU LATERAL -->
         <div class="menu-lateral">
-            <img src="../img/logo_login_cadastro.png" alt="Logo Bee Follow" class="logo-menu">
+            <img src="../img/logoBeeFollow_branco.png" alt="Logo Bee Follow" class="logo-menu">
             <h3 class="boas-vindas">Bem-vindo!</h3>
              <div class="perfil-usuario">
                     <div class="icone-usuario">👤</div>
@@ -43,22 +43,23 @@
 
             <!-- CARDS DE INDICADORES (4 Cards como na referência) -->
             <div class="secao-indicadores">
+                <div class="indicador indicador-destaque">
+                    <h2>Possíveis enxameações</h2>
+                    <span class="valor-card">1</span>
+                    <p class="texto-comparacao">Colmeia 3 - (Necessita inspeção física nas próximos 20 minutos)</p>
+                </div>
+
                 <div class="indicador">
                     <h2>Colmeias em atenção</h2>
                     <span class="valor-card">4 / 12</span>
                     <p class="texto-comparacao">(Representa 33,3% do apiário afetado)</p>
                 </div>
 
-                <div class="indicador">
-                    <h2>Possíveis enxameações</h2>
-                    <span class="valor-card">1</span>
-                    <p class="texto-comparacao">Colmeia 3 - (Necessita inspeção física nas próximos 20 minutos)</p>
-                </div>
 
                 <div class="indicador indicador">
-                    <h2>Colmeia mais sinalizada da semana</h2>
-                    <span class="valor-card">Colmeia 3</span>
-                    <p class="texto-comparacao">(Responsável por 75% dos alertas gerados)</p>
+                    <h2>Colmeias em processo de adaptação</h2>
+                    <span class="valor-card">1</span>
+                    <p class="texto-comparacao">(Pós-enxameação: acompanhamento ativo necessário)</p>
                 </div>
 
                 <div class="indicador">
@@ -66,7 +67,7 @@
                     <span class="valor-card valor-hardware">
                         <span class="cor-ok">Ativo: 11</span> | <span class="cor-critica">Inativo: 1</span>
                     </span>
-                    <p class="texto-comparacao">(1 sensor desconectou há 4 horas)</p>
+                    <p class="texto-comparacao">(1 sensor apresentou falha nas últimas 4 horas)</p>
                 </div>
             </div>
 
@@ -79,7 +80,7 @@
 
                 <div class="card-alertas-recentes">
                     <h2>Alertas Recentes</h2>
-                    <div class="bloco-alerta-item">
+                    <div class="bloco-critico-item">
                         <strong>Colmeia 03</strong>
                         <p class="cor-critica">Temperatura acima do ideal (38°C)</p>
                         <small>30-10-2026 14:20</small>
@@ -90,14 +91,14 @@
                         <small>29-10-2026 17:05</small>
                     </div>
                     <div class="bloco-alerta-item">
-                        <strong>Colmeia 04</strong>
-                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
-                        <small>28-10-2026 08:40</small>
-                    </div>
-                    <div class="bloco-alerta-item">
                         <strong>Colmeia 10</strong>
                         <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
                         <small>26-10-2026 12:15</small>
+                    </div>
+                    <div class="bloco-adaptacao-item">
+                        <strong>Colmeia 04</strong>
+                        <p class="cor-adaptacao">Temperatura abaixo do ideal (33°C)</p>
+                        <small>28-10-2026 08:40</small>
                     </div>
                 </div>
             </div>
@@ -181,6 +182,7 @@
                     <div class="texto-guia">
                         <p><strong class="cor-critica">Vermelho (Crítico):</strong> Alteração intensa na colmeia, exigindo intervenção presencial imediata do apicultor para evitar danos ao enxame.</p>
                         <p><strong class="cor-atencao">Amarelo (Atenção):</strong> Variação térmica que indica comportamento fora do padrão, exigindo acompanhamento prioritário no sistema.</p>
+                        <p><strong class="cor-adaptacao">Azul (Adaptação):</strong> Temperatura abaixo da faixa ideal, exigindo inspeções presenciais constantes.</p>
                         <p><strong class="cor-ok">Verde (Normal):</strong> Temperatura dentro da faixa ideal de 34°C a 35°C, dispensando inspeções presenciais não programadas.</p>
                     </div>
                 </div>
@@ -202,9 +204,9 @@
             labels: ['Colmeia 1', 'Colmeia 2', 'Colmeia 3', 'Colmeia 4', 'Colmeia 5', 'Colmeia 6', 'Colmeia 7', 'Colmeia 8', 'Colmeia 9', 'Colmeia 10', 'Colmeia 11', 'Colmeia 12'],
             datasets: [{
                 label: 'Temperatura das Colmeias',
-                data: [34, 36, 38, 36, 34, 35, 35, 34, 35, 36, null, 35,],
+                data: [34, 36, 38, 33, 34, 35, 35, 34, 35, 36, null, 35,],
                 borderWidth: 1,
-                backgroundColor: ['#65b96e', '#f7a925', '#D9534F', '#f7a925', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#f7a925', '#65b96e', '#65b96e' ],
+                backgroundColor: ['#65b96e', '#f7a925', '#D9534F', '#62b3af', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#f7a925', '#65b96e', '#65b96e' ],
                 borderColor: 'white',
                 borderWidth: 1
             },

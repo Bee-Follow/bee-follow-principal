@@ -148,8 +148,7 @@ html, body {
 
 /* Card da colmeia mais sinalizada em destaque */
 .indicador-destaque {
-    background: #293926;
-    border: 1px solid #857635;
+    border-left: 6px solid #E8795A;
 }   
 
 /* SEÇÃO SUPERIOR E INFERIOR */
@@ -245,8 +244,40 @@ html, body {
     margin: 2px 0;
 }
 
-.bloco-alerta-item small {
-    color: #aebbae;
+.bloco-critico-item {
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: #1a3025;
+    border: 1px solid #223a2e;
+    border-left: 4px solid #e74c3c;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.bloco-critico-item:last-child {
+    margin-bottom: 0;
+}
+
+.bloco-critico-item p {
+    margin: 2px 0;
+}
+
+.bloco-adaptacao-item {
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: #1a3025;
+    border: 1px solid #223a2e;
+    border-left: 4px solid #62b3af;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.bloco-adaptacao-item:last-child {
+    margin-bottom: 0;
+}
+
+.bloco-adaptacao-item p {
+    margin: 2px 0;
 }
 
 /* ESTILOS DO GUIA DE MONITORAMENTO */
@@ -281,6 +312,11 @@ html, body {
 
 .cor-ok {
     color: #65b96e;
+    font-weight: bold;
+}
+
+.cor-adaptacao {
+    color: #62b3af;
     font-weight: bold;
 }
 
