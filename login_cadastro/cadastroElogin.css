@@ -96,7 +96,6 @@ button {
     font-size: 20px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 20px;
     transition: background-color 0.2s;
 }
 
@@ -157,4 +156,9 @@ button:hover {
 
 .hidden {
     display: none;
+}
+.link-login{
+    color: #f7a925;
+    align-items: center;
+    margin-left: 30%;
 }
