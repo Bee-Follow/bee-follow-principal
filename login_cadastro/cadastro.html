@@ -50,18 +50,22 @@
 
         <div class="grupo-formulario">
             <label for="ipt_senha">Digite a senha</label>
-            <input type="password" id="ipt_senha" placeholder="********">
+            <input type="password" id="ipt_senha" placeholder="********" onkeyup="validarsenha()">
+            <div id="div_senha"></div>
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_conf_senha">Confirme a senha</label>
-            <input type="password" id="ipt_conf_senha" placeholder="********">
-        </div>
-            <button onclick="cadastrar()" id="cadastro">Cadastrar</button><br> 
-            <a href="login.html" class="link-login">Já possui cadastro? Faça o login</a>
-    </div>
+            <input type="password" id="ipt_conf_senha" placeholder="********" onkeyup="senhaigual()">
+            <div id="div_conf_senha"></div>
 
-    <script>
+        </div>
+        <button onclick="cadastrar()" id="cadastro">Cadastrar</button><br> 
+        <a href="login.html" class="link-login">Já possui cadastro? Faça o login</a>
+    </div>
+</body>
+
+<script>
             const showToastBtn = document.getElementById('cadastro');
             const toast = document.getElementById('toast');
             showToastBtn.addEventListener('click', function() {
@@ -106,7 +110,35 @@
             }
                
         }
-    </script>
-</body>
 
+        function validarsenha(){
+            let senha = ipt_senha.value
+            let msg = ``;
+
+            if (senha.length < 8){
+                msg = `<span style="color: red;">Senha precisa de 8 caracteres</span>`;
+            } 
+            else {
+                msg = `<span style="color: green;">Senha válida</span>`
+            } 
+
+
+            div_senha.innerHTML = `${msg}`;
+        }   
+        
+        function senhaigual(){
+            let senha = ipt_senha.value;
+            let conf_senha = ipt_conf_senha.value
+            let msg = ``;
+            
+            if (senha != conf_senha){
+                msg = `<span style="color: red;"> As senhas não são iguais </span>`;
+            }
+            else {
+                msg = `<span style="color: green;"> As senhas são iguais </span>`;
+                
+            }
+            div_conf_senha.innerHTML = `${msg}`;
+        }
+</script>
 </html>
