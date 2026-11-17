@@ -1,5 +1,9 @@
 # A linha abaixo determina que o diretório node_modules não será enviado ao repositório remoto
 node_modules
 package-lock.json
+<<<<<<< HEAD
+=======
+LICENSE
+>>>>>>> c170754f1ccd6a000abd4f3ff54d6987ac569b9b
 
 .github

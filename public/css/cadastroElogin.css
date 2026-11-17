@@ -61,7 +61,7 @@ h2 {
 .grupo-formulario {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .grupo-formulario label {
@@ -128,7 +128,7 @@ button:hover {
     background-color: #f7a925;
     border-radius: 4px;
     color: black;
-    padding: 10px 20px;
+    
 }
 .show {
     opacity: 0;
