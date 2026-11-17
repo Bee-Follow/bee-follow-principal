@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow</title>
-    <link rel="icon" type="image/png" href="../img/logo.png">
-    <link rel="stylesheet" href="style-index.css">
+    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
+    <link rel="stylesheet" href="./css/style-index.css">
 </head>
 
 <body>
     <!-- tag <header> criada para ser o topo da página, contendo as tags <nav> utilizada para navegação dentro do web site-->
     <header id="header">
         <!-- <div> dentro do header para colocar a imagem dentro da navbar -->
-        <div class="logo img"><img src="../img/logo.png" alt="Logo da Bee Follow"></div>
+        <div class="logo img"><img src="./assets/imgs/logo.png" alt="Logo da Bee Follow"></div>
         <!-- <div> criada dentro do header contendo os links de navegação e o botão -->
         <div class="menu-direito">
             <nav>
@@ -32,7 +32,7 @@
     <div class="card-inicio" id="secao1">
         <!-- <div> da imagem da colmeia, criada para separa-lá das demais -->
         <div class="card-img-colmeias">
-            <img src="../img/colmeias.png" alt="">
+            <img src="./assets/imgs/colmeias.png" alt="">
         </div>
         <!-- <div> do texto principal no banner inicial do web site, criada para separa-lá das demais -->
         <div class="card-texto">
@@ -47,7 +47,7 @@
                 preventiva.</p>
         </div>
         <!-- <div> da imagem da abelhla no banner inicial do web site, criada para separa-lá das demais -->
-        <div class="card-img"><img src="../img/abelha-1.png"
+        <div class="card-img"><img src="./assets/imgs/abelha-1.png"
                 alt="Fotografia aproximada de uma abelha pousada no centro amarelo de uma flor com pétalas brancas">
         </div>
     </div>
@@ -57,7 +57,7 @@
         <div class="beneficio">
             <!-- Espaço reservado para a imagem -->
             <div>
-                <img src="../img/solucao_1.png" height="80%" width="80%">
+                <img src="./assets/imgs/solucao_1.png" height="80%" width="80%">
             </div>
             <br>
             <h2 class="text-titulo">Monitoramento em<br>tempo real</h2>
@@ -70,7 +70,7 @@
         <div class="beneficio">
             <!-- Espaço reservado para a imagem -->
             <div>
-                <img src="../img/solucao_2.png" alt="Imagem de alerta" height="80%" width="80%">
+                <img src="./assets/imgs/solucao_2.png" alt="Imagem de alerta" height="80%" width="80%">
             </div>
             <br>
             <h2 class="text-titulo">Alertas inteligentes</h2>
@@ -83,7 +83,7 @@
         <div class="beneficio">
             <!-- Espaço reservado para a imagem -->
             <div>
-                <img src="../img/solucao_3.png" alt="Imagem do icone do bando de dados" height="80%" width="80%">
+                <img src="./assets/imgs/solucao_3.png" alt="Imagem do icone do bando de dados" height="80%" width="80%">
             </div>
             <br>
             <h2>Dados</h2>
@@ -107,7 +107,7 @@
                 </p>
             </div>
             <div class="sobre-img">
-                <img src="../img/sobre_nos.jpg" alt="Abelhas em um favo de mel">
+                <img src="./assets/imgs/sobre_nos.jpg" alt="Abelhas em um favo de mel">
             </div>
         </div>
     </section>
@@ -135,7 +135,7 @@
             </div>
             <!-- Painel direito: resultado -->
             <div class="painel-resultado text">
-                <div class=msg id="div_msg">
+                <div class= 'msg' id="div_msg">
                     <p class="placeholder">Preencha os campos ao lado e clique em "Calcular" para ver o resultado aqui.
                     </p>
                 </div>
@@ -167,7 +167,7 @@
                 </div>
             </div>
             <div class="card-img-contato">
-                <img src="../img/formulario.jpg" alt="Imagem do apicultor" style="height: 100%; width: 100%;">
+                <img src="./assets/imgs/formulario.jpg" alt="Imagem do apicultor" style="height: 100%; width: 100%;">
             </div>
         </div>
     </section>
@@ -200,9 +200,9 @@
                 <div class="folder-coluna folder-redes">
                     <h2>Nossas redes</h2>
                     <div class="folder-redes-icones">
-                        <a href="#"><img class="folder-redesimg" src="../img/Instagram.png" alt="Instagram"></a>
-                        <a href="#"><img class="folder-redesimg" src="../img/facebook.png" alt="Facebook"></a>
-                        <a href="#"><img class="folder-redesimg" src="../img/Linkedin.png" alt="Linkedin"></a>
+                        <a href="#"><img class="folder-redesimg" src="./assets/imgs/Instagram.png" alt="Instagram"></a>
+                        <a href="#"><img class="folder-redesimg" src="./assets/imgs/facebook.png" alt="Facebook"></a>
+                        <a href="#"><img class="folder-redesimg" src="./assets/imgs/Linkedin.png" alt="Linkedin"></a>
                     </div>
                 </div>
 
@@ -212,7 +212,7 @@
 </body>
 <script>
     function carregamentoLogin() {
-        window.location.href = '../login_cadastro/login.html';
+        window.location.href = './login.html';
     }
 
     function aviso(tipo, titulo, mensagem) {

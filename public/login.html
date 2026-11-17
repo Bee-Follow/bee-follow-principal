@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Login</title>
-    <link rel="icon" type="image/png" href="../img/logo.png">
-    <link rel="stylesheet" href="cadastroElogin.css">
+    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
+    <link rel="stylesheet" href="./css/cadastroElogin.css">
     <script src="../cadastro.js"></script>
 </head>
 <body>
 
     <div class="lado-esquerdo">
         <div class="conteiner-logo">
-            <img class="imagem-logo" src="../img/logo_login_cadastro.png" alt="Bee Follow Logo">
+            <img class="imagem-logo" src="./assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
         </div>
     </div>
 
@@ -59,7 +59,7 @@
                 } else if (email == cadastro.email && senha == cadastro.senha ) {
                     toast.innerHTML = "Bem-vindo! Aguarde o redirecionamento para a próxima tela."
                     setTimeout(() => {
-                        window.location = "../dashboard/dashboard.html";
+                        window.location = "./dashboard/dashboard.html";
                     }, "3000");
                 } else {
                     toast.innerHTML = "E-mail ou senha incorreta."
