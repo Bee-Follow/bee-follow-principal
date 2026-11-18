@@ -1,6 +1,6 @@
 var colmeiasModel = require("../models/colmeiasModel");
 
-function kpi1 (req, res) {
+function kpi1(req, res) {
     Promise.all([
         colmeiasModel.kpi1TotalDeColmeias(),
         colmeiasModel.kpi1QuantidadeDeColmeiasEmAlerta(),
@@ -13,13 +13,13 @@ function kpi1 (req, res) {
             colmeiasEmAlerta: resultados[2]
         });
     })
-    .catch (function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
+    .catch(function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
         console.log("Erro ao buscar as informações da 1º KPI: ", erro.sqlMessage || erro);
         res.status(500).json(erro.sqlMessage || erro);
     });
 }
 
-function kpi2 (req, res) {
+function kpi2(req, res) {
     Promise.all([
         colmeiasModel.kpi2QuaisColmeiasEmAdaptacao(),
         colmeiasModel.kpi2QuantidadeDeColmeiasEmAdaptacao()
@@ -30,13 +30,13 @@ function kpi2 (req, res) {
             qntEmAdaptacao: resultados[1]
         });
     })
-    .catch (function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
+    .catch(function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
         console.log("Erro ao buscar as informações da 2º KPI: ", erro.sqlMessage || erro);
         res.status(500).json(erro.sqlMessage || erro);
     });
 }
 
-function kpi4 (req, res) {
+function kpi4(req, res) {
     Promise.all([
         colmeiasModel.kpi4TotalDeSensoresAtivos(),
         colmeiasModel.kpi4QuantidadeDeColmeiasComProblemas(),
@@ -49,7 +49,7 @@ function kpi4 (req, res) {
             quaisColmeiasComProblemas: resultados[2]
         });
     })
-    .catch (function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
+    .catch(function (erro) {   // O .catch é se caso der algum erro nas coletas do banco de dados
         console.log("Erro ao buscar as informações da 4º KPI: ", erro.sqlMessage || erro);
         res.status(500).json(erro.sqlMessage || erro);
     });
