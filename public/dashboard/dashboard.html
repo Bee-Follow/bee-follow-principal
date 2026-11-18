@@ -74,32 +74,17 @@
             <!-- SEÇÃO SUPERIOR: Gráfico de Barras e Alertas Recentes -->
             <div class="secao-graficos">
                 <div class="grafico">
-                    <h2>Média Térmica por Colmeia (°C)</h2>
+                    <h2>Temperatura das Colmeias<span id="data_hora"></span></h2>
                     <canvas id="sensorAnalogico"></canvas>
                 </div>
 
-                <div class="card-alertas-recentes">
+                <div class="card-alertas-recentes" id="card_alertas">
                     <h2>Alertas Recentes</h2>
-                    <div class="bloco-critico-item">
+                    <!-- <div class="bloco-critico-item">
                         <strong>Colmeia 03</strong>
                         <p class="cor-critica">Temperatura acima do ideal (38°C)</p>
                         <small>30-10-2026 14:20</small>
-                    </div>
-                    <div class="bloco-alerta-item">
-                        <strong>Colmeia 02</strong>
-                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
-                        <small>29-10-2026 17:05</small>
-                    </div>
-                    <div class="bloco-alerta-item">
-                        <strong>Colmeia 10</strong>
-                        <p class="cor-atencao">Temperatura acima do ideal (36°C)</p>
-                        <small>26-10-2026 12:15</small>
-                    </div>
-                    <div class="bloco-adaptacao-item">
-                        <strong>Colmeia 04</strong>
-                        <p class="cor-adaptacao">Temperatura abaixo do ideal (33°C)</p>
-                        <small>28-10-2026 08:40</small>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -107,72 +92,7 @@
             <div class="secao-inferior">
                 <div class="card-ultimas-leituras">
                     <h2>Status sensores</h2>
-                    <table class="tabela-leituras">
-                        <tr>
-                            <th>Colmeia</th>
-                            <th>Status</th>
-                            <th>Última manutenção</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>23-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>16-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>28-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>09-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>21-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>02-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>14-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>26-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>07-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>19-10-2026</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td class="cor-critica">Sensor com Problema</td>
-                            <td>15-09-2026</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td class="cor-ok">Ativo</td>
-                            <td>12-10-2026</td>
-                        </tr>
+                    <table class="tabela-leituras" id="status">
                     </table>
                 </div>
 
@@ -198,13 +118,13 @@
    
 
     const sensor = document.getElementById('sensorAnalogico');
-    new Chart(sensor, {
+    let grafico_temperatura = new Chart(sensor, {
         type: 'bar',
         data: {
-            labels: ['Colmeia 1', 'Colmeia 2', 'Colmeia 3', 'Colmeia 4', 'Colmeia 5', 'Colmeia 6', 'Colmeia 7', 'Colmeia 8', 'Colmeia 9', 'Colmeia 10', 'Colmeia 11', 'Colmeia 12'],
+            labels: [],
             datasets: [{
                 label: 'Temperatura das Colmeias',
-                data: [34, 36, 38, 33, 34, 35, 35, 34, 35, 36, null, 35,],
+                data: [],
                 borderWidth: 1,
                 backgroundColor: ['#65b96e', '#f7a925', '#D9534F', '#62b3af', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#65b96e', '#f7a925', '#65b96e', '#65b96e' ],
                 borderColor: 'white',
@@ -236,49 +156,124 @@
         }
     });
 
+    function obterDadosGrafico() {
+        fetch(`/dashboard/ultimas/dados`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+                        plotarGrafico(resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+            fetch(`/dashboard/ultimas/sensores`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+                        plotarSensores(resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+            fetch(`/dashboard/ultimas/alertas`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+                        plotarAlertas(resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGrafico(resposta) {
+
+    
+            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+            console.log(resposta)
+
+            grafico_temperatura.data.labels = [];
+            grafico_temperatura.data.datasets[0].data = [];
+
+            for (i = 0; i < resposta.length; i++) {
+                var registro = resposta[i];
+                grafico_temperatura.data.labels.push(registro.id);
+                grafico_temperatura.data.datasets[0].data.push(registro.temperatura);
+            }
+
+            grafico_temperatura.update();
+
+            setTimeout(() => atualizarGrafico(), 5000);
+    }
+    function plotarSensores(resposta) {
+            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarSensores":')
+            console.log(resposta)
+            status.innerHTML = `<tr>
+                                <th>Colmeia</th>
+                                <th>Status</th>
+                                <th>Última Manutenção</th>
+                                <th>Próxima Manutenção</th>
+                                </tr>`
+            for (i = 0; i < resposta.length; i++) {
+                var registro = resposta[i];
+                status.innerHTML += `
+                    <tr>
+                    <td>Colmeia ${registro.id}</td>
+                    <td>${registro.funcionando}</td>
+                    <td>${registro.ultimamanutencao}</td>
+                    </tr>`;
+            }
+            
+            setTimeout(() => atualizarGrafico(), 5000);
+        }
+        function plotarAlertas(resposta) {
+            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarAlertas":')
+            console.log(resposta)
+            for (i = 0; i < resposta.length; i++) {
+                var registro = resposta[i];
+                if (registro.temperatura < 34) {
+                    card_alertas.innerHTML += `<div class="bloco-critico-item">
+                        <strong>Colmeia ${registro.id}</strong>
+                        <p class="cor-critica">Temperatura abaixo do normal (${registro.temperatura}ºC)</p>
+                        <span>Colocar informações do que o apicultor deve fazer diante dessa temperatura</span>
+                        <small>${registro.dataHora}</small>
+                        </div>`
+                } else if (registro.temperatura > 34 && registro.temperatura <= 36) {
+                    card_alertas.innerHTML += `<div class="bloco-critico-item">
+                        <strong>Colmeia ${registro.id}</strong>
+                        <p class="cor-critica">Temperatura abaixo do normal (${registro.temperatura}ºC)</p>
+                        <span>Colocar informações do que o apicultor deve fazer diante dessa temperatura</span>
+                        <small>${registro.dataHora}</small>
+                        </div>`
+                } else {
+                    card_alertas.innerHTML += `<div class="bloco-critico-item">
+                        <strong>Colmeia ${registro.id}</strong>
+                        <p class="cor-critica">Temperatura acima do normal (${registro.temperatura}ºC)/p>
+                        <span>Colocar informações do que o apicultor deve fazer diante dessa temperatura</span>
+                        <small>${registro.dataHora}</small>
+                        </div>`
+                }
+            }
+            
+            setTimeout(() => atualizarGrafico(), 5000);
+        }
     function sair() {
         window.location.href = "../login_cadastro/login.html";
     }
-
-    
-    // Terceira Sprint
-
-    // var paginacao = {};
-    // var tempo = {};
-
-    // function obterDados(grafico, endpoint) {
-    //     fetch('http://localhost:3300/sensores/' + endpoint)
-    //         .then(response => response.json())
-    //         .then(valores => {
-    //             if (paginacao[endpoint] == null) {
-    //                 paginacao[endpoint] = 0;
-    //             }
-    //             if (tempo[endpoint] == null) {
-    //                 tempo[endpoint] = 0;
-    //             }
-
-    //             var ultimaPaginacao = paginacao[endpoint];
-    //             paginacao[endpoint] = valores.length;
-    //             valores = valores.slice(ultimaPaginacao);
-
-    //             valores.forEach((valor) => {
-    //                 if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-    //                     grafico.data.labels.shift();
-    //                     grafico.data.datasets[0].data.shift();
-    //                 }
-
-    //                 grafico.data.labels.push(tempo[endpoint]++);
-    //                 grafico.data.datasets[0].data.push(parseFloat(valor));
-    //                 grafico.update();
-    //             });
-    //         })
-    //         .catch(error => console.error('Erro ao obter dados:', error));
-    // }
-
-    // setInterval(() => {
-    //     obterDados(sensorAnalogico, 'analogico');
-    // }, 1000);
-    //---------------------------------------------------------------------------------------------------
     </script>
 </body>
 
