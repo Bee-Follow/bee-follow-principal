@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Criar Conta</title>
-    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
-    <link rel="stylesheet" href="./css/cadastroElogin.css">
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="cadastroElogin.css">
     <script src="../cadastro.js"></script>
 </head>
 
@@ -14,7 +14,7 @@
 
     <div class="lado-esquerdo">
         <div class="conteiner-logo">
-            <img class="imagem-logo" src="./assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
+            <img class="imagem-logo" src="../img/logo_login_cadastro.png" alt="Bee Follow Logo">
         </div>
     </div>
 
@@ -35,12 +35,12 @@
 
         <div class="grupo-formulario">
             <label for="ipt_cpf">Digite seu CPF</label>
-            <input type="text" id="ipt_cpf" placeholder="000.000.000-00">
+            <input type="text" id="ipt_cpf" placeholder="000.000.000-00" oninput="formatarCPF(this)" maxlength="14">
         </div>
 
         <div class="grupo-formulario">
             <label for="ipt_telefone">Telefone</label>
-            <input type="tel" id="ipt_telefone" placeholder="(00) 00000-0000">
+            <input type="tel" id="ipt_telefone" placeholder="(00) 00000-0000" oninput="formatartel(this)" maxlength="13">
         </div>
 
         <div class="grupo-formulario">
@@ -128,7 +128,8 @@
         
         function senhaigual(){
             let senha = ipt_senha.value;
-            let conf_senha = ipt_conf_senha.value
+            let conf_senha = ipt_conf_senha.value;
+            let ponto = `.`
             let msg = ``;
             
             if (senha != conf_senha){
@@ -140,5 +141,42 @@
             }
             div_conf_senha.innerHTML = `${msg}`;
         }
+
+        function formatarCPF(ipt_cpf) {
+            // 1. Deixa apenas os números e limita a 11 dígitos
+            let cpf = ipt_cpf.value.replace(/\D/g, '').slice(0, 11);
+
+            // 2. Adiciona os pontos e o traço conforme o tamanho
+            if (cpf.length > 3) {
+                cpf = cpf.slice(0, 3) + '.' + cpf.slice(3);
+            }
+            if (cpf.length > 7) {
+                cpf = cpf.slice(0, 7) + '.' + cpf.slice(7);
+            }
+            if (cpf.length > 11) {
+                cpf = cpf.slice(0, 11) + '-' + cpf.slice(11, 13);
+            }
+
+            // 3. Devolve o texto formatado para o ipt_cpf
+            ipt_cpf.value = cpf;
+        }
+
+        function formatartel(ipt_telefone) {
+            // 1. Deixa apenas os números
+            let telefone = ipt_telefone.value.replace(/\D/g, '');
+
+            // 2. Adiciona os pontos e o traço conforme o tamanho
+            if (telefone.length >= 1 ){
+                telefone = '(' + telefone;
+            }    
+            if (telefone.length > 3) {
+                telefone = telefone.slice(0, 3) + ') ' + telefone.slice(3);
+            }
+            
+
+            // 3. Devolve o texto formatado para o ipt_telefone
+            ipt_telefone.value = telefone;
+        }
+        
 </script>
 </html>
