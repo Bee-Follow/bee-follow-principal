@@ -20,6 +20,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var dashboardRouter = require("./src/routes/dashboard");
 var empresasRouter = require("./src/routes/empresas");
+var colmeiaRouter = require(".src/routes/colmeia")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/empresas", empresasRouter);
+app.use("/colmeia", colmeiaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

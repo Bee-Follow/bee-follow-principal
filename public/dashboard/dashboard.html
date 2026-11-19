@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Dashboard</title>
     <link rel="stylesheet" href="../css/styleDashboard.css">
+    <link rel="" href="">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="obterDadosGrafico()">
+    
     <div class="painel-dashboard">
 
         <!-- MENU LATERAL -->
         <div class="menu-lateral">
-            <img src="../img/logoBeeFollow_branco.png" alt="Logo Bee Follow" class="logo-menu">
+            <img src="../assets/imgs/logoBeeFollow_branco.png" alt="Logo Bee Follow" class="logo-menu">
             <h3 class="boas-vindas">Bem-vindo!</h3>
              <div class="perfil-usuario">
                     <div class="icone-usuario">👤</div>
@@ -43,29 +45,31 @@
 
             <!-- CARDS DE INDICADORES (4 Cards como na referência) -->
             <div class="secao-indicadores">
-                <div class="indicador indicador-destaque">
+                <div class="indicador indicador-destaque" id="kpi1">
                     <h2>Possíveis enxameações</h2>
-                    <span class="valor-card">1</span>
+                    <span class="valor-card" id="kpi1_valor">0</span>
                     <p class="texto-comparacao">Colmeia 3 - (Necessita inspeção física nas próximos 20 minutos)</p>
                 </div>
 
-                <div class="indicador">
+                <div class="indicador" id="kpi2">
                     <h2>Colmeias em atenção</h2>
-                    <span class="valor-card">4 / 12</span>
+                    <span class="valor-card">
+                        <span class="cor-critica" id="kpi2_atencao">0</span> | <span id="kpi2_normal">0</span>
+                    </span>
                     <p class="texto-comparacao">(Representa 33,3% do apiário afetado)</p>
                 </div>
 
 
-                <div class="indicador indicador">
+                <div class="indicador indicador" id="kpi3">
                     <h2>Colmeias em processo de adaptação</h2>
-                    <span class="valor-card">1</span>
+                    <span class="valor-card" id="kpi3_valor">0</span>
                     <p class="texto-comparacao">(Pós-enxameação: acompanhamento ativo necessário)</p>
                 </div>
 
-                <div class="indicador">
+                <div class="indicador" id="kpi4">
                     <h2></span>Status do sensor</h2>
                     <span class="valor-card valor-hardware">
-                        <span class="cor-ok">Ativo: 11</span> | <span class="cor-critica">Inativo: 1</span>
+                        <span class="cor-ok" id="kpi4_ativos">Ativo: 0</span> | <span class="cor-critica" id="kpi4_inativos">Inativo: 0</span>
                     </span>
                     <p class="texto-comparacao">(1 sensor apresentou falha nas últimas 4 horas)</p>
                 </div>
@@ -115,7 +119,26 @@
     <script>
         
         Chart.defaults.color = '#ffffff';
-   
+        
+        document.addEventListener("DOMContentLoaded", () =>{
+            const kpi1 = document.getElementById('kpi1')
+            const kpi2 = document.getElementById('kpi2')
+            const kpi3 = document.getElementById('kpi3')
+            const kpi4 = document.getElementById('kpi4')
+        })
+
+        // TODAS AS KPIS
+
+        // KPI 1
+            function carregarKpis() {
+                fetch(res => res.json())
+                    .then(res => res.json())
+                    .then(preencherkpi1)
+                    .then(erro => console.error)
+                
+
+            }
+
 
     const sensor = document.getElementById('sensorAnalogico');
     let grafico_temperatura = new Chart(sensor, {

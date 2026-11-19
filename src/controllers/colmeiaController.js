@@ -36,6 +36,10 @@ function kpi2(req, res) {
     });
 }
 
+function kpi3(req, res) {
+    res.status(200).json({});
+}
+
 function kpi4(req, res) {
     Promise.all([
         colmeiasModel.kpi4TotalDeSensoresAtivos(),
@@ -58,6 +62,6 @@ function kpi4(req, res) {
 module.exports = {
     kpi1,
     kpi2,
-    //kpi3,
+    kpi3,
     kpi4
 }

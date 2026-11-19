@@ -12,6 +12,10 @@ router.get("/kpi2", function (req, res) {
     colmeiaController.kpi2(req, res);
 })
 
+router.get("/kpi3", function (req, res) {
+    colmeiaController.kpi3(req, res)
+})
+
 // ------------------------------ KPI 4
 router.get("/kpi4", function (req, res) { 
     colmeiaController.kpi4(req, res);
