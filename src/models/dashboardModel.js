@@ -1,4 +1,4 @@
-const { buscarAlertas } = require("../controllers/dashboardController");
+const dashboardController = require("../controllers/dashboardController");
 var database = require("../database/config");
 
 function buscarUltimasMedidas(idApiario) {
@@ -48,6 +48,7 @@ function buscarAlertas(idApiario) {
 }
 
 module.exports = {
+    dashboardController,
     buscarUltimasMedidas,
     buscarSensoresAtivos,
     buscarAlertas
