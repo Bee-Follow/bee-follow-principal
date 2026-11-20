@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Follow - Login</title>
+    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
+    <link rel="stylesheet" href="./css/cadastroElogin.css">
+</head>
+
+<body>
+
+    <div class="lado-esquerdo">
+        <div class="conteiner-logo">
+            <img class="imagem-logo" src="./assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
+        </div>
+    </div>
+
+    <div class="lado-direito">
+        <div id="toast" class="hidden"></div>
+        <h1>Entrar</h1>
+        <h2>Acesse sua conta Bee Follow</h2>
+
+        <div class="grupo-formulario">
+            <label for="ipt_email">E-mail</label>
+            <input type="email" id="ipt_email" placeholder="Ex: seuemail@exemplo.com">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_senha">Senha</label>
+            <input type="password" id="ipt_senha" placeholder="********" onkeydown="if (event.key === 'Enter') entrar()">
+        </div>
+
+        <button onclick="entrar()" id="entrar">Entrar</button><br>
+        <a href="cadastro.html" class="link-login">Não possui cadastro? Cadastre-se</a>
+    </div>
+
+    <script>
+        const PAGINA_APOS_LOGIN = './dashboard/dashboard.html';
+
+        let toastTimer;
+
+        function mostrarToast(msg) {
+            clearTimeout(toastTimer);
+            toast.classList.remove('show');
+            toast.classList.add('hidden');
+            void toast.offsetWidth; // reinicia a animação
+            toast.innerHTML = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            toastTimer = setTimeout(function () {
+                toast.classList.add('hidden');
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        function entrar() {
+            let email = ipt_email.value.trim();
+            let senha = ipt_senha.value;
+
+            if (email == "" || senha == "") {
+                return mostrarToast("Preencha o e-mail e a senha!");
+            }
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+            })
+            .then(function (resposta) {
+             if (resposta.ok) {
+             return resposta.json().then(function (usuario) {
+            sessionStorage.ID_USUARIO = usuario.id;
+            sessionStorage.ID_APIARIO = usuario.idApiario;
+            sessionStorage.NOME_USUARIO = usuario.nome;
+            sessionStorage.EMAIL_USUARIO = usuario.email;
+
+                        mostrarToast("Login realizado com sucesso! Redirecionando...");
+                        setTimeout(function () {
+                            window.location = PAGINA_APOS_LOGIN;
+                        }, 1500);
+                    });
+                } else {
+                    return resposta.text().then(function (texto) {
+                        throw new Error(resposta.status + " - " + texto);
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.log("#ERRO:", erro);
+                if (String(erro.message).startsWith("403")) {
+                    mostrarToast("E-mail e/ou senha inválidos.");
+                } else {
+                    mostrarToast("Não foi possível fazer o login. Tente novamente.");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+<!-- No front-end, a função entrar() lê o email e a senha digitados, 
+valida se estão preenchidos e envia uma requisição POST para /usuarios/autenticar 
+com os dados em JSON. Se o servidor responder com sucesso, os dados do usuário 
+(id, nome, email e apiário) são salvos no sessionStorage e o usuário é redirecionado 
+para o dashboard. Se houver erro, a função exibe uma mensagem na tela por meio 
+do mostrarToast: login inválido para o status 403, ou mensagem genérica nos demais casos. -->
