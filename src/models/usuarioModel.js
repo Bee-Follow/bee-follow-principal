@@ -1,28 +1,39 @@
-var database = require("../database/config")
+var database = require("../database/config");
 
-function autenticar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+function cadastrar(nome, email, cpf, telefone, idApiario, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n\n function cadastrar():", nome, email, cpf, telefone, idApiario);
+
     var instrucaoSql = `
-        SELECT id, nome, email, fk_empresa as empresaId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+        INSERT INTO funcionario (nome, email, cpf, telefone, codigo_apiario, senha)
+        VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${idApiario}', '${senha}');
     `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(nome, email, senha, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, fkEmpresa);
-    
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
+function autenticar(email, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n\n function autenticar():", email);
+
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, senha, fk_empresa) VALUES ('${nome}', '${email}', '${senha}', '${fkEmpresa}');
+        SELECT id, nome, email, codigo_apiario AS idApiario
+        FROM funcionario
+        WHERE email = '${email}' AND senha = '${senha}';
     `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 module.exports = {
-    autenticar,
-    cadastrar
+    cadastrar,
+    autenticar
 };
+
+// O model é responsável pela comunicação com o banco de dados. 
+// A função cadastrar recebe os dados do funcionário e monta um INSERT 
+// na tabela funcionario.
+
+// A função autenticar recebe email e senha e monta 
+// um SELECT para verificar se existe um funcionário com essas credenciais. 
+// Ambas executam o SQL por meio de database.executar() e retornam o resultado ao controller.

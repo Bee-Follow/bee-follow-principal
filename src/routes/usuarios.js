@@ -3,13 +3,13 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
-router.post("/cadastrar", function (req, res) {
-    usuarioController.cadastrar(req, res);
-})
-
-router.post("/autenticar", function (req, res) {
-    usuarioController.autenticar(req, res);
-});
+router.post("/cadastrar", usuarioController.cadastrar);
+router.post("/autenticar", usuarioController.autenticar);
 
 module.exports = router;
+
+// Esse arquivo define as rotas de login e cadastro. 
+// Cada rota configura a URL e o método HTTP, e indica 
+// qual função do controller será executada quando essa 
+// URL for acessada. A rota /cadastrar chama a função de 
+// cadastro e a rota /autenticar chama a função de login.
