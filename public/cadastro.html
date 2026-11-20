@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Criar Conta</title>
-    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="icon" type="image/png" href="assets/imgs/logo.png">
     <link rel="stylesheet" href="../public/css/cadastroElogin.css">
     <script src="../cadastro.js"></script>
 </head>
@@ -94,7 +94,7 @@
             } else if (arroba_antes_com == false) {
                 toast.innerHTML = 'Formato de e-mail inválido. O "@" deve vir antes do ".com"'
             }
-            else if (cpf.length != 11) {
+            else if (cpf.length != 14) {
                 toast.innerHTML = 'O CPF deve ter 11 caracteres'
             }
             else if (senha != conf_senha) {
