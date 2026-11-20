@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Follow - Criar Conta</title>
+    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
+    <link rel="stylesheet" href="./css/cadastroElogin.css">
+</head>
+
+<body>
+
+    <div class="lado-esquerdo">
+        <div class="conteiner-logo">
+            <img class="imagem-logo" src="./assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
+        </div>
+    </div>
+
+    <div class="lado-direito">
+        <div id="toast" class="hidden"></div>
+        <h1>Criar conta</h1>
+        <h2>Preencha os dados para começar</h2>
+
+        <div class="grupo-formulario">
+            <label for="ipt_nome">Nome</label>
+            <input type="text" id="ipt_nome" placeholder="Ex: João da Silva">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_email">Digite o seu e-mail</label>
+            <input type="email" id="ipt_email" placeholder="Ex: seuemail@exemplo.com">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_cpf">Digite seu CPF</label>
+            <input type="text" id="ipt_cpf" placeholder="000.000.000-00">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_telefone">Telefone</label>
+            <input type="tel" id="ipt_telefone" placeholder="(00) 00000-0000">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_id_apiario">Informe o indicador do seu apiário</label>
+            <input type="text" id="ipt_id_apiario" placeholder="Insira o código fornecido a sua empresa">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_senha">Digite a senha</label>
+            <input type="password" id="ipt_senha" placeholder="********" onkeyup="validarsenha()">
+            <div id="div_senha"></div>
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="ipt_conf_senha">Confirme a senha</label>
+            <input type="password" id="ipt_conf_senha" placeholder="********" onkeyup="senhaigual()">
+            <div id="div_conf_senha"></div>
+        </div>
+
+        <button onclick="cadastrar()" id="cadastro">Cadastrar</button><br>
+        <a href="login.html" class="link-login">Já possui cadastro? Faça o login</a>
+    </div>
+
+    <script>
+        let toastTimer;
+
+        function mostrarToast(msg) {
+            clearTimeout(toastTimer);
+            toast.classList.remove('show');
+            toast.classList.add('hidden');
+            void toast.offsetWidth; // reinicia a animação
+            toast.innerHTML = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            toastTimer = setTimeout(function () {
+                toast.classList.add('hidden');
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        function validarsenha() {
+            div_senha.innerHTML = ipt_senha.value.length >= 8
+                ? "Senha válida."
+                : "A senha precisa ter 8 ou mais caracteres.";
+        }
+
+        function senhaigual() {
+            div_conf_senha.innerHTML = ipt_senha.value == ipt_conf_senha.value
+                ? "As senhas são iguais."
+                : "As senhas não são iguais.";
+        }
+
+        function cadastrar() {
+            let nome = ipt_nome.value.trim();
+            let email = ipt_email.value.trim();
+            let cpf = ipt_cpf.value.replace(/\D/g, '');
+            let telefone = ipt_telefone.value.trim();
+            let id_apiario = ipt_id_apiario.value.trim();
+            let senha = ipt_senha.value;
+            let conf_senha = ipt_conf_senha.value;
+
+            let emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (nome == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "" || id_apiario == "") {
+                return mostrarToast("Preencha todos os campos!");
+            }
+            if (!emailValido) {
+                return mostrarToast("Formato de e-mail inválido!");
+            }
+            if (cpf.length != 11) {
+                return mostrarToast("O CPF deve ter 11 números");
+            }
+            if (senha.length < 8) {
+                return mostrarToast("A senha precisa ter 8 ou mais caracteres");
+            }
+            if (senha != conf_senha) {
+                return mostrarToast("As senhas não coincidem!");
+            }
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nome: nome,
+                    email: email,
+                    cpf: cpf,
+                    telefone: telefone,
+                    idApiario: id_apiario,
+                    senha: senha
+                })
+            })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    mostrarToast("Cadastro realizado com sucesso! Redirecionando...");
+                    setTimeout(function () {
+                        window.location = "login.html";
+                    }, 2000);
+                } else {
+                    return resposta.text().then(function (texto) {
+                        throw new Error(resposta.status + " - " + texto);
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.log("#ERRO:", erro);
+                mostrarToast("Não foi possível realizar o cadastro. Tente novamente.");
+            });
+        }
+    </script>
+
+</body>
+
+</html>
+
+<!-- No front-end, a função cadastrar() coleta os dados do formulário, 
+remove espaços e deixa o CPF somente com números. Em seguida valida
+se todos os campos foram preenchidos, se o email tem formato válido,
+se o CPF tem 11 dígitos e se a senha tem pelo menos 8 caracteres e
+é igual à confirmação. Estando tudo correto, envia uma requisição 
+POST para /usuarios/cadastrar com os dados em JSON. Se o cadastro 
+for concluído, o usuário vê uma mensagem de sucesso e é redirecionado 
+para a tela de login; caso contrário, é exibida uma mensagem de erro. As
+funções validarsenha e senhaigual dão retorno visual em tempo real enquanto o usuário digita. -->
