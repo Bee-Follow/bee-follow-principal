@@ -7,14 +7,13 @@
     <title>Bee Follow - Criar Conta</title>
     <link rel="icon" type="image/png" href="assets/imgs/logo.png">
     <link rel="stylesheet" href="css/cadastroElogin.css">
-    <script src="../cadastro.js"></script>
 </head>
 
-<body>
+<body onload="listar()">
 
     <div class="lado-esquerdo">
         <div class="conteiner-logo">
-            <img class="imagem-logo" src="../img/logo_login_cadastro.png" alt="Bee Follow Logo">
+            <img class="imagem-logo" src="assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
         </div>
     </div>
 
@@ -32,17 +31,6 @@
             <label for="ipt_email">Digite o seu e-mail</label>
             <input type="email" id="ipt_email" placeholder="Ex: seuemail@exemplo.com">
         </div>
-
-        <div class="grupo-formulario">
-            <label for="ipt_cpf">Digite seu CPF</label>
-            <input type="text" id="ipt_cpf" placeholder="000.000.000-00" oninput="formatarCPF(this)" maxlength="14">
-        </div>
-
-        <div class="grupo-formulario">
-            <label for="ipt_telefone">Telefone</label>
-            <input type="tel" id="ipt_telefone" placeholder="(00) 00000-0000" oninput="formatartel(this)" maxlength="13">
-        </div>
-
         <div class="grupo-formulario">
             <label for="ipt_id_apiario">Informe o indicador do seu apiário</label>
             <input type="text" id="ipt_id_apiario" placeholder="Insira o código fornecido a sua empresa">
@@ -58,125 +46,135 @@
             <label for="ipt_conf_senha">Confirme a senha</label>
             <input type="password" id="ipt_conf_senha" placeholder="********" onkeyup="senhaigual()">
             <div id="div_conf_senha"></div>
-
         </div>
-        <button onclick="cadastrar()" id="cadastro">Cadastrar</button><br> 
+
+        <button onclick="cadastrar()" id="cadastro">Cadastrar</button><br>
         <a href="login.html" class="link-login">Já possui cadastro? Faça o login</a>
     </div>
-</body>
 
-<script>
-            const showToastBtn = document.getElementById('cadastro');
-            const toast = document.getElementById('toast');
-            showToastBtn.addEventListener('click', function() {
+    <script>
+        let listaEmpresasCadastradas = []
+        const showToastBtn = document.getElementById('cadastro');
+        const toast = document.getElementById('toast');
+        showToastBtn.addEventListener('click', function () {
             toast.classList.remove('hidden');
             toast.classList.add('show');
-            setTimeout(function() {
-                    toast.classList.add('hidden');
-                }, 5000);
-            });
-            function cadastrar() {
-            let nome = ipt_nome.value
-            let email = ipt_email.value
-            let cpf = ipt_cpf.value
-            let telefone = ipt_telefone.value
-            let id_apiario = ipt_id_apiario.value
+            setTimeout(function () {
+                toast.classList.add('hidden');
+            }, 5000);
+        });
+        function validarsenha() {
+            let senha = ipt_senha.value
+            let msg = ``;
+
+            if (senha.length < 8) {
+                msg = `<span style="color: red;">Senha precisa de 8 caracteres</span>`;
+            }
+            else {
+                msg = `<span style="color: green;">Senha válida</span>`
+            }
+
+
+            div_senha.innerHTML = `${msg}`;
+        }
+        function senhaigual() {
+            let senha = ipt_senha.value;
+            let conf_senha = ipt_conf_senha.value;
+            let ponto = `.`
+            let msg = ``;
+
+            if (senha != conf_senha) {
+                msg = `<span style="color: red;"> As senhas não são iguais </span>`;
+            }
+            else {
+                msg = `<span style="color: green;"> As senhas são iguais </span>`;
+
+            }
+            div_conf_senha.innerHTML = `${msg}`;
+        }
+        function cadastrar() {
+            let nome = ipt_nome.value.trim();
+            let email = ipt_email.value.trim();
+            let codigo = ipt_id_apiario.value.trim();
             let senha = ipt_senha.value
             let conf_senha = ipt_conf_senha.value
             let com = email.indexOf('.com');
             let arroba = email.indexOf('@');
             let arroba_antes_com = arroba < com;
-            var cadastro = {email: email, senha: senha}
-            if (nome == "" || email == "" || cpf == "" || telefone == "" || senha == "" || conf_senha == "" || id_apiario == "") {
+            var cadastro = { email: email, senha: senha }
+            if (nome == "" || email == "" || senha == "" || conf_senha == "" || codigo == "") {
                 toast.innerHTML = 'Preencha os dados corretamente'
             } else if (com < 0 || arroba < 0) {
                 toast.innerHTML = 'Os email precisa de @ e .com'
             } else if (arroba_antes_com == false) {
                 toast.innerHTML = 'Formato de e-mail inválido. O "@" deve vir antes do ".com"'
-            }
-            else if (cpf.length != 14) {
-                toast.innerHTML = 'O CPF deve ter 11 caracteres'
-            }
-            else if (senha != conf_senha) {
-                toast.innerHTML = 'As senhas não coincidem!';
-            } else if (senha.length < 8) {
-                toast.innerHTML = 'A senha precisa ter 8 ou mais caracteres'
             } else {
-                localStorage.setItem("dadosCadastro", JSON.stringify(cadastro));
-                toast.innerHTML = "Cadastro concluído! Você será redirecionado, aguarde."
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "3000");
+                for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+                    if (listaEmpresasCadastradas[i].codigo_ativacao == codigo) {
+                        fk_empresa = listaEmpresasCadastradas[i].id
+                        console.log("Código de ativação válido.");
+                        break;
+                    } else {
+                        toast.innerHTML = "Mensagem de erro para código inválido";
+                    }
+                }
+                    fetch("/usuarios/cadastrar", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            nome: nome,
+                            email: email,
+                            fk_empresa: fk_empresa,
+                            senha: senha
+                        })
+                    })
+                        .then(function (resposta) {
+                            if (resposta.ok) {
+                                mostrarToast("Cadastro realizado com sucesso! Redirecionando...");
+                                setTimeout(function () {
+                                    window.location = "./login.html";
+                                }, 2000);
+                            } else {
+                                return resposta.text().then(function (texto) {
+                                    throw new Error(resposta.status + " - " + texto);
+                                });
+                            }
+                        })
+                        .catch(function (erro) {
+                            console.log("#ERRO:", erro);
+                            mostrarToast("Não foi possível realizar o cadastro. Tente novamente.");
+                        });
+                }
             }
-               
-        }
-
-        function validarsenha(){
-            let senha = ipt_senha.value
-            let msg = ``;
-
-            if (senha.length < 8){
-                msg = `<span style="color: red;">Senha precisa de 8 caracteres</span>`;
-            } 
-            else {
-                msg = `<span style="color: green;">Senha válida</span>`
-            } 
-
-
-            div_senha.innerHTML = `${msg}`;
-        }   
-        
-        function senhaigual(){
-            let senha = ipt_senha.value;
-            let conf_senha = ipt_conf_senha.value;
-            let ponto = `.`
-            let msg = ``;
-            
-            if (senha != conf_senha){
-                msg = `<span style="color: red;"> As senhas não são iguais </span>`;
+            function listar() {
+                fetch("/empresas/listar", {
+                    method: "GET",
+                })
+                    .then(function (resposta) {
+                        resposta.json().then((empresas) => {
+                            empresas.forEach((empresa) => {
+                                listaEmpresasCadastradas.push(empresa);
+                                console.log("listaEmpresasCadastradas")
+                                console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+                            });
+                        });
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                    });
             }
-            else {
-                msg = `<span style="color: green;"> As senhas são iguais </span>`;
-                
-            }
-            div_conf_senha.innerHTML = `${msg}`;
-        }
+    </script>
 
-        function formatarCPF(ipt_cpf) {
-            // 1. Deixa apenas os números e limita a 11 dígitos
-            let cpf = ipt_cpf.value.replace(/\D/g, '').slice(0, 11);
+</body>
 
-            // 2. Adiciona os pontos e o traço conforme o tamanho
-            if (cpf.length > 3) {
-                cpf = cpf.slice(0, 3) + '.' + cpf.slice(3);
-            }
-            if (cpf.length > 7) {
-                cpf = cpf.slice(0, 7) + '.' + cpf.slice(7);
-            }
-            if (cpf.length > 11) {
-                cpf = cpf.slice(0, 11) + '-' + cpf.slice(11, 13);
-            }
-
-            // 3. Devolve o texto formatado para o ipt_cpf
-            ipt_cpf.value = cpf;
-        }
-
-        function formatartel(ipt_telefone) {
-            // 1. Deixa apenas os números
-            let telefone = ipt_telefone.value.replace(/\D/g, '');
-
-            // 2. Adiciona os pontos e o traço conforme o tamanho
-            if (telefone.length >= 1 ){
-                telefone = '(' + telefone;
-            }    
-            if (telefone.length > 3) {
-                telefone = telefone.slice(0, 3) + ') ' + telefone.slice(3);
-            }
-            
-
-            // 3. Devolve o texto formatado para o ipt_telefone
-            ipt_telefone.value = telefone;
-        }
-        
-</script>
 </html>
+
+<!-- No front-end, a função cadastrar() coleta os dados do formulário, 
+remove espaços e deixa o CPF somente com números. Em seguida valida
+se todos os campos foram preenchidos, se o email tem formato válido,
+se o CPF tem 11 dígitos e se a senha tem pelo menos 8 caracteres e
+é igual à confirmação. Estando tudo correto, envia uma requisição 
+POST para /usuarios/cadastrar com os dados em JSON. Se o cadastro 
+for concluído, o usuário vê uma mensagem de sucesso e é redirecionado 
+para a tela de login; caso contrário, é exibida uma mensagem de erro. As
+funções validarsenha e senhaigual dão retorno visual em tempo real enquanto o usuário digita. -->

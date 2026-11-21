@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bee Follow - Login</title>
-    <link rel="icon" type="image/png" href="./assets/imgs/logo.png">
-    <link rel="stylesheet" href="./css/cadastroElogin.css">
-    <script src="../cadastro.js"></script>
+    <link rel="icon" type="image/png" href="assets/imgs/logo.png">
+    <link rel="stylesheet" href="css/cadastroElogin.css">
 </head>
+
 <body>
 
     <div class="lado-esquerdo">
         <div class="conteiner-logo">
-            <img class="imagem-logo" src="./assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
+            <img class="imagem-logo" src="assets/imgs/logo_login_cadastro.png" alt="Bee Follow Logo">
         </div>
     </div>
 
     <div class="lado-direito">
-        <div id="toast" class="hidden show"></div>
-        <br>
-        <h1>Bem-Vindo novamente!</h1>
-        <h2>Faça login para continuar</h2>
+        <div id="toast" class="hidden"></div>
+        <h1>Entrar</h1>
+        <h2>Acesse sua conta Bee Follow</h2>
 
         <div class="grupo-formulario">
-            <label for="ipt_email">Email</label>
-            <input type="email" id="ipt_email" placeholder="seuemail@exemplo.com">
+            <label for="ipt_email">E-mail</label>
+            <input type="email" id="ipt_email" placeholder="Ex: seuemail@exemplo.com">
         </div>
 
         <div class="grupo-formulario">
@@ -32,42 +32,66 @@
             <input type="password" id="ipt_senha" placeholder="********">
         </div>
 
-        <button onclick="entrar()" id="btnEntrar">Entrar</button><br><br>
-        <div id="div_aviso"></div>
-        <div class="secao-cadastro">
-            <label>Caso não tenha Login</label>
-            <button onclick="irParaCadastro()">Fazer cadastro</button>
-        </div>
+        <button onclick="entrar()" id="entrar">Entrar</button><br>
+        <a href="cadastro.html" class="link-login">Não possui cadastro? Cadastre-se</a>
     </div>
 
-   <script>
-    const showToastBtn = document.getElementById('btnEntrar');
-            const toast = document.getElementById('toast');
-            showToastBtn.addEventListener('click', function() {
+    <script>
+        const showToastBtn = document.getElementById('entrar');
+        const toast = document.getElementById('toast');
+        showToastBtn.addEventListener('click', function () {
             toast.classList.remove('hidden');
             toast.classList.add('show');
-            setTimeout(function() {
-                    toast.classList.add('hidden');
-                }, 5000);
-            });
+            setTimeout(function () {
+                toast.classList.add('hidden');
+            }, 5000);
+        });
         function entrar() {
-            const cadastro = JSON.parse(localStorage.getItem("dadosCadastro"))
-            let email = ipt_email.value;
+            let email = ipt_email.value.trim();
             let senha = ipt_senha.value;
-                if (email == '' || senha == '') {
-                 toast.innerHTML='Por favor, preencha todos os campos!';
-                } else if (email == cadastro.email && senha == cadastro.senha ) {
-                    toast.innerHTML = "Bem-vindo! Aguarde o redirecionamento para a próxima tela."
-                    setTimeout(() => {
-                        window.location = "./dashboard/dashboard.html";
-                    }, "3000");
-                } else {
-                    toast.innerHTML = "E-mail ou senha incorreta."
-                }
+
+            if (email == '' || senha == '') {
+                toast.innerHTML = 'Por favor, preencha todos os campos!';
+            } else {
+                fetch("/usuarios/autenticar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha
+                    })
+                })
+                    .then(function (resposta) {
+                        if (resposta.ok) {
+                            return resposta.json().then(function (usuario) {
+                                sessionStorage.ID_USUARIO = usuario.id;
+                                sessionStorage.NOME_USUARIO = usuario.nome;
+                                sessionStorage.EMAIL_USUARIO = usuario.email;
+                                sessionStorage.APIARIO = usuario.fk_apiario;
+                                toast.innerHTML = "Bem-vindo! Aguarde o redirecionamento para a próxima tela."
+                                setTimeout(() => {
+                                    window.location = "./dashboard/dashboard.html";
+                                }, "3000");
+                            });
+                        } else {
+                            toast.innerHTML = "E-mail ou senha incorreta."
+                        }
+                    })
+                    .catch(function (erro) {
+                        console.log(erro);
+                    });
             }
-        function irParaCadastro() {
-            window.location.href = 'cadastro.html'; 
+
         }
     </script>
+
 </body>
+
 </html>
+
+<!-- No front-end, a função entrar() lê o email e a senha digitados, 
+valida se estão preenchidos e envia uma requisição POST para /usuarios/autenticar 
+com os dados em JSON. Se o servidor responder com sucesso, os dados do usuário 
+(id, nome, email e apiário) são salvos no sessionStorage e o usuário é redirecionado 
+para o dashboard. Se houver erro, a função exibe uma mensagem na tela por meio 
+do mostrarToast: login inválido para o status 403, ou mensagem genérica nos demais casos. -->
