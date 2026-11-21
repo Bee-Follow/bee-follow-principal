@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/styleDashboard.css">
     <link rel="" href="">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
 </head>
 
 <body onload="obterDadosGrafico()">
@@ -38,9 +39,7 @@
 
             <!-- Cabeçalho principal da Dashboard -->
             <div class="cabecalho-dashboard">
-                <h1>GESTÃO DA TEMPERATURA DE COLMEIAS - BEE FOLLOW</h1>
-
-  
+                <h1>GESTÃO DA TEMPERATURA DE COLMEIAS - BEE FOLLOW</h1>  
             </div>
 
             <!-- CARDS DE INDICADORES (4 Cards como na referência) -->
@@ -84,11 +83,6 @@
 
                 <div class="card-alertas-recentes" id="card_alertas">
                     <h2>Alertas Recentes</h2>
-                    <!-- <div class="bloco-critico-item">
-                        <strong>Colmeia 03</strong>
-                        <p class="cor-critica">Temperatura acima do ideal (38°C)</p>
-                        <small>30-10-2026 14:20</small>
-                    </div> -->
                 </div>
             </div>
 
@@ -96,7 +90,7 @@
             <div class="secao-inferior">
                 <div class="card-ultimas-leituras">
                     <h2>Status sensores</h2>
-                    <table class="tabela-leituras" id="status">
+                    <table class="tabela-leituras" id="status_sensores">
                     </table>
                 </div>
 
@@ -169,7 +163,7 @@
                         display: true,
                         text: '(°C)'
                     },
-                    min: 30,
+                    min: 25,
                     max: 40,
                     ticks: {
                         stepSize: 1,
@@ -179,8 +173,10 @@
         }
     });
 
+    var idApiario = sessionStorage.APIARIO
+
     function obterDadosGrafico() {
-        fetch(`/dashboard/ultimas/dados`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/ultimas/dados/${idApiario}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -194,7 +190,7 @@
                 .catch(function (error) {
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-            fetch(`/dashboard/ultimas/sensores`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/dashboard/ultimas/sensores/${idApiario}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -208,7 +204,7 @@
                 .catch(function (error) {
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-            fetch(`/dashboard/ultimas/alertas`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/dashboard/ultimas/alertas/${idApiario}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -222,6 +218,7 @@
                 .catch(function (error) {
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+            setTimeout(() => obterDadosGrafico(), 10000);
     }
     function plotarGrafico(resposta) {
 
@@ -240,12 +237,12 @@
 
             grafico_temperatura.update();
 
-            setTimeout(() => atualizarGrafico(), 5000);
+            // setTimeout(() => atualizarGrafico(), 5000);
     }
     function plotarSensores(resposta) {
             console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarSensores":')
             console.log(resposta)
-            status.innerHTML = `<tr>
+            status_sensores.innerHTML = `<tr>
                                 <th>Colmeia</th>
                                 <th>Status</th>
                                 <th>Última Manutenção</th>
@@ -253,7 +250,7 @@
                                 </tr>`
             for (i = 0; i < resposta.length; i++) {
                 var registro = resposta[i];
-                status.innerHTML += `
+                status_sensores.innerHTML += `
                     <tr>
                     <td>Colmeia ${registro.id}</td>
                     <td>${registro.funcionando}</td>
@@ -261,11 +258,12 @@
                     </tr>`;
             }
             
-            setTimeout(() => atualizarGrafico(), 5000);
+            // setTimeout(() => atualizarGrafico(), 5000);
         }
         function plotarAlertas(resposta) {
             console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarAlertas":')
             console.log(resposta)
+            card_alertas.innerHTML = '<h2>Alertas Recentes</h2>';
             for (i = 0; i < resposta.length; i++) {
                 var registro = resposta[i];
                 if (registro.temperatura < 34) {
@@ -285,17 +283,18 @@
                 } else {
                     card_alertas.innerHTML += `<div class="bloco-critico-item">
                         <strong>Colmeia ${registro.id}</strong>
-                        <p class="cor-critica">Temperatura acima do normal (${registro.temperatura}ºC)/p>
+                        <p class="cor-critica">Temperatura acima do normal (${registro.temperatura}ºC)</p>
                         <span>Colocar informações do que o apicultor deve fazer diante dessa temperatura</span>
                         <small>${registro.dataHora}</small>
                         </div>`
                 }
             }
             
-            setTimeout(() => atualizarGrafico(), 5000);
+            // setTimeout(() => atualizarGrafico(), 5000);
         }
     function sair() {
-        window.location.href = "../login_cadastro/login.html";
+        window.location.href = "./login.html";
+        limparSessao();
     }
     </script>
 </body>
