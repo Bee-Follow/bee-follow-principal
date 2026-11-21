@@ -11,23 +11,23 @@
     <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="obterDadosGrafico()">
+<body onload="obterDadosGrafico(), validarSessao()">
     
     <div class="painel-dashboard">
 
         <!-- MENU LATERAL -->
-        <div class="menu-lateral">
-            <img src="../assets/imgs/logoBeeFollow_branco.png" alt="Logo Bee Follow" class="logo-menu">
-            <h3 class="boas-vindas">Bem-vindo!</h3>
-             <div class="perfil-usuario">
-                    <div class="icone-usuario">👤</div>
-                    <span>Administrador</span>
-                </div><br>
-            <a href="" class="ativo"> Dashboard</a>
-            <a href=""> Colmeias</a>
-            <a href=""> Alertas</a>
-            <a href=""> Relatórios</a>
-            <a href=""> Sensores</a>
+            <div class="menu-lateral">
+                <img src="../assets/imgs/logoBeeFollow_branco.png" alt="Logo Bee Follow" class="logo-menu">
+                <h3 class="boas-vindas">Bem-vindo!</h3>
+                <div class="perfil-usuario">
+                        <div class="icone-usuario">👤</div>
+                        <span id="b_usuario"></span>
+                    </div><br>
+                <a href="" class="ativo"> Dashboard</a>
+                <a href=""> Colmeias</a>
+                <a href=""> Alertas</a>
+                <a href=""> Relatórios</a>
+                <a href=""> Sensores</a>
 
             <div class="menu-rodape">
                 <button class="link-saida" onclick="sair()">↪ Sair</button>
